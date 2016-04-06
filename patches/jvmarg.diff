@@ -1,0 +1,11 @@
+--- system/build/tools/releasetools/common.py.orig	2016-03-29 03:11:28.168089237 +0200
++++ system/build/tools/releasetools/common.py	2016-03-29 03:12:32.008089188 +0200
+@@ -59,7 +59,7 @@
+     self.signapk_path = "framework/signapk.jar"  # Relative to search_path
+     self.extra_signapk_args = []
+     self.java_path = "java"  # Use the one on the path by default.
+-    self.java_args = "-Xmx2048m" # JVM Args
++    self.java_args = "-Xmx512m" # JVM Args
+     self.public_key_suffix = ".x509.pem"
+     self.private_key_suffix = ".pk8"
+     # use otatools built boot_signer by default

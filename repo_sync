@@ -1,0 +1,19 @@
+cd ~/android/system
+
+patch -R -p1 --no-backup-if-mismatch < ../patches/jvmarg.diff
+patch -R -p1 --no-backup-if-mismatch < ../patches/build.name.diff
+
+repo sync
+
+echo "Setting build name to NIGHTLY"
+patch -p1 --no-backup-if-mismatch < ../patches/build.name.diff
+echo ""
+
+echo "Setting memory limit to 512mb for java virtual machine"
+patch -p1 --no-backup-if-mismatch < ../patches/jvmarg.diff
+echo ""
+
+#repo sync awifi-dev/android_device_lge_awifi
+#repo sync awifi-dev/android_kernel_lge_awifi
+#repo sync awifi-dev/proprietary_vendor_lge
+#repo sync CyanogenMod/android_device_qcom_common

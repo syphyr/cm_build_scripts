@@ -1,0 +1,4 @@
+cd ~/android/system
+source build/envsetup.sh
+make clean
+brunch awifi

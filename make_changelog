@@ -1,0 +1,52 @@
+#!/bin/bash
+
+rm ~/android/changelog.txt
+touch ~/android/changelog.txt
+
+echo "" >> ~/android/changelog.txt
+echo "Custom Awifi Repos:" >> ~/android/changelog.txt
+echo "" >> ~/android/changelog.txt
+
+FILE1="~/android/system/.repo/local_manifests/local_manifests.xml"
+FILELINES1=`cat ~/android/system/.repo/local_manifests/local_manifests.xml`
+for LINE1 in $FILELINES1 ; do
+    PATH1=`echo $LINE1 | grep path | cut -d"=" -f2 | sed 's/^"//' | sed 's/"$//'`
+    if [ ! "$PATH1" == "" ]; then
+      if [ -d ~/android/system/"$PATH1" ]; then
+        cd ~/android/system/"$PATH1"
+        OUT1=`git log HEAD --oneline --since="7 days ago"`
+        if [ ! "$OUT1" == "" ]; then
+          echo "Repo: $PATH1" >> ~/android/changelog.txt
+          echo "$OUT1" >> ~/android/changelog.txt
+          echo "" >> ~/android/changelog.txt
+        fi
+      fi
+    fi
+done
+
+echo "" >> ~/android/changelog.txt
+echo "CyanogenMod 13 Repos:" >> ~/android/changelog.txt
+echo "" >> ~/android/changelog.txt
+
+FILE2="~/android/system/.repo/manifest.xml"
+FILELINES2=`cat ~/android/system/.repo/manifest.xml`
+for LINE2 in $FILELINES2 ; do
+    PATH2=`echo $LINE2 | grep path | cut -d"=" -f2 | sed 's/^"//' | sed 's/"$//'`
+    if [ ! "$PATH2" == "" ]; then
+      if [ -d ~/android/system/"$PATH2" ]; then
+        cd ~/android/system/"$PATH2"
+        OUT2=`git log HEAD --oneline --since="7 days ago"`
+        if [ ! "$OUT2" == "" ]; then
+          echo "Repo: $PATH2" >> ~/android/changelog.txt
+          echo "$OUT2" >> ~/android/changelog.txt
+          echo "" >> ~/android/changelog.txt
+        fi
+      fi
+    fi
+done
+
+echo "" >> ~/android/changelog.txt
+echo "Details of the commits above can be found on http://review.cyanogenmod.org/" >> ~/android/changelog.txt
+echo "" >> ~/android/changelog.txt
+
+cat ~/android/changelog.txt

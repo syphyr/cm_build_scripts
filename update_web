@@ -1,0 +1,35 @@
+#!/bin/bash
+
+BUILDDIR="/var/www/html/CyanogenModOTA/builds"
+cd ~/android/system/out/target/product/awifi
+FILE=`ls cm-13*-awifi.zip`
+FILE_NEW=`echo $FILE | sed 's/'UNOFFICIAL'/'NIGHTLY'/'`
+NOEXT=${FILE_NEW%\.*}
+
+#echo "The file $FILE was renamed to $FILE_NEW"
+echo "Removing previous builds on OTA REST Server."
+
+#sudo rm -rf "$BUILDDIR"/buildprop
+#sudo mkdir "$BUILDDIR"/buildprop
+
+sudo mv "$BUILDDIR"/changelog/.gitignore "$BUILDDIR"/
+sudo rm -rf "$BUILDDIR"/changelog
+sudo mkdir "$BUILDDIR"/changelog
+sudo mv "$BUILDDIR"/.gitignore "$BUILDDIR"/changelog/
+sudo mv "$BUILDDIR"/full/.gitignore "$BUILDDIR"/
+sudo rm -rf "$BUILDDIR"/full
+sudo mkdir "$BUILDDIR"/full
+sudo mv "$BUILDDIR"/.gitignore "$BUILDDIR"/full/
+
+echo "Copying $FILE_NEW to OTA REST Server."
+sudo cp "$FILE" "$BUILDDIR"/full/"$FILE_NEW"
+
+#sudo mkdir "$BUILDDIR"/buildprop/"$NOEXT"
+#echo "Copying build.prop."
+#sudo cp system/build.prop "$BUILDDIR"/buildprop/"$NOEXT"/
+
+echo "Copying Changelog"
+cd ../../../../../
+sudo cp changelog.txt "$BUILDDIR"/changelog/"$NOEXT".txt
+echo "Done"
+

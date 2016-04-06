@@ -1,16 +1,19 @@
 #!/bin/bash
 
+## Directory of Apache OTA Rest Server that contains builds
 BUILDDIR="/var/www/html/CyanogenModOTA/builds"
+
+## Change to targets build directory
 cd ~/android/system/out/target/product/awifi
 FILE=`ls cm-13*-awifi.zip`
+
+## If zip is UNOFFICIAL then rename to NIGHTLY to fix OTA
 FILE_NEW=`echo $FILE | sed 's/'UNOFFICIAL'/'NIGHTLY'/'`
+
+## Remove extension of file name and set new variable
 NOEXT=${FILE_NEW%\.*}
 
-#echo "The file $FILE was renamed to $FILE_NEW"
 echo "Removing previous builds on OTA REST Server."
-
-#sudo rm -rf "$BUILDDIR"/buildprop
-#sudo mkdir "$BUILDDIR"/buildprop
 
 sudo mv "$BUILDDIR"/changelog/.gitignore "$BUILDDIR"/
 sudo rm -rf "$BUILDDIR"/changelog
@@ -24,12 +27,7 @@ sudo mv "$BUILDDIR"/.gitignore "$BUILDDIR"/full/
 echo "Copying $FILE_NEW to OTA REST Server."
 sudo cp "$FILE" "$BUILDDIR"/full/"$FILE_NEW"
 
-#sudo mkdir "$BUILDDIR"/buildprop/"$NOEXT"
-#echo "Copying build.prop."
-#sudo cp system/build.prop "$BUILDDIR"/buildprop/"$NOEXT"/
-
 echo "Copying Changelog"
-cd ../../../../../
-sudo cp changelog.txt "$BUILDDIR"/changelog/"$NOEXT".txt
+sudo cp ~/android/changelog.txt "$BUILDDIR"/changelog/"$NOEXT".txt
 echo "Done"
 

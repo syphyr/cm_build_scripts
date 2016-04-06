@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+
+  <remote name="cmhub" fetch="git://github.com/" review="review.cyanogenmod.com" />
+  <remote name="ghub" fetch="git://github.com/" />
+
+  <project path="device/lge/awifi" name="syphyr/android_device_lge_awifi" remote="ghub" />
+  <project path="kernel/lge/awifi" name="syphyr/android_kernel_lge_awifi" remote="ghub" />
+  <project path="vendor/lge" name="syphyr/proprietary_vendor_lge" remote="ghub" />
+  <project path="device/qcom/common" name="CyanogenMod/android_device_qcom_common" remote="cmhub" />
+
+</manifest>

@@ -1,52 +1,56 @@
 #!/bin/bash
 
-rm ~/android/changelog.txt
-touch ~/android/changelog.txt
+CHANGE_FILE=~/android/changelog.txt
+PROJECT_DIR=~/android/system
+FILE1=~/android/system/.repo/local_manifests/local_manifests.xml
+FILE2=~/android/system/.repo/manifest.xml
 
-echo "" >> ~/android/changelog.txt
-echo "Custom Awifi Repos:" >> ~/android/changelog.txt
-echo "" >> ~/android/changelog.txt
+rm "$CHANGE_FILE"
+touch "$CHANGE_FILE"
 
-FILE1="~/android/system/.repo/local_manifests/local_manifests.xml"
-FILELINES1=`cat ~/android/system/.repo/local_manifests/local_manifests.xml`
+echo "" >> "$CHANGE_FILE"
+echo "Custom Awifi Repos:" >> "$CHANGE_FILE"
+echo "" >> "$CHANGE_FILE"
+
+FILELINES1=`cat $FILE1`
 for LINE1 in $FILELINES1 ; do
     PATH1=`echo $LINE1 | grep path | cut -d"=" -f2 | sed 's/^"//' | sed 's/"$//'`
     if [ ! "$PATH1" == "" ]; then
-      if [ -d ~/android/system/"$PATH1" ]; then
-        cd ~/android/system/"$PATH1"
+      if [ -d "$PROJECT_DIR"/"$PATH1" ]; then
+        cd "$PROJECT_DIR"/"$PATH1"
         OUT1=`git log HEAD --oneline --since="7 days ago"`
         if [ ! "$OUT1" == "" ]; then
-          echo "Repo: $PATH1" >> ~/android/changelog.txt
-          echo "$OUT1" >> ~/android/changelog.txt
-          echo "" >> ~/android/changelog.txt
+          echo "Repo: $PATH1" >> "$CHANGE_FILE"
+          echo "$OUT1" >> "$CHANGE_FILE"
+          echo "" >> "$CHANGE_FILE"
         fi
       fi
     fi
 done
 
-echo "" >> ~/android/changelog.txt
-echo "CyanogenMod 13 Repos:" >> ~/android/changelog.txt
-echo "" >> ~/android/changelog.txt
+echo "" >> "$CHANGE_FILE"
+echo "CyanogenMod 13 Repos:" >> "$CHANGE_FILE"
+echo "" >> "$CHANGE_FILE"
 
-FILE2="~/android/system/.repo/manifest.xml"
-FILELINES2=`cat ~/android/system/.repo/manifest.xml`
+FILELINES2=`cat $FILE2`
 for LINE2 in $FILELINES2 ; do
     PATH2=`echo $LINE2 | grep path | cut -d"=" -f2 | sed 's/^"//' | sed 's/"$//'`
     if [ ! "$PATH2" == "" ]; then
-      if [ -d ~/android/system/"$PATH2" ]; then
-        cd ~/android/system/"$PATH2"
+      if [ -d "$PROJECT_DIR"/"$PATH2" ]; then
+        cd "$PROJECT_DIR"/"$PATH2"
         OUT2=`git log HEAD --oneline --since="7 days ago"`
         if [ ! "$OUT2" == "" ]; then
-          echo "Repo: $PATH2" >> ~/android/changelog.txt
-          echo "$OUT2" >> ~/android/changelog.txt
-          echo "" >> ~/android/changelog.txt
+          echo "Repo: $PATH2" >> "$CHANGE_FILE"
+          echo "$OUT2" >> "$CHANGE_FILE"
+          echo "" >> "$CHANGE_FILE"
         fi
       fi
     fi
 done
 
-echo "" >> ~/android/changelog.txt
-echo "Details of the commits above can be found on http://review.cyanogenmod.org/" >> ~/android/changelog.txt
-echo "" >> ~/android/changelog.txt
+echo "" >> "$CHANGE_FILE"
+echo "Details of the commits above can be found on http://review.cyanogenmod.org/" >> "$CHANGE_FILE"
+echo "" >> "$CHANGE_FILE"
 
-cat ~/android/changelog.txt
+cat "$CHANGE_FILE"
+

@@ -3,7 +3,7 @@ cd ~/android/system
 patch -R -p1 --no-backup-if-mismatch < ../patches/jvmarg.diff
 patch -R -p1 --no-backup-if-mismatch < ../patches/build.name.diff
 
-repo sync
+repo sync --force-sync
 
 echo "Setting build name to NIGHTLY"
 patch -p1 --no-backup-if-mismatch < ../patches/build.name.diff

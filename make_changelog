@@ -2,8 +2,13 @@
 
 CHANGE_FILE=~/android/changelog.txt
 PROJECT_DIR=~/android/system
-FILE1=~/android/system/.repo/local_manifests/local_manifests.xml
-FILE2=~/android/system/.repo/manifest.xml
+FILE1=$PROJECT_DIR/.repo/local_manifests/local_manifests.xml
+FILE2=$PROJECT_DIR/.repo/manifest.xml
+
+if [ ! -d "$PROJECT_DIR" ]; then
+  echo "Project directory does not exist"
+  exit
+fi
 
 rm "$CHANGE_FILE"
 touch "$CHANGE_FILE"
@@ -12,41 +17,45 @@ echo "" >> "$CHANGE_FILE"
 echo "Custom Awifi Repos:" >> "$CHANGE_FILE"
 echo "" >> "$CHANGE_FILE"
 
-FILELINES1=`cat $FILE1`
-for LINE1 in $FILELINES1 ; do
-    PATH1=`echo $LINE1 | grep path | cut -d"=" -f2 | sed 's/^"//' | sed 's/"$//'`
-    if [ ! "$PATH1" == "" ]; then
-      if [ -d "$PROJECT_DIR"/"$PATH1" ]; then
-        cd "$PROJECT_DIR"/"$PATH1"
-        OUT1=`git log HEAD --oneline --since="7 days ago"`
-        if [ ! "$OUT1" == "" ]; then
-          echo "Repo: $PATH1" >> "$CHANGE_FILE"
-          echo "$OUT1" >> "$CHANGE_FILE"
-          echo "" >> "$CHANGE_FILE"
+if [ -e "$FILE1" ]; then
+  FILELINES1=`cat $FILE1`
+  for LINE1 in $FILELINES1 ; do
+      PATH1=`echo $LINE1 | grep path | cut -d"=" -f2 | sed 's/^"//' | sed 's/"$//'`
+      if [ ! "$PATH1" == "" ]; then
+        if [ -d "$PROJECT_DIR"/"$PATH1" ]; then
+          cd "$PROJECT_DIR"/"$PATH1"
+          OUT1=`git log HEAD --oneline --since="7 days ago"`
+          if [ ! "$OUT1" == "" ]; then
+            echo "Repo: $PATH1" >> "$CHANGE_FILE"
+            echo "$OUT1" >> "$CHANGE_FILE"
+            echo "" >> "$CHANGE_FILE"
+          fi
         fi
       fi
-    fi
-done
+  done
+fi
 
 echo "" >> "$CHANGE_FILE"
 echo "CyanogenMod 13 Repos:" >> "$CHANGE_FILE"
 echo "" >> "$CHANGE_FILE"
 
-FILELINES2=`cat $FILE2`
-for LINE2 in $FILELINES2 ; do
-    PATH2=`echo $LINE2 | grep path | cut -d"=" -f2 | sed 's/^"//' | sed 's/"$//'`
-    if [ ! "$PATH2" == "" ]; then
-      if [ -d "$PROJECT_DIR"/"$PATH2" ]; then
-        cd "$PROJECT_DIR"/"$PATH2"
-        OUT2=`git log HEAD --oneline --since="7 days ago"`
-        if [ ! "$OUT2" == "" ]; then
-          echo "Repo: $PATH2" >> "$CHANGE_FILE"
-          echo "$OUT2" >> "$CHANGE_FILE"
-          echo "" >> "$CHANGE_FILE"
+if [ -e "$FILE2" ]; then
+  FILELINES2=`cat $FILE2`
+  for LINE2 in $FILELINES2 ; do
+      PATH2=`echo $LINE2 | grep path | cut -d"=" -f2 | sed 's/^"//' | sed 's/"$//'`
+      if [ ! "$PATH2" == "" ]; then
+        if [ -d "$PROJECT_DIR"/"$PATH2" ]; then
+          cd "$PROJECT_DIR"/"$PATH2"
+          OUT2=`git log HEAD --oneline --since="7 days ago"`
+          if [ ! "$OUT2" == "" ]; then
+            echo "Repo: $PATH2" >> "$CHANGE_FILE"
+            echo "$OUT2" >> "$CHANGE_FILE"
+            echo "" >> "$CHANGE_FILE"
+          fi
         fi
       fi
-    fi
-done
+  done
+fi
 
 echo "" >> "$CHANGE_FILE"
 echo "Details of the commits above can be found on http://review.cyanogenmod.org/" >> "$CHANGE_FILE"

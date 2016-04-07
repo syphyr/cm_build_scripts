@@ -33,7 +33,4 @@ echo ""
 echo "Updating Web Server."
 echo ""
 ./update_web
-echo ""
-echo "Done."
-echo ""
 

@@ -34,12 +34,6 @@ echo "Updating Web Server."
 echo ""
 ./update_web
 echo ""
-if [ -e `which oat_unit_test` ]; then
-  echo "OTA Unit Test."
-  echo ""
-  ota_unit_test
-  echo ""
-fi
 echo "Done."
 echo ""
 

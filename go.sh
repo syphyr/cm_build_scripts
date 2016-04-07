@@ -1,3 +1,23 @@
+if [ ! -e ./repo_sync ]; then
+  echo "Repo sync script is not found"
+  exit
+fi
+
+if [ ! -e ./start_build ]; then
+  echo "Start build script is not found"
+  exit
+fi
+
+if [ ! -e ./make_changelog ]; then
+  echo "Make changelog script is not found"
+  exit
+fi
+
+if [ ! -e ./update_web ]; then
+  echo "Update web script is not found"
+  exit
+fi
+
 echo "Syncing Repos."
 echo ""
 ./repo_sync
@@ -14,10 +34,12 @@ echo "Updating Web Server."
 echo ""
 ./update_web
 echo ""
-echo "OTA Unit Test."
-echo ""
-ota_unit_test
-echo ""
+if [ -e `which oat_unit_test` ]; then
+  echo "OTA Unit Test."
+  echo ""
+  ota_unit_test
+  echo ""
+fi
 echo "Done."
 echo ""
 

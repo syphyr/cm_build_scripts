@@ -13,7 +13,9 @@ FILE_NEW=`echo $FILE | sed 's/'UNOFFICIAL'/'NIGHTLY'/'`
 ## Remove extension of file name and set new variable
 NOEXT=${FILE_NEW%\.*}
 
+echo ""
 echo "Removing previous builds on OTA REST Server."
+echo ""
 
 sudo mv "$BUILDDIR"/changelog/.gitignore "$BUILDDIR"/
 sudo rm -rf "$BUILDDIR"/changelog
@@ -24,18 +26,29 @@ sudo rm -rf "$BUILDDIR"/full
 sudo mkdir "$BUILDDIR"/full
 sudo mv "$BUILDDIR"/.gitignore "$BUILDDIR"/full/
 
-echo "Copying $FILE_NEW to OTA REST Server."
-sudo cp "$FILE" "$BUILDDIR"/full/"$FILE_NEW"
+if [ -e "$FILE" ]; then
+  echo "Copying ROM ($FILE_NEW) to OTA REST Server."
+  sudo cp "$FILE" "$BUILDDIR"/full/"$FILE_NEW"
+else
+  echo "ROM not found"
+  exit
+fi
 
-echo "Copying Changelog."
-sudo cp ~/android/changelog.txt "$BUILDDIR"/changelog/"$NOEXT".txt
-echo ""
+if [ -e ~/android/changelog.txt ]; then
+  echo "Copying changelog ($NOEXT.txt) to OTA REST Server."
+  sudo cp ~/android/changelog.txt "$BUILDDIR"/changelog/"$NOEXT".txt
+else
+  echo "Changelog not found"
+  exit
+fi
 
 if [ -e `which oat_unit_test` ]; then
+  echo ""
   echo "OTA Unit Test."
   echo ""
   ota_unit_test
-  echo ""
 fi
 
+echo ""
 echo "Done."
+echo ""

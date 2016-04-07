@@ -27,7 +27,15 @@ sudo mv "$BUILDDIR"/.gitignore "$BUILDDIR"/full/
 echo "Copying $FILE_NEW to OTA REST Server."
 sudo cp "$FILE" "$BUILDDIR"/full/"$FILE_NEW"
 
-echo "Copying Changelog"
+echo "Copying Changelog."
 sudo cp ~/android/changelog.txt "$BUILDDIR"/changelog/"$NOEXT".txt
-echo "Done"
+echo ""
 
+if [ -e `which oat_unit_test` ]; then
+  echo "OTA Unit Test."
+  echo ""
+  ota_unit_test
+  echo ""
+fi
+
+echo "Done."

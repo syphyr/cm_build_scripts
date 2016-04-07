@@ -1,4 +1,3 @@
-cd ~/android
 echo "Syncing Repos."
 echo ""
 ./repo_sync

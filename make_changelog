@@ -13,9 +13,9 @@ fi
 rm "$CHANGE_FILE"
 touch "$CHANGE_FILE"
 
-echo "" >> "$CHANGE_FILE"
+echo " " >> "$CHANGE_FILE"
 echo "Custom Awifi Repos:" >> "$CHANGE_FILE"
-echo "" >> "$CHANGE_FILE"
+echo " " >> "$CHANGE_FILE"
 
 if [ -e "$FILE1" ]; then
   FILELINES1=`cat $FILE1`
@@ -26,9 +26,9 @@ if [ -e "$FILE1" ]; then
           cd "$PROJECT_DIR"/"$PATH1"
           OUT1=`git log HEAD --oneline --since="7 days ago"`
           if [ ! "$OUT1" == "" ]; then
-            echo "Repo: $PATH1" >> "$CHANGE_FILE"
+            echo "> * Repo: $PATH1" >> "$CHANGE_FILE"
             echo "$OUT1" >> "$CHANGE_FILE"
-            echo "" >> "$CHANGE_FILE"
+            echo " " >> "$CHANGE_FILE"
           fi
         fi
       fi
@@ -48,9 +48,9 @@ if [ -e "$FILE2" ]; then
           cd "$PROJECT_DIR"/"$PATH2"
           OUT2=`git log HEAD --oneline --since="7 days ago"`
           if [ ! "$OUT2" == "" ]; then
-            echo "Repo: $PATH2" >> "$CHANGE_FILE"
+            echo "> * Repo: $PATH2" >> "$CHANGE_FILE"
             echo "$OUT2" >> "$CHANGE_FILE"
-            echo "" >> "$CHANGE_FILE"
+            echo " " >> "$CHANGE_FILE"
           fi
         fi
       fi

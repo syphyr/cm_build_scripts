@@ -28,7 +28,7 @@ if [ -e "$FILE1" ]; then
           if [ ! "$OUT1" == "" ]; then
             echo "Repo: $PATH1" >> "$CHANGE_FILE"
             echo "$OUT1" >> "$CHANGE_FILE"
-            echo " " >> "$CHANGE_FILE"
+            echo -e "\n" >> "$CHANGE_FILE"
           fi
         fi
       fi
@@ -50,7 +50,7 @@ if [ -e "$FILE2" ]; then
           if [ ! "$OUT2" == "" ]; then
             echo "Repo: $PATH2" >> "$CHANGE_FILE"
             echo "$OUT2" >> "$CHANGE_FILE"
-            echo " " >> "$CHANGE_FILE"
+            echo -e "\n" >> "$CHANGE_FILE"
           fi
         fi
       fi

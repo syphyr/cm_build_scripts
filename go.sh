@@ -18,17 +18,18 @@ if [ ! -e ./update_web ]; then
   exit
 fi
 
+echo ""
 echo "Syncing Repos."
 echo ""
 ./repo_sync
 echo ""
-echo "Building ROM."
-echo ""
-./start_build
-echo ""
 echo "Creating Changelog."
 echo ""
 ./make_changelog
+echo ""
+echo "Building ROM."
+echo ""
+./start_build
 echo ""
 echo "Updating Web Server."
 echo ""

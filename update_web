@@ -8,7 +8,8 @@ cd ~/android/system/out/target/product/awifi
 FILE=`ls cm-13*-awifi.zip`
 
 ## If zip is UNOFFICIAL then rename to NIGHTLY to fix OTA
-FILE_NEW=`echo $FILE | sed 's/'UNOFFICIAL'/'NIGHTLY'/'`
+#FILE_NEW=`echo $FILE | sed 's/'UNOFFICIAL'/'NIGHTLY'/'`
+FILE_NEW=$FILE
 
 ## Remove extension of file name and set new variable
 NOEXT=${FILE_NEW%\.*}
@@ -16,11 +17,6 @@ NOEXT=${FILE_NEW%\.*}
 echo ""
 echo "Removing previous builds on OTA REST Server."
 echo ""
-
-#sudo mv "$BUILDDIR"/changelog/.gitignore "$BUILDDIR"/
-#sudo rm -rf "$BUILDDIR"/changelog
-#sudo mkdir "$BUILDDIR"/changelog
-#sudo mv "$BUILDDIR"/.gitignore "$BUILDDIR"/changelog/
 
 sudo mv "$BUILDDIR"/full/.gitignore "$BUILDDIR"/
 sudo rm -rf "$BUILDDIR"/full

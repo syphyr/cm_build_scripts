@@ -7,6 +7,11 @@ BUILDDIR="/var/www/html/CyanogenModOTA/builds"
 cd ~/android/system/out/target/product/awifi
 FILE=`ls cm-13*-awifi.zip`
 
+if [ ! -e "$FILE" ]; then
+  echo "ROM not found!"
+  exit
+fi
+
 ## If zip is UNOFFICIAL then rename to NIGHTLY to fix OTA
 #FILE_NEW=`echo $FILE | sed 's/'UNOFFICIAL'/'NIGHTLY'/'`
 FILE_NEW=$FILE
@@ -27,7 +32,7 @@ if [ -e "$FILE" ]; then
   echo "Copying ROM ($FILE_NEW) to OTA REST Server."
   sudo cp "$FILE" "$BUILDDIR"/full/"$FILE_NEW"
 else
-  echo "ROM not found"
+  echo "ROM not found!"
   exit
 fi
 
@@ -35,7 +40,7 @@ if [ -e ~/android/changelog.txt ]; then
   echo "Copying changelog ($NOEXT.txt) to OTA REST Server."
   sudo cp ~/android/changelog.txt "$BUILDDIR"/full/"$NOEXT".txt
 else
-  echo "Changelog not found"
+  echo "Changelog not found!"
   exit
 fi
 

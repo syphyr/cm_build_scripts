@@ -1,0 +1,32 @@
+SHOW_DEL=`show_del`
+if [ ! "$SHOW_DEL" = "" ]; then
+  echo ""
+  echo "Deleted files:"
+  echo "$SHOW_DEL"
+  echo ""
+else
+  echo ""
+  echo "No deleted files found."
+  echo ""
+fi
+
+SHOW_MOD=`show_mod`
+if [ ! "$SHOW_MOD" = "" ]; then
+  echo "Modified files:"
+  echo "$SHOW_MOD"
+  echo ""
+else
+  echo "No modified files found."
+  echo ""
+fi
+
+SHOW_OTHER=`show_other`
+if [ ! "$SHOW_OTHER" = "" ]; then
+  echo "Other files:"
+  echo "$SHOW_OTHER"
+  echo ""
+else
+  echo "No other files found."
+  echo ""
+fi
+

@@ -1,0 +1,6 @@
+## revert changes from 2nd to last commit and create new commit with reverted changes
+## git revert HEAD~1
+
+## revert changes from last commit and create new commit with reverted changes
+git revert HEAD -m 1
+

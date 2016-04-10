@@ -12,12 +12,8 @@ if [ ! -e "$FILE" ]; then
   exit
 fi
 
-## If zip is UNOFFICIAL then rename to NIGHTLY to fix OTA
-#FILE_NEW=`echo $FILE | sed 's/'UNOFFICIAL'/'NIGHTLY'/'`
-FILE_NEW=$FILE
-
 ## Remove extension of file name and set new variable
-NOEXT=${FILE_NEW%\.*}
+NOEXT=${FILE%\.*}
 
 echo ""
 echo "Removing previous builds on OTA REST Server."
@@ -28,13 +24,8 @@ sudo rm -rf "$BUILDDIR"/full
 sudo mkdir "$BUILDDIR"/full
 sudo mv "$BUILDDIR"/.gitignore "$BUILDDIR"/full/
 
-if [ -e "$FILE" ]; then
-  echo "Copying ROM ($FILE_NEW) to OTA REST Server."
-  sudo cp "$FILE" "$BUILDDIR"/full/"$FILE_NEW"
-else
-  echo "ROM not found!"
-  exit
-fi
+echo "Copying ROM ($FILE) to OTA REST Server."
+sudo cp "$FILE" "$BUILDDIR"/full/
 
 if [ -e ~/android/changelog.txt ]; then
   echo "Copying changelog ($NOEXT.txt) to OTA REST Server."

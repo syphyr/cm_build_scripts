@@ -1,18 +1,21 @@
 #!/bin/bash
 
-## Directory of Apache OTA Rest Server that contains builds
+## Root directory of Apache OTA Rest Server that contains builds
 BUILDDIR="/var/www/html/CyanogenModOTA/builds"
 
-## Change to targets build directory
+## Change to target directory
 cd ~/android/system/out/target/product/awifi
-FILE=`ls cm-13*-awifi.zip`
 
+## Find file name of new ROM and set variable
+FILE=`ls cm-13.0-*.zip`
+
+## Check if ROM exists before proceding
 if [ ! -e "$FILE" ]; then
   echo "ROM not found!"
   exit
 fi
 
-## Remove extension of file name and set new variable
+## Remove extension of file name and set variable
 NOEXT=${FILE%\.*}
 
 echo ""

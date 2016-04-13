@@ -24,7 +24,7 @@ if [ -e "$FILE1" ]; then
       if [ ! "$PATH1" == "" ]; then
         if [ -d "$PROJECT_DIR"/"$PATH1" ]; then
           cd "$PROJECT_DIR"/"$PATH1"
-          OUT1=`git log HEAD --oneline --since="5 days ago"`
+          OUT1=`git log HEAD --pretty="%h (%cr) %s" --since="5 days ago"`
           if [ ! "$OUT1" == "" ]; then
             echo "Repo: $PATH1" >> "$CHANGE_FILE"
             echo "$OUT1" >> "$CHANGE_FILE"
@@ -46,7 +46,7 @@ if [ -e "$FILE2" ]; then
       if [ ! "$PATH2" == "" ]; then
         if [ -d "$PROJECT_DIR"/"$PATH2" ]; then
           cd "$PROJECT_DIR"/"$PATH2"
-          OUT2=`git log HEAD --oneline --since="5 days ago"`
+          OUT2=`git log HEAD --pretty="%h (%cr) %s" --since="5 days ago"`
           if [ ! "$OUT2" == "" ]; then
             echo "Repo: $PATH2" >> "$CHANGE_FILE"
             echo "$OUT2" >> "$CHANGE_FILE"

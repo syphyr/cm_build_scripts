@@ -1,4 +1,4 @@
-SHOW_DEL=`show_del`
+SHOW_DEL=`showdel`
 if [ ! "$SHOW_DEL" = "" ]; then
   echo ""
   echo "Deleted files:"
@@ -10,7 +10,7 @@ else
   echo ""
 fi
 
-SHOW_MOD=`show_mod`
+SHOW_MOD=`showmod`
 if [ ! "$SHOW_MOD" = "" ]; then
   echo "Modified files:"
   echo "$SHOW_MOD"
@@ -20,7 +20,7 @@ else
   echo ""
 fi
 
-SHOW_OTHER=`show_other`
+SHOW_OTHER=`showother`
 if [ ! "$SHOW_OTHER" = "" ]; then
   echo "Other files:"
   echo "$SHOW_OTHER"

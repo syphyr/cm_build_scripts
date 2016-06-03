@@ -12,8 +12,13 @@ FILE=`ls cm-13.0-*.zip`
 ## Check if ROM exists before proceding
 if [ ! -e "$FILE" ]; then
   echo "ROM not found!"
+  SUBJECT="Build Failed!"
+  send_mail "$SUBJECT"
   exit
 fi
+
+SUBJECT="Build Successful for $FILE"
+send_mail "$SUBJECT"
 
 ## Remove extension of file name and set variable
 NOEXT=${FILE%\.*}

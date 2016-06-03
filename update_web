@@ -11,7 +11,7 @@ FILE=`ls cm-13.0-*.zip`
 
 ## Check if ROM exists before proceding
 if [ ! -e "$FILE" ]; then
-  echo "ROM not found!"
+  echo "Build Failure! Automatic email notification sent for failed build!"
   SUBJECT="Build Failed!"
   send_mail "$SUBJECT"
   exit
@@ -19,6 +19,7 @@ fi
 
 SUBJECT="Build Successful for $FILE"
 send_mail "$SUBJECT"
+echo "Automatic email notification sent for successful build."
 
 ## Remove extension of file name and set variable
 NOEXT=${FILE%\.*}
@@ -33,13 +34,16 @@ sudo mkdir "$BUILDDIR"/full
 sudo mv "$BUILDDIR"/.gitignore "$BUILDDIR"/full/
 
 echo "Copying ROM ($FILE) to OTA REST Server."
+echo ""
 sudo cp "$FILE" "$BUILDDIR"/full/
 
 if [ -e ~/android/changelog.txt ]; then
   echo "Copying changelog ($NOEXT.txt) to OTA REST Server."
+  echo ""
   sudo cp ~/android/changelog.txt "$BUILDDIR"/full/"$NOEXT".txt
 else
   echo "Changelog not found!"
+  echo ""
   exit
 fi
 

@@ -1,15 +1,10 @@
 cd ~/android/system
 
-patch -R -p1 --no-backup-if-mismatch < ../patches/jvmarg.diff
 patch -R -p1 --no-backup-if-mismatch < ../patches/build.name.diff
 
 repo sync
 
 echo "Setting build name to NIGHTLY"
 patch -p1 --no-backup-if-mismatch < ../patches/build.name.diff
-echo ""
-
-echo "Setting memory limit to 512mb for java virtual machine"
-patch -p1 --no-backup-if-mismatch < ../patches/jvmarg.diff
 echo ""
 

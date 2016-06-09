@@ -28,19 +28,19 @@ echo ""
 echo "Removing previous builds on OTA REST Server."
 echo ""
 
-sudo mv "$BUILDDIR"/full/.gitignore "$BUILDDIR"/
-sudo rm -rf "$BUILDDIR"/full
-sudo mkdir "$BUILDDIR"/full
-sudo mv "$BUILDDIR"/.gitignore "$BUILDDIR"/full/
+mv "$BUILDDIR"/full/.gitignore "$BUILDDIR"/
+rm -rf "$BUILDDIR"/full
+mkdir "$BUILDDIR"/full
+mv "$BUILDDIR"/.gitignore "$BUILDDIR"/full/
 
 echo "Copying ROM ($FILE) to OTA REST Server."
 echo ""
-sudo cp "$FILE" "$BUILDDIR"/full/
+cp "$FILE" "$BUILDDIR"/full/
 
 if [ -e ~/android/changelog.txt ]; then
   echo "Copying changelog ($NOEXT.txt) to OTA REST Server."
   echo ""
-  sudo cp ~/android/changelog.txt "$BUILDDIR"/full/"$NOEXT".txt
+  cp ~/android/changelog.txt "$BUILDDIR"/full/"$NOEXT".txt
 else
   echo "Changelog not found!"
   echo ""

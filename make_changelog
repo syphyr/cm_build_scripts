@@ -4,7 +4,7 @@ CHANGE_FILE=~/android/changelog.html
 PROJECT_DIR=~/android/system
 FILE1=$PROJECT_DIR/.repo/local_manifests/local_manifests.xml
 FILE2=$PROJECT_DIR/.repo/manifest.xml
-NOW=$(date +"%m-%d-%Y")
+NOW=$(date +"%a %B %d %r %Y")
 
 if [ ! -d "$PROJECT_DIR" ]; then
   echo "Project directory does not exist"
@@ -14,7 +14,7 @@ fi
 rm "$CHANGE_FILE"
 touch "$CHANGE_FILE"
 
-echo "<!DOCTYPE html><html><body><pre><b>Changelog for $NOW</b><br>" > "$CHANGE_FILE"
+echo "<!DOCTYPE html><html><body><pre><b>Changes to CM13 for AWIFI since $NOW</b><br>" > "$CHANGE_FILE"
 
 if [ -e "$FILE1" ]; then
   FILELINES1=`cat $FILE1`

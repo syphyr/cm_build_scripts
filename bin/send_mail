@@ -10,7 +10,7 @@ subject="$1"
 boundary="ZZ_/afg6432dfgkl.94531q"
 body="Changelog is attached for current build:"
 declare -a attachments
-attachments=( "/home/tsjoklat/android/changelog.txt" )
+attachments=( "/home/tsjoklat/android/changelog.html" )
 
 # Build headers
 {
@@ -38,7 +38,8 @@ for file in "${attachments[@]}"; do
 
 #  mimetype=$(get_mimetype "$file")
 #  mimetype=$(find "$file" | file -if- | cut -d";" -f1 | awk -F: '{ print $2 }' | sed 's/ //g')
-   mimetype="text/plain"
+#  mimetype="text/plain"
+   mimetype="text/html"
  
   printf '%s\n' "--${boundary}
 Content-Type: $mimetype

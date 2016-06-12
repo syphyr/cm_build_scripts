@@ -1,59 +1,44 @@
 #!/bin/bash
 
 CHANGE_FILE=~/android/changelog.html
-PROJECT_DIR=~/android/system
-FILE1=$PROJECT_DIR/.repo/local_manifests/local_manifests.xml
-FILE2=$PROJECT_DIR/.repo/manifest.xml
+CM_PROJECT_DIR=~/android/system
+## End Edit
+
 NOW=$(date +"%a %B %d %r %Y")
 
-if [ ! -d "$PROJECT_DIR" ]; then
-  echo "Project directory does not exist"
+if [ ! -d "$CM_PROJECT_DIR" ]; then
+  echo "The root of your CyanogenMod project source directory is not found. Exiting!"
   exit
 fi
+
+REPOS=$(find "$CM_PROJECT_DIR" -name .git -type d -exec dirname {} \; | sort)
+
+cd "$CM_PROJECT_DIR"
+DIR_LEN=$(pwd)
 
 rm "$CHANGE_FILE"
 touch "$CHANGE_FILE"
 
-echo "<!DOCTYPE html><html><body><pre><b>Changes to CM13 for AWIFI since $NOW</b><br>" > "$CHANGE_FILE"
+echo "<!DOCTYPE html><html><body><pre><u>Since $NOW</u><br>" > "$CHANGE_FILE"
 
-if [ -e "$FILE1" ]; then
-  FILELINES1=`cat $FILE1`
-  for LINE1 in $FILELINES1 ; do
-      PATH1=`echo $LINE1 | grep path | cut -d"=" -f2 | sed 's/^"//' | sed 's/"$//'`
-      if [ ! "$PATH1" == "" ]; then
-        if [ -d "$PROJECT_DIR"/"$PATH1" ]; then
-          cd "$PROJECT_DIR"/"$PATH1"
-          OUT1=`git log HEAD --pretty="%h (%cr) %s" --since="5 days ago"`
-          if [ ! "$OUT1" == "" ]; then
-            echo "<b>Repo: $PATH1</b>" >> "$CHANGE_FILE"
-            echo "$OUT1<br>" >> "$CHANGE_FILE"
-          fi
+for REPOLINE in $REPOS ; do
+    REPOPATH=$(echo $REPOLINE | cut -c $((${#DIR_LEN} + 2))-)
+    if [ ! "$REPOPATH" == "" ] && [ ! "$REPOPATH" == ".repo/manifests" ]; then
+      if [ -d "$CM_PROJECT_DIR"/"$REPOPATH" ]; then
+        cd "$CM_PROJECT_DIR"/"$REPOPATH"
+        GITOUT=$(git log HEAD --pretty="%h (%cr) %s" --since="5 days ago")
+        if [ ! "$GITOUT" == "" ]; then
+          echo "<b>$REPOPATH</b>" >> "$CHANGE_FILE"
+          echo "$GITOUT<br>" >> "$CHANGE_FILE"
         fi
       fi
-  done
-fi
-
-if [ -e "$FILE2" ]; then
-  FILELINES2=`cat $FILE2`
-  for LINE2 in $FILELINES2 ; do
-      PATH2=`echo $LINE2 | grep path | cut -d"=" -f2 | sed 's/^"//' | sed 's/"$//'`
-      if [ ! "$PATH2" == "" ]; then
-        if [ -d "$PROJECT_DIR"/"$PATH2" ]; then
-          cd "$PROJECT_DIR"/"$PATH2"
-          OUT2=`git log HEAD --pretty="%h (%cr) %s" --since="5 days ago"`
-          if [ ! "$OUT2" == "" ]; then
-            echo "<b>Repo: $PATH2</b>" >> "$CHANGE_FILE"
-            echo "$OUT2<br>" >> "$CHANGE_FILE"
-          fi
-        fi
-      fi
-  done
-fi
+    fi
+done
 
 echo "</pre></body></html>" >> "$CHANGE_FILE"
 
 echo ""
 echo "Most recent changes:"
 echo ""
-cat "$CHANGE_FILE" | grep "hours ago" | sed 's/<br>//g'
+cat "$CHANGE_FILE" | grep -E 'hours ago|minutes ago' | sed 's/<br>//g'
 echo ""

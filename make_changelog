@@ -1,7 +1,13 @@
 #!/bin/bash
 
+# Path to changelog file
 CHANGE_FILE=~/android/changelog.html
+# Path to root of CM project directory
 CM_PROJECT_DIR=~/android/system
+# Paths to Android manifests
+FILE1=$CM_PROJECT_DIR/.repo/manifests/default.xml
+FILE2=$CM_PROJECT_DIR/.repo/manifests/snippets/hal_cm_all.xml
+FILE3=$CM_PROJECT_DIR/.repo/local_manifests/local_manifests.xml
 ## End Edit
 
 NOW=$(date +"%a %B %d %r %Y")
@@ -11,10 +17,19 @@ if [ ! -d "$CM_PROJECT_DIR" ]; then
   exit
 fi
 
-REPOS=$(find "$CM_PROJECT_DIR" -name .git -type d -exec dirname {} \; | sort)
+if [ -e "$FILE1" ]; then
+  REPOS=$(cat $FILE1)
+fi
 
-cd "$CM_PROJECT_DIR"
-DIR_LEN=$(pwd)
+if [ -e "$FILE2" ]; then
+  REPOS+=$(cat $FILE2)
+fi
+
+if [ -e "$FILE3" ]; then
+  REPOS+=$(cat $FILE3)
+fi
+
+REPOS=$(echo "$REPOS" | sort)
 
 rm "$CHANGE_FILE"
 touch "$CHANGE_FILE"
@@ -22,8 +37,8 @@ touch "$CHANGE_FILE"
 echo "<!DOCTYPE html><html><body><pre><u>Since $NOW</u><br>" > "$CHANGE_FILE"
 
 for REPOLINE in $REPOS ; do
-    REPOPATH=$(echo $REPOLINE | cut -c $((${#DIR_LEN} + 2))-)
-    if [ ! "$REPOPATH" == "" ] && [ ! "$REPOPATH" == ".repo/manifests" ]; then
+    REPOPATH=$(echo "$REPOLINE" | grep "path=" | cut -d"\"" -f2)
+    if [ ! "$REPOPATH" == "" ]; then
       if [ -d "$CM_PROJECT_DIR"/"$REPOPATH" ]; then
         cd "$CM_PROJECT_DIR"/"$REPOPATH"
         GITOUT=$(git log HEAD --pretty="%h (%cr) %s" --since="5 days ago")
@@ -40,5 +55,5 @@ echo "</pre></body></html>" >> "$CHANGE_FILE"
 echo ""
 echo "Most recent changes:"
 echo ""
-cat "$CHANGE_FILE" | grep -E 'hours ago|minutes ago' | sed 's/<br>//g'
+cat "$CHANGE_FILE" | grep -E 'hours ago|minutes ago|seconds ago' | sed 's/<br>//g'
 echo ""

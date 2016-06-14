@@ -1,10 +1,19 @@
-cd ~/android/system
+# Path to root of CM project directory
+CM_PROJECT_DIR=~/android/system
+## End Edit
 
-patch -R -p1 --no-backup-if-mismatch < ../patches/build.name.diff
+cd "$CM_PROJECT_DIR"
+
+if [ -e "../patches/build.name.diff" ]; then
+  patch -R -p1 --no-backup-if-mismatch < ../patches/build.name.diff
+fi
 
 repo sync
 
-echo "Setting build name to NIGHTLY"
-patch -p1 --no-backup-if-mismatch < ../patches/build.name.diff
+if [ -e "../patches/build.name.diff" ]; then
+  echo "Setting build name to NIGHTLY"
+  patch -p1 --no-backup-if-mismatch < ../patches/build.name.diff
+fi
+
 echo ""
 

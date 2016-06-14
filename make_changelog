@@ -10,7 +10,7 @@ FILE2=$CM_PROJECT_DIR/.repo/manifests/snippets/hal_cm_all.xml
 FILE3=$CM_PROJECT_DIR/.repo/local_manifests/local_manifests.xml
 ## End Edit
 
-NOW=$(date +"%a %B %d %r %Y")
+NOW=$(date -u)
 
 if [ ! -d "$CM_PROJECT_DIR" ]; then
   echo "The root of your CyanogenMod project source directory is not found. Exiting!"

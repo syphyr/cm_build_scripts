@@ -1,6 +1,6 @@
 # Path to root of CM project directory
-CM_PROJECT_DIR="~/android/system"
-PROJECT_NAME="awifi"
+CM_PROJECT_DIR=~/android/system
+PROJECT_NAME=awifi
 ## End Edit
 
 cd "$CM_PROJECT_DIR"

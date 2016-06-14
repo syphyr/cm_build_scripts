@@ -1,11 +1,11 @@
 #!/bin/bash
 
 ## Builds directory of OTA Rest Server
-BUILDDIR="/var/www/html/CyanogenModOTA/builds"
+BUILDDIR=/var/www/html/CyanogenModOTA/builds
 ## CM out directory of build target
-OUTDIR="~/android/system/out/target/product/awifi"
+OUTDIR=~/android/system/out/target/product/awifi
 ## Changelog location
-CHANGE_FILE="~/android/changelog.html"
+CHANGE_FILE=~/android/changelog.html
 ## End Edit
 
 ## Find file name of ROM and set variable

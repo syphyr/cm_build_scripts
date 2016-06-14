@@ -1,11 +1,9 @@
 #!/bin/bash
 
-# some variables
-# refactoring the script such that all these values are
-# passed from the outside as arguments should be easy
-
 from="cmbuilder@cmbuilder.org"
 to="syphyr@gmail.com"
+## End edit
+
 subject="$1"
 boundary="ZZ_/afg6432dfgkl.94531q"
 body="Changelog is attached for current build:"
@@ -29,17 +27,12 @@ Content-Disposition: inline
 $body
 "
  
-# now loop over the attachments, guess the type
-# and produce the corresponding part, encoded base64
+# Add attachment
 for file in "${attachments[@]}"; do
-
 
   [ ! -f "$file" ] && echo "Warning: attachment $file not found, skipping" >&2 && continue
 
-#  mimetype=$(get_mimetype "$file")
-#  mimetype=$(find "$file" | file -if- | cut -d";" -f1 | awk -F: '{ print $2 }' | sed 's/ //g')
-#  mimetype="text/plain"
-   mimetype="text/html"
+  mimetype="text/html"
  
   printf '%s\n' "--${boundary}
 Content-Type: $mimetype
@@ -51,7 +44,7 @@ Content-Disposition: attachment; filename=\"$file\"
   echo
 done
  
-# print last boundary with closing --
+# Print last boundary with closing --
 printf '%s\n' "--${boundary}--"
  
-} | sendmail -t -oi   # one may also use -f here to set the envelope-from
+} | sendmail -t -oi   # One may also use -f here to set the envelope-from

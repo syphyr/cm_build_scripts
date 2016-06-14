@@ -1,13 +1,16 @@
 #!/bin/bash
 
-## Root directory of Apache OTA Rest Server that contains builds
+## Builds directory of OTA Rest Server
 BUILDDIR="/var/www/html/CyanogenModOTA/builds"
+## CM out directory of build target
+OUTDIR="~/android/system/out/target/product/awifi"
+## Changelog location
+CHANGE_FILE="~/android/changelog.html"
+## End Edit
 
-## Change to target directory
-cd ~/android/system/out/target/product/awifi
-
-## Find file name of new ROM and set variable
-FILE=`ls cm-13.0-*.zip`
+## Find file name of ROM and set variable
+cd "$OUTDIR"
+FILE=$(ls cm-13.0-*.zip)
 
 ## Check if ROM exists before proceding
 if [ ! -e "$FILE" ]; then
@@ -37,10 +40,10 @@ echo "Copying ROM ($FILE) to OTA REST Server."
 echo ""
 cp "$FILE" "$BUILDDIR"/full/
 
-if [ -e ~/android/changelog.html ]; then
+if [ -e "$CHANGE_FILE" ]; then
   echo "Copying changelog ($NOEXT.html) to OTA REST Server."
   echo ""
-  cp ~/android/changelog.html "$BUILDDIR"/full/"$NOEXT".html
+  cp "$CHANGE_FILE" "$BUILDDIR"/full/"$NOEXT".html
 else
   echo "Changelog not found!"
   echo ""

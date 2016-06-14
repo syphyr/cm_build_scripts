@@ -14,15 +14,23 @@ FILE=$(ls cm-13.0-*.zip)
 
 ## Check if ROM exists before proceding
 if [ ! -e "$FILE" ]; then
-  echo "Build Failure! Automatic email notification sent for failed build!"
-  SUBJECT="Build Failed!"
-  send_mail "$SUBJECT"
+  echo "Build Failed!"
+  if [ -e `which send_mail` ]; then
+    echo ""
+    echo "Automatic email notification sent for failed build!"
+    SUBJECT="Build Failed!"
+    send_mail "$SUBJECT"
+  fi
   exit
 fi
 
-SUBJECT="Build Successful for $FILE"
-send_mail "$SUBJECT"
-echo "Automatic email notification sent for successful build."
+echo "Build Successful!"
+if [ -e `which send_mail` ]; then
+  echo ""
+  echo "Automatic email notification sent for successful build."
+  SUBJECT="Build Successful for $FILE"
+  send_mail "$SUBJECT"
+fi
 
 ## Remove extension of file name and set variable
 NOEXT=${FILE%\.*}

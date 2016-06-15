@@ -34,7 +34,7 @@ REPOS=$(echo "$REPOS" | sort)
 rm "$CHANGE_FILE"
 touch "$CHANGE_FILE"
 
-echo "<!DOCTYPE html><html><body><pre><u>Since $NOW</u><br>" > "$CHANGE_FILE"
+echo "<!DOCTYPE html><html><body><pre><b><u>Since $NOW</u></b><br>" > "$CHANGE_FILE"
 
 for REPOLINE in $REPOS ; do
     REPOPATH=$(echo "$REPOLINE" | grep "path=" | cut -d"\"" -f2)

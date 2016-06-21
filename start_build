@@ -1,9 +1,9 @@
 # Path to root of CM project directory
 CM_PROJECT_DIR=~/android/system
-PROJECT_NAME=awifi
+ANDROID_DEVICE=awifi
 ## End Edit
 
 cd "$CM_PROJECT_DIR"
 source build/envsetup.sh
 make clean
-brunch "$PROJECT_NAME"
+brunch "$ANDROID_DEVICE"

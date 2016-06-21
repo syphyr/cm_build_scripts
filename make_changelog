@@ -23,7 +23,6 @@ else
 fi
 
 rm "$CHANGE_FILE"
-touch "$CHANGE_FILE"
 
 echo "<!DOCTYPE html><html><body><pre><b><u>Since $NOW</u></b><br>" > "$CHANGE_FILE"
 

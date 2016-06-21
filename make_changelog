@@ -6,21 +6,16 @@ CHANGE_FILE=~/android/changelog.html
 CM_PROJECT_DIR=~/android/system
 ## End Edit
 
-PROJECT_LIST=$CM_PROJECT_DIR/.repo/project.list
-
 NOW=$(date -u)
 
 if [ ! -d "$CM_PROJECT_DIR" ]; then
   echo "The root of your CyanogenMod project source directory is not found. Exiting!"
   exit
+else
+  cd "$CM_PROJECT_DIR"
 fi
 
-if [ -e "$PROJECT_LIST" ]; then
-  REPOS=$(cat "$PROJECT_LIST" | sort)
-else
-  echo "Project list not found. Exiting!"
-  exit
-fi
+REPOS=$(repo forall -c 'echo "$REPO_PATH"' | sort)
 
 rm "$CHANGE_FILE"
 

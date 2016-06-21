@@ -13,7 +13,7 @@ NOW=$(date -u)
 if [ -e "$PROJECT_LIST" ]; then
   REPOS=$(cat "$PROJECT_LIST" | sort)
 else
-  echo "Project list not found. Exiting!"
+  echo "Project list not found. Run repo_sync command to generate project list. Exiting!"
   exit
 fi
 

@@ -1,0 +1,10 @@
+# Path to root of OmniROM project directory
+CM_PROJECT_DIR=~/android/omni
+ANDROID_DEVICE=v500
+## End Edit
+
+cd "$CM_PROJECT_DIR"
+source build/envsetup.sh
+make clean
+lunch omni_$ANDROID_DEVICE-eng
+mka recoveryimage

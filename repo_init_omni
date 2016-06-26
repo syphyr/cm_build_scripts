@@ -1,0 +1,2 @@
+cd ~/android/omni
+repo init -u https://github.com/omnirom/android.git -b android-6.0

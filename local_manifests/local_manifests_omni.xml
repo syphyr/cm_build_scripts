@@ -45,7 +45,7 @@
   <remove-project name="platform/external/crcalc"/>
   <remove-project name="platform/external/deqp"/>
   <remove-project name="platform/external/dexmaker"/>
-  <remove-project name="platform/external/dhcpcd"/>
+  <remove-project name="android_external_dhcpcd"/>
   <remove-project name="platform/external/dnsmasq"/>
   <remove-project name="platform/external/doclava"/>
   <remove-project name="platform/external/donuts"/>

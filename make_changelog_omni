@@ -19,25 +19,27 @@ fi
 
 rm "$CHANGE_FILE"
 
-echo "<!DOCTYPE html><html><body><pre><b><u>Since $NOW</u></b><br>" > "$CHANGE_FILE"
+echo "<!DOCTYPE html><html><body><h3><b><u>Since $NOW</u></b></h3><br>" > "$CHANGE_FILE"
 
 for REPOPATH in $REPOS ; do
     if [ ! "$REPOPATH" == "" ]; then
       if [ -d "$CM_PROJECT_DIR"/"$REPOPATH" ]; then
         cd "$CM_PROJECT_DIR"/"$REPOPATH"
-        GITOUT=$(git log HEAD --pretty="%h (%cr) %s (%an)" --since="5 days ago")
+        GITOUT=$(git log HEAD --pretty="<li>%h (%cr) %s (%an)</li>" --since="5 days ago")
         if [ ! "$GITOUT" == "" ]; then
           echo "<b>$REPOPATH</b>" >> "$CHANGE_FILE"
-          echo "$GITOUT<br>" >> "$CHANGE_FILE"
+          echo '<ul style="list-style-type:disc">' >> "$CHANGE_FILE"
+          echo "$GITOUT" >> "$CHANGE_FILE"
+          echo "</ul>" >> "$CHANGE_FILE"
         fi
       fi
     fi
 done
 
-echo "</pre></body></html>" >> "$CHANGE_FILE"
+echo "</body></html>" >> "$CHANGE_FILE"
 
 echo ""
 echo "Most recent changes:"
 echo ""
-cat "$CHANGE_FILE" | grep -E 'hours ago|minutes ago|seconds ago' | sed 's/<br>//g'
+cat "$CHANGE_FILE" | grep -E 'hours ago|minutes ago|seconds ago' | sed 's/<br>//g' | sed 's/<\/li>//g' | sed 's/<li>//g'
 echo ""

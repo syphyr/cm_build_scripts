@@ -5,7 +5,7 @@
   <remote name="ghub" fetch="https://github.com/" />
 
   <project path="device/lge/awifi" name="syphyr/android_device_lge_awifi" remote="ghub" />
-  <project path="kernel/lge/awifi" name="syphyr/android_kernel_lge_awifi" remote="ghub" revision="cm-13.0-release" />
+  <project path="kernel/lge/awifi" name="syphyr/android_kernel_lge_awifi" remote="ghub" revision="cm-13.0" />
   <project path="vendor/lge" name="syphyr/proprietary_vendor_lge" remote="ghub" />
   <project path="device/qcom/common" name="CyanogenMod/android_device_qcom_common" remote="cmhub" />
 

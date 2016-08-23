@@ -4,16 +4,16 @@ CM_PROJECT_DIR=~/android/cm11
 
 cd "$CM_PROJECT_DIR"
 
-#if [ -e "../patches/build.name.diff" ]; then
-#  patch -R -p1 --no-backup-if-mismatch < ../patches/build.name.diff
-#fi
+if [ -e "../patches/build.name.cm11.diff" ]; then
+  patch -R -p1 --no-backup-if-mismatch < ../patches/build.name.cm11.diff
+fi
 
 repo sync
 
-#if [ -e "../patches/build.name.diff" ]; then
-#  echo "Setting build name to NIGHTLY"
-#  patch -p1 --no-backup-if-mismatch < ../patches/build.name.diff
-#fi
+if [ -e "../patches/build.name.cm11.diff" ]; then
+  echo "Setting build name to NIGHTLY"
+  patch -p1 --no-backup-if-mismatch < ../patches/build.name.cm11.diff
+fi
 
 echo ""
 

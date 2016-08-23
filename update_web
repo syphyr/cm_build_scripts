@@ -43,10 +43,7 @@ echo ""
 echo "Removing previous builds on OTA REST Server."
 echo ""
 
-mv "$BUILDDIR"/full/.gitignore "$BUILDDIR"/
-rm -rf "$BUILDDIR"/full
-mkdir "$BUILDDIR"/full
-mv "$BUILDDIR"/.gitignore "$BUILDDIR"/full/
+rm "$BUILDDIR"/full/cm-13.0-*
 
 echo "Copying ROM ($FILE) to OTA REST Server."
 echo ""

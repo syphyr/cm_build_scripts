@@ -5,7 +5,7 @@ BUILDDIR=/var/www/html/CyanogenModOTA/builds
 ## Root of CM project directory
 PROJECT_DIR=~/android/cm11
 ## Changelog location
-CHANGE_FILE=~/android/changelog-cm11.html
+CHANGE_FILE=~/android/changelog-cm11.txt
 ## Device name
 ANDROID_DEVICE=p3110
 ## End Edit

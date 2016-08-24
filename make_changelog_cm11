@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Path to changelog file
-CHANGE_FILE=~/android/changelog-cm11.html
+CHANGE_FILE=~/android/changelog-cm11.txt
 # Path to root of CM project directory
 CM_PROJECT_DIR=~/android/cm11
 ## End Edit
@@ -19,25 +19,26 @@ fi
 
 rm "$CHANGE_FILE"
 
-echo "<!DOCTYPE html><html><body><pre><b><u>Since $NOW</u></b><br>" > "$CHANGE_FILE"
+echo -e "Since $NOW\n" > "$CHANGE_FILE"
+echo ""
 
 for REPOPATH in $REPOS ; do
     if [ ! "$REPOPATH" == "" ]; then
       if [ -d "$CM_PROJECT_DIR"/"$REPOPATH" ]; then
         cd "$CM_PROJECT_DIR"/"$REPOPATH"
-        GITOUT=$(git log HEAD --pretty="%h (%cr) %s (%an)" --since="6 weeks ago")
+        GITOUT=$(git log HEAD --pretty="* %h (%cr) %s (%an)" --since="6 weeks ago")
         if [ ! "$GITOUT" == "" ]; then
-          echo "<b>$REPOPATH</b>" >> "$CHANGE_FILE"
-          echo "$GITOUT<br>" >> "$CHANGE_FILE"
+          echo "$REPOPATH" >> "$CHANGE_FILE"
+          echo "$GITOUT" >> "$CHANGE_FILE"
+          echo "" >> "$CHANGE_FILE"
         fi
       fi
     fi
 done
 
-echo "</pre></body></html>" >> "$CHANGE_FILE"
 
 echo ""
 echo "Most recent changes:"
 echo ""
-cat "$CHANGE_FILE" | grep -E 'hours ago|minutes ago|seconds ago' | sed 's/<br>//g'
+cat "$CHANGE_FILE" | grep -E 'hours ago|minutes ago|seconds ago'
 echo ""

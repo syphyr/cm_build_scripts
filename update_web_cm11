@@ -14,26 +14,26 @@ OUTDIR=$PROJECT_DIR/out/target/product/$ANDROID_DEVICE
 
 ## Find file name of ROM and set variable
 cd "$OUTDIR"
-FILE=$(ls cm-11.0-*.zip)
+FILE=$(ls cm-11-*.zip)
 
 ## Check if ROM exists before proceding
 if [ ! -e "$FILE" ]; then
   echo "Build Failed!"
-  if [ -e `which send_mail` ]; then
+  if [ -e `which send_mail_cm11` ]; then
     echo ""
     echo "Automatic email notification sent for failed build!"
     SUBJECT="Build Failed!"
-    send_mail "$SUBJECT"
+    send_mail_cm11 "$SUBJECT"
   fi
   exit
 fi
 
 echo "Build Successful!"
-if [ -e `which send_mail` ]; then
+if [ -e `which send_mail_cm11` ]; then
   echo ""
   echo "Automatic email notification sent for successful build."
   SUBJECT="Build Successful for $FILE"
-  send_mail "$SUBJECT"
+  send_mail_cm11 "$SUBJECT"
 fi
 
 ## Remove extension of file name and set variable
@@ -43,7 +43,7 @@ echo ""
 echo "Removing previous builds on OTA REST Server."
 echo ""
 
-rm "$BUILDDIR"/full/cm-11.0-*
+rm "$BUILDDIR"/full/cm-11-*
 
 echo "Copying ROM ($FILE) to OTA REST Server."
 echo ""

@@ -1,3 +1,5 @@
+sudo update-java-alternatives -s java-6-oracle
+
 if [ ! -e ./repo_sync_cm11 ]; then
   echo "Repo sync script is not found"
   exit

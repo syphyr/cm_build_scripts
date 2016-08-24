@@ -1,3 +1,5 @@
+sudo update-java-alternatives -s java-1.7.0-openjdk-amd64
+
 if [ ! -e ./repo_sync_omni ]; then
   echo "Repo sync script is not found"
   exit

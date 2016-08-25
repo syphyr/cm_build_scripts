@@ -19,14 +19,14 @@ fi
 
 rm "$CHANGE_FILE"
 
-echo -e "Since $NOW\n" > "$CHANGE_FILE"
-echo ""
+echo "Since $NOW" > "$CHANGE_FILE"
+echo "" >> "$CHANGE_FILE"
 
 for REPOPATH in $REPOS ; do
     if [ ! "$REPOPATH" == "" ]; then
       if [ -d "$CM_PROJECT_DIR"/"$REPOPATH" ]; then
         cd "$CM_PROJECT_DIR"/"$REPOPATH"
-        GITOUT=$(git log HEAD --pretty="* %h (%cr) %s (%an)" --since="6 weeks ago")
+        GITOUT=$(git log HEAD --pretty="  * %h (%cr) %s (%an)" --since="6 weeks ago")
         if [ ! "$GITOUT" == "" ]; then
           echo "$REPOPATH" >> "$CHANGE_FILE"
           echo "$GITOUT" >> "$CHANGE_FILE"

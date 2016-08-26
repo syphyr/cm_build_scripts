@@ -5,7 +5,7 @@ BUILDDIR=/var/www/html/CyanogenModOTA/builds
 ## Root of CM project directory
 PROJECT_DIR=~/android/cm11
 ## Changelog location
-CHANGE_FILE=~/android/changelog-cm11.txt
+CHANGE_FILE=~/android/changelog-cm11.html
 ## Device name
 ANDROID_DEVICE=p3110
 ## End Edit
@@ -50,9 +50,9 @@ echo ""
 cp "$FILE" "$BUILDDIR"/full/
 
 if [ -e "$CHANGE_FILE" ]; then
-  echo "Copying changelog ($NOEXT.txt) to OTA REST Server."
+  echo "Copying changelog ($NOEXT.html) to OTA REST Server."
   echo ""
-  cp "$CHANGE_FILE" "$BUILDDIR"/full/"$NOEXT".txt
+  cp "$CHANGE_FILE" "$BUILDDIR"/full/"$NOEXT".html
 else
   echo "Changelog not found!"
   echo ""

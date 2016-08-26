@@ -1,0 +1,8 @@
+FILE=~/android/merge/my_commits.txt
+REPOS=$(tac $FILE | cut -d " " -f1)
+
+for REPOLINE in $REPOS ; do
+    if [ ! "$REPOLINE" == "" ]; then
+      git cherry-pick $REPOLINE
+    fi
+done

@@ -15,6 +15,11 @@ if [ ! -e ./make_changelog_omni ]; then
   exit
 fi
 
+if [ ! -e ./update_web_twrp ]; then
+  echo "Email script is not found"
+  exit
+fi
+
 echo ""
 echo "Syncing Repos."
 echo ""
@@ -28,4 +33,7 @@ echo "Building ROM."
 echo ""
 ./start_build_omni
 echo ""
-
+echo "Sending email."
+echo ""
+./update_web_twrp
+echo ""

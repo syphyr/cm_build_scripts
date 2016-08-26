@@ -1,0 +1,50 @@
+#!/bin/bash
+
+from="cmbuilder@cmbuilder.org"
+to="syphyr@gmail.com"
+## End edit
+
+subject="$1"
+boundary="ZZ_/afg6432dfgkl.94531q"
+body="Changelog is attached for current build:"
+declare -a attachments
+attachments=( "/home/tsjoklat/android/changelog-omni.html" )
+
+# Build headers
+{
+
+printf '%s\n' "From: $from
+To: $to
+Subject: $subject
+Mime-Version: 1.0
+Content-Type: multipart/mixed; boundary=\"$boundary\"
+
+--${boundary}
+Content-Type: text/plain; charset=\"US-ASCII\"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
+$body
+"
+ 
+# Add attachment
+for file in "${attachments[@]}"; do
+
+  [ ! -f "$file" ] && echo "Warning: attachment $file not found, skipping" >&2 && continue
+
+  mimetype="text/html"
+ 
+  printf '%s\n' "--${boundary}
+Content-Type: $mimetype
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename=\"$file\"
+"
+ 
+  base64 "$file"
+  echo
+done
+ 
+# Print last boundary with closing --
+printf '%s\n' "--${boundary}--"
+ 
+} | sendmail -t -oi   # One may also use -f here to set the envelope-from

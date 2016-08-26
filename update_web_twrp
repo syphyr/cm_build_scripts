@@ -1,0 +1,41 @@
+#!/bin/bash
+
+## Root of CM project directory
+PROJECT_DIR=~/android/omni
+## Changelog location
+CHANGE_FILE=~/android/changelog-omni.html
+## Device name
+ANDROID_DEVICE=v500
+## End Edit
+
+OUTDIR=$PROJECT_DIR/out/target/product/$ANDROID_DEVICE
+
+## Find file name of ROM and set variable
+cd "$OUTDIR"
+FILE=$(ls recovery.img)
+
+NOW=$(date +%Y-%m-%d:%H:%M:%S)
+
+## Check if ROM exists before proceding
+if [ ! -e "$FILE" ]; then
+  echo "Build Failed!"
+  if [ -e `which send_mail_twrp` ]; then
+    echo ""
+    echo "Automatic email notification sent for failed build!"
+    SUBJECT="TWRP Build Failed on $NOW"
+    send_mail_twrp "$SUBJECT"
+  fi
+  exit
+fi
+
+echo "Build Successful!"
+if [ -e `which send_mail_twrp` ]; then
+  echo ""
+  echo "Automatic email notification sent for successful build."
+  SUBJECT="Build Successful for TWRP $FILE on $NOW"
+  send_mail_twrp "$SUBJECT"
+fi
+
+echo ""
+echo "Done."
+echo ""

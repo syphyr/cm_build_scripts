@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+
+  <remote name="cmhub" fetch="https://github.com/" review="review.cyanogenmod.com" />
+  <remote name="ghub" fetch="https://github.com/" />
+
+  <project path="device/samsung/espresso-common" name="syphyr/android_device_samsung_espresso-common" remote="ghub" />
+  <project path="device/samsung/omap4-common" name="syphyr/android_device_samsung_omap4-common" remote="ghub" />
+  <project path="device/samsung/p3110" name="syphyr/android_device_samsung_p3110" remote="ghub" />
+  <project path="hardware/samsung" name="syphyr/android_hardware_samsung" remote="ghub" />
+  <project path="kernel/samsung/espresso10" name="syphyr/android_kernel_samsung_espresso10" remote="ghub" revision="cm-11.0-stable" />
+  <project path="packages/apps/SamsungServiceMode" name="syphyr/android_packages_apps_SamsungServiceMode" remote="ghub" />
+  <project path="vendor/samsung" name="syphyr/proprietary_vendor_samsung" remote="ghub" />
+
+</manifest>

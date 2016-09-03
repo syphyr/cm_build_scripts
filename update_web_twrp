@@ -14,7 +14,7 @@ OUTDIR=$PROJECT_DIR/out/target/product/$ANDROID_DEVICE
 cd "$OUTDIR"
 FILE=$(ls recovery.img)
 
-NOW=$(date +%Y-%m-%d:%H:%M:%S)
+NOW=$(date +%Y-%m-%d)
 
 ## Check if ROM exists before proceding
 if [ ! -e "$FILE" ]; then
@@ -32,7 +32,7 @@ echo "Build Successful!"
 if [ -e `which send_mail_twrp` ]; then
   echo ""
   echo "Automatic email notification sent for successful build."
-  SUBJECT="Build Successful for TWRP $FILE on $NOW"
+  SUBJECT="Build Successful for TWRP on $NOW"
   send_mail_twrp "$SUBJECT"
 fi
 

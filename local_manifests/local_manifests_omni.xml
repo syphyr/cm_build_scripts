@@ -391,9 +391,10 @@
   <remote name="ghub" fetch="https://github.com/" />
 
   <project path="device/lge/v500" name="syphyr/android_device_lge_v500" remote="ghub" revision="android-6.0" />
+
 <!--
   <project path="device/qcom/common" name="omnirom/android_device_qcom_common" remote="ohub" revision="android-6.0" />
--->
   <project path="device/qcom/common" name="CyanogenMod/android_device_qcom_common" remote="cmhub" revision="cm-13.0" />
+-->
 
 </manifest>

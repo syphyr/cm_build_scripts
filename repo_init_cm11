@@ -1,2 +1,2 @@
-cd ~/android/cm11
+cd ~/android/system/cm-11.0
 repo init -u https://github.com/CyanogenMod/android.git -b cm-11.0

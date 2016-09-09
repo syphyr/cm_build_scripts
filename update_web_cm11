@@ -3,7 +3,7 @@
 ## OTA Rest Server builds directory
 BUILDDIR=/var/www/html/CyanogenModOTA/builds
 ## Root of CM project directory
-PROJECT_DIR=~/android/cm11
+PROJECT_DIR=~/android/system/cm-11.0
 ## Changelog location
 CHANGE_FILE=~/android/changelog-cm11.html
 ## Device name

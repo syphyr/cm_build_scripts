@@ -1,2 +1,2 @@
-cd ~/android/system
+cd ~/android/system/cm-13.0
 prebuilts/misc/linux-x86/ccache/ccache -M 50G

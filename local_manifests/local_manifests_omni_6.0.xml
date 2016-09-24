@@ -47,7 +47,7 @@
   <remove-project name="platform/external/dexmaker"/>
   <remove-project name="android_external_dhcpcd"/>
   <remove-project name="platform/external/dnsmasq"/>
-  <remove-project name="platform/external/doclava"/>
+  <remove-project name="android_external_doclava"/>
   <remove-project name="platform/external/donuts"/>
   <remove-project name="platform/external/drm_gralloc"/>
   <remove-project name="platform/external/drm_hwcomposer"/>
@@ -75,7 +75,7 @@
   <remove-project name="platform/external/google-fonts/dancing-script"/>
   <remove-project name="platform/external/google-tv-pairing-protocol"/>
   <remove-project name="platform/external/gtest"/>
-  <remove-project name="platform/external/guava"/>
+  <remove-project name="android_external_guava"/>
   <remove-project name="platform/external/hamcrest"/>
   <remove-project name="platform/external/harfbuzz_ng"/>
   <remove-project name="platform/external/hyphenation-patterns"/>

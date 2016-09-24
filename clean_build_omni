@@ -1,0 +1,8 @@
+# Path to root of OmniROM project directory
+CM_PROJECT_DIR=~/android/system/android-6.0
+ANDROID_DEVICE=v500
+## End Edit
+
+cd "$CM_PROJECT_DIR"
+source build/envsetup.sh
+make clean

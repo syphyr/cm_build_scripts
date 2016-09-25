@@ -1,0 +1,64 @@
+#!/bin/bash
+
+## OTA Rest Server builds directory
+BUILDDIR=/var/www/html/CyanogenModOTA/builds
+## Root of CM project directory
+PROJECT_DIR=~/android/system/cm-14.0
+## Changelog location
+CHANGE_FILE=~/android/changelog-cm14.html
+## Device name
+ANDROID_DEVICE=awifi
+## End Edit
+
+OUTDIR=$PROJECT_DIR/out/target/product/$ANDROID_DEVICE
+
+## Find file name of ROM and set variable
+cd "$OUTDIR"
+FILE=$(ls cm-14.0-*.zip)
+
+## Check if ROM exists before proceding
+if [ ! -e "$FILE" ]; then
+  echo "Build Failed!"
+  if [ -e `which send_mail_cm14` ]; then
+    echo ""
+    echo "Automatic email notification sent for failed build!"
+    SUBJECT="Build Failed!"
+    send_mail_cm14 "$SUBJECT"
+  fi
+  exit
+fi
+
+echo "Build Successful!"
+if [ -e `which send_mail_cm14` ]; then
+  echo ""
+  echo "Automatic email notification sent for successful build."
+  SUBJECT="Build Successful for $FILE"
+  send_mail_cm14 "$SUBJECT"
+fi
+
+## Remove extension of file name and set variable
+NOEXT=${FILE%\.*}
+
+echo ""
+echo "Removing previous builds on OTA REST Server."
+echo ""
+
+rm "$BUILDDIR"/full/cm-14.0-*
+
+echo "Copying ROM ($FILE) to OTA REST Server."
+echo ""
+cp "$FILE" "$BUILDDIR"/full/
+
+if [ -e "$CHANGE_FILE" ]; then
+  echo "Copying changelog ($NOEXT.html) to OTA REST Server."
+  echo ""
+  cp "$CHANGE_FILE" "$BUILDDIR"/full/"$NOEXT".html
+else
+  echo "Changelog not found!"
+  echo ""
+  exit
+fi
+
+echo ""
+echo "Done."
+echo ""

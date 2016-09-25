@@ -1,0 +1,11 @@
+--- system/vendor/cm/config/common.mk.orig	2016-04-02 01:27:53.562980403 +0200
++++ system/vendor/cm/config/common.mk	2016-04-02 01:29:48.373546315 +0200
+@@ -267,7 +267,7 @@
+     endif
+ else
+     # If CM_BUILDTYPE is not defined, set to UNOFFICIAL
+-    CM_BUILDTYPE := UNOFFICIAL
++    CM_BUILDTYPE := NIGHTLY
+     CM_EXTRAVERSION :=
+ endif
+ 

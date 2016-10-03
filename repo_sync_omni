@@ -4,7 +4,7 @@ CM_PROJECT_DIR=~/android/system/android-6.0
 
 cd "$CM_PROJECT_DIR"
 
-repo sync -f --no-clone-bundle
+repo sync --no-clone-bundle
 
 echo ""
 

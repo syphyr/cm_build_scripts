@@ -8,7 +8,7 @@ if [ -e "../../patches/build.name.diff" ]; then
   patch -R -p1 --no-backup-if-mismatch < ../../patches/build.name.diff
 fi
 
-repo sync
+repo sync --no-clone-bundle
 
 if [ -e "../../patches/build.name.diff" ]; then
   echo "Setting build name to NIGHTLY"

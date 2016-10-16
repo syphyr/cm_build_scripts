@@ -1,2 +1,2 @@
-cd /usr/local/src/CyanogenModOTAUnitTest/CyanogenModOTAUnitTest
+cd /usr/local/src/CyanogenModOTAUnitTest
 nodejs index.js

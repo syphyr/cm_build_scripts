@@ -25,7 +25,7 @@ for REPOPATH in $REPOS ; do
     if [ ! "$REPOPATH" == "" ]; then
       if [ -d "$CM_PROJECT_DIR"/"$REPOPATH" ]; then
         cd "$CM_PROJECT_DIR"/"$REPOPATH"
-        GITOUT=$(git log HEAD --pretty="<li>%h (%cr) %s (%an)</li>" --since="5 days ago")
+        GITOUT=$(git log HEAD --pretty="<li>%h (%cr) %s (%an)</li>" --since="3 weeks ago")
         if [ ! "$GITOUT" == "" ]; then
           echo "<font size="4"><b>$REPOPATH</b></font>" >> "$CHANGE_FILE"
           echo '<ul style="list-style-type:square">' >> "$CHANGE_FILE"

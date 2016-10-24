@@ -3,8 +3,12 @@ sudo update-java-alternatives -s java-1.7.0-openjdk-amd64
 # Path to root of CM project directory
 CM_PROJECT_DIR=~/android/system/cm-13.0
 ANDROID_DEVICE=awifi
+# Path to ccache dir
+export USE_CCACHE=1
+export CCACHE_DIR=~/android/system/.ccache
 ## End Edit
 
 cd "$CM_PROJECT_DIR"
+prebuilts/misc/linux-x86/ccache/ccache -s
 source build/envsetup.sh
 brunch "$ANDROID_DEVICE"

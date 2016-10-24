@@ -5,7 +5,7 @@ BUILDDIR=/var/www/html/CyanogenModOTA/builds
 ## Root of CM project directory
 PROJECT_DIR=~/android/system/cm-13.0
 ## Changelog location
-CHANGE_FILE=~/android/changelog.html
+CHANGE_FILE=~/android/changelog-cm13.html
 ## Device name
 ANDROID_DEVICE=awifi
 ## End Edit

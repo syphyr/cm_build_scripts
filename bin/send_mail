@@ -8,7 +8,7 @@ subject="$1"
 boundary="ZZ_/afg6432dfgkl.94531q"
 body="Changelog is attached for current build:"
 declare -a attachments
-attachments=( "/home/delta/android/changelog.html" )
+attachments=( "/home/delta/android/changelog-cm13.html" )
 
 # Build headers
 {

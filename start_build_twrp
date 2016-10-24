@@ -12,3 +12,4 @@ source build/envsetup.sh
 make clean
 lunch omni_$ANDROID_DEVICE-eng
 mka recoveryimage
+prebuilts/misc/linux-x86/ccache/ccache -s

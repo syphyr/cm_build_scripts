@@ -11,3 +11,4 @@ prebuilts/misc/linux-x86/ccache/ccache -s
 source build/envsetup.sh
 make clean
 brunch "$ANDROID_DEVICE"
+prebuilts/misc/linux-x86/ccache/ccache -s

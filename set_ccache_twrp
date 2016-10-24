@@ -1,4 +1,4 @@
-cd ~/android/system/cm-13.0
+cd ~/android/system/android-6.0
 export USE_CCACHE=1
 export CCACHE_DIR=~/android/system/.ccache
 prebuilts/misc/linux-x86/ccache/ccache -M 15G

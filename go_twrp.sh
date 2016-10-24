@@ -1,16 +1,16 @@
 sudo update-java-alternatives -s java-1.7.0-openjdk-amd64
 
-if [ ! -e ./repo_sync_omni ]; then
+if [ ! -e ./repo_sync_twrp ]; then
   echo "Repo sync script is not found"
   exit
 fi
 
-if [ ! -e ./start_build_omni ]; then
+if [ ! -e ./start_build_twrp ]; then
   echo "Start build script is not found"
   exit
 fi
 
-if [ ! -e ./make_changelog_omni ]; then
+if [ ! -e ./make_changelog_twrp ]; then
   echo "Make changelog script is not found"
   exit
 fi
@@ -23,15 +23,15 @@ fi
 echo ""
 echo "Syncing Repos."
 echo ""
-./repo_sync_omni
+./repo_sync_twrp
 echo ""
 echo "Creating Changelog."
 echo ""
-./make_changelog_omni
+./make_changelog_twrp
 echo ""
 echo "Building ROM."
 echo ""
-./start_build_omni
+./start_build_twrp
 echo ""
 echo "Sending email."
 echo ""

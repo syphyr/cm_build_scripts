@@ -9,6 +9,7 @@ export CCACHE_DIR=~/android/system/.ccache
 ## End Edit
 
 cd "$CM_PROJECT_DIR"
-prebuilts/misc/linux-x86/ccache/ccache -s
+prebuilts/misc/linux-x86/ccache/ccache -z
 source build/envsetup.sh
 brunch "$ANDROID_DEVICE"
+prebuilts/misc/linux-x86/ccache/ccache -s

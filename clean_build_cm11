@@ -7,6 +7,5 @@ export CCACHE_DIR=~/android/system/.ccache
 ## End Edit
 
 cd "$CM_PROJECT_DIR"
-prebuilts/misc/linux-x86/ccache/ccache -s
 source build/envsetup.sh
 make clean

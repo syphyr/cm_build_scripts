@@ -3,7 +3,7 @@
 ## OTA Rest Server builds directory
 BUILDDIR=/var/www/html/CyanogenModOTA/builds
 ## Root of CM project directory
-PROJECT_DIR=~/android/system/cm-14.0
+PROJECT_DIR=~/android/system/cm-14.1
 ## Changelog location
 CHANGE_FILE=~/android/changelog-cm14.html
 ## Device name
@@ -14,7 +14,7 @@ OUTDIR=$PROJECT_DIR/out/target/product/$ANDROID_DEVICE
 
 ## Find file name of ROM and set variable
 cd "$OUTDIR"
-FILE=$(ls cm-14.0-*.zip)
+FILE=$(ls cm-14.1-*.zip)
 
 ## Check if ROM exists before proceding
 if [ ! -e "$FILE" ]; then
@@ -43,7 +43,7 @@ echo ""
 echo "Removing previous builds on OTA REST Server."
 echo ""
 
-rm "$BUILDDIR"/full/cm-14.0-*
+rm "$BUILDDIR"/full/cm-14.1-*
 
 echo "Copying ROM ($FILE) to OTA REST Server."
 echo ""

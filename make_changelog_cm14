@@ -3,7 +3,7 @@
 # Path to changelog file
 CHANGE_FILE=~/android/changelog-cm14.html
 # Path to root of CM project directory
-CM_PROJECT_DIR=~/android/system/cm-14.0
+CM_PROJECT_DIR=~/android/system/cm-14.1
 ## End Edit
 
 PROJECT_LIST=$CM_PROJECT_DIR/.repo/project.list

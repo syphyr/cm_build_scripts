@@ -1,5 +1,5 @@
 # Path to root of CM project directory
-CM_PROJECT_DIR=~/android/system/cm-14.0
+CM_PROJECT_DIR=~/android/system/cm-14.1
 ANDROID_DEVICE=awifi
 # Path to ccache dir
 export USE_CCACHE=1

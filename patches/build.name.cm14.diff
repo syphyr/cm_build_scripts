@@ -1,6 +1,6 @@
 --- system/vendor/cm/config/common.mk.orig	2016-04-02 01:27:53.562980403 +0200
 +++ system/vendor/cm/config/common.mk	2016-04-02 01:29:48.373546315 +0200
-@@ -320,7 +320,7 @@
+@@ -319,7 +319,7 @@
      endif
  else
      # If CM_BUILDTYPE is not defined, set to UNOFFICIAL

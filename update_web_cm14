@@ -7,7 +7,7 @@ PROJECT_DIR=~/android/system/cm-14.1
 ## Changelog location
 CHANGE_FILE=~/android/changelog-cm14.html
 ## Device name
-ANDROID_DEVICE=awifi
+ANDROID_DEVICE=v500
 ## End Edit
 
 OUTDIR=$PROJECT_DIR/out/target/product/$ANDROID_DEVICE

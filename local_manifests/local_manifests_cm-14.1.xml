@@ -4,9 +4,16 @@
   <remote name="cmhub" fetch="https://github.com/" review="review.cyanogenmod.com" />
   <remote name="ghub" fetch="https://github.com/" />
 
+<!--
   <project path="device/lge/awifi" name="syphyr/android_device_lge_awifi" remote="ghub" revision="cm-14.1" />
   <project path="kernel/lge/awifi" name="syphyr/android_kernel_lge_awifi" remote="ghub" revision="cm-14.1" />
   <project path="vendor/lge" name="syphyr/proprietary_vendor_lge" remote="ghub" revision="cm-14.1" />
+-->
+
+  <project path="device/lge/v500" name="CyanogenMod/android_device_lge_v500" remote="cmhub" revision="cm-14.1" />
+  <project path="kernel/lge/v500" name="CyanogenMod/android_kernel_lge_v500" remote="cmhub" revision="cm-14.1" />
+  <project path="vendor/lge" name="TheMuppets/proprietary_vendor_lge" remote="ghub" revision="cm-14.1" />
+
   <project path="device/qcom/common" name="CyanogenMod/android_device_qcom_common" remote="cmhub" />
 
 </manifest>

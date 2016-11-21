@@ -11,11 +11,11 @@
   <project path="kernel/samsung/espresso10" name="syphyr/android_kernel_samsung_espresso10" remote="ghub" revision="cm-11.0-stable" />
   <project path="packages/apps/SamsungServiceMode" name="syphyr/android_packages_apps_SamsungServiceMode" remote="ghub" />
   <project path="vendor/samsung" name="syphyr/proprietary_vendor_samsung" remote="ghub" />
-
+<!--
   <remove-project name="CyanogenMod/android_packages_apps_CMUpdater" />
   <project path="packages/apps/CMUpdater" name="syphyr/android_packages_apps_CMUpdater" remote="ghub" />
 
   <remove-project name="CyanogenMod/android_frameworks_base" />
   <project path="frameworks/base" name="syphyr/android_frameworks_base" remote="ghub" />
-
+-->
 </manifest>

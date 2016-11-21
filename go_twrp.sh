@@ -1,4 +1,5 @@
-sudo update-java-alternatives -s java-1.7.0-openjdk-amd64
+sudo update-alternatives --set java /usr/lib/jvm/java-7-openjdk-amd64/jre/bin/java
+sudo update-alternatives --set javac /usr/lib/jvm/java-7-openjdk-amd64/bin/javac
 
 if [ ! -e ./repo_sync_twrp ]; then
   echo "Repo sync script is not found"

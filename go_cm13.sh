@@ -1,6 +1,13 @@
 sudo update-alternatives --set java /usr/lib/jvm/java-7-openjdk-amd64/jre/bin/java
 sudo update-alternatives --set javac /usr/lib/jvm/java-7-openjdk-amd64/bin/javac
 
+# Directory that contains CM build scripts
+BUILD_SCRIPT_DIR=~/android
+
+## END EDIT ##
+
+cd $BUILD_SCRIPT_DIR
+
 if [ ! -e ./repo_sync_cm13 ]; then
   echo "Repo sync script is not found"
   exit

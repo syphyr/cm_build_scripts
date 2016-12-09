@@ -1,2 +1,4 @@
+#!/bin/bash
+
 cd ~/android/system/cm-14.1
 repo init -u https://github.com/CyanogenMod/android.git -b cm-14.1

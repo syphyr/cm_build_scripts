@@ -1,3 +1,5 @@
+#!/bin/bash
+
 sudo update-alternatives --set java /usr/lib/jvm/java-6-oracle/jre/bin/java
 sudo update-alternatives --set javac /usr/lib/jvm/java-6-oracle/bin/javac
 

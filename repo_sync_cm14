@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # Path to root of CM project directory
 CM_PROJECT_DIR=~/android/system/cm-14.1
 CM_DEVICE=~/android/system/cm-14.1/device/lge/v500

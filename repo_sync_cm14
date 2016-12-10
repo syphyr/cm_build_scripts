@@ -4,6 +4,8 @@
 CM_PROJECT_DIR=~/android/system/cm-14.1
 CM_DEVICE=~/android/system/cm-14.1/device/lge/v500
 CM_KERNEL=~/android/system/cm-14.1/kernel/lge/v500
+CM_VENDOR=~/android/system/cm-14.1/vendor/lge
+CM_QCOM=~/android/system/cm-14.1/vendor/qcom/binaries
 ## End Edit
 
 cd "$CM_PROJECT_DIR"
@@ -34,6 +36,24 @@ fi
 if [ -d "$CM_KERNEL" ]; then
   cd "$CM_KERNEL"
   echo "Rebasing kernel repo."
+  git checkout cm-14.1
+  git fetch cyanogen
+  git rebase cyanogen/cm-14.1
+  echo ""
+fi
+
+if [ -d "$CM_VENDOR" ]; then
+  cd "$CM_VENDOR"
+  echo "Rebasing vendor repo."
+  git checkout cm-14.1
+  git fetch cyanogen
+  git rebase cyanogen/cm-14.1
+  echo ""
+fi
+
+if [ -d "$CM_QCOM" ]; then
+  cd "$CM_QCOM"
+  echo "Rebasing qcom repo."
   git checkout cm-14.1
   git fetch cyanogen
   git rebase cyanogen/cm-14.1

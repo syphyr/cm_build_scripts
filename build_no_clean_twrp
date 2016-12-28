@@ -1,10 +1,10 @@
 #!/bin/bash
 
-sudo update-alternatives --set java /usr/lib/jvm/java-7-openjdk-amd64/jre/bin/java
-sudo update-alternatives --set javac /usr/lib/jvm/java-7-openjdk-amd64/bin/javac
+sudo update-alternatives --set java /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
+sudo update-alternatives --set javac /usr/lib/jvm/java-8-openjdk-amd64/bin/javac
 
 # Path to root of OmniROM project directory
-CM_PROJECT_DIR=~/android/system/android-6.0
+CM_PROJECT_DIR=~/android/system/android-7.1
 ANDROID_DEVICE=v500
 # Path to ccache dir
 export USE_CCACHE=1

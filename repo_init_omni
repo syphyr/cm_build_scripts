@@ -1,4 +1,4 @@
 #!/bin/bash
 
-cd ~/android/system/android-6.0
-repo init -u https://github.com/omnirom/android.git -b android-6.0 --depth=1
+cd ~/android/system/android-7.1
+repo init -u https://github.com/omnirom/android.git -b android-7.1 --depth=1

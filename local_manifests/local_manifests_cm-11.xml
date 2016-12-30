@@ -1,7 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <manifest>
 
-  <remote name="cmhub" fetch="https://github.com/" review="review.cyanogenmod.com" />
+  <remove-project name="platform/prebuilts/clang/darwin-x86/3.1"/>
+  <remove-project name="platform/prebuilts/clang/darwin-x86/3.2"/>
+  <remove-project name="platform/prebuilts/clang/darwin-x86/arm/3.3"/>
+  <remove-project name="platform/prebuilts/clang/darwin-x86/host/3.3"/>
+  <remove-project name="platform/prebuilts/clang/darwin-x86/mips/3.3"/>
+  <remove-project name="platform/prebuilts/clang/darwin-x86/x86/3.3"/>
+  <remove-project name="platform/prebuilts/gcc/darwin-x86/x86/x86_64-linux-android-4.7"/>
+  <remove-project name="platform/prebuilts/gcc/darwin-x86/arm/arm-eabi-4.6"/>
+  <remove-project name="platform/prebuilts/gcc/darwin-x86/arm/arm-eabi-4.7"/>
+  <remove-project name="platform/prebuilts/gcc/darwin-x86/arm/arm-linux-androideabi-4.6"/>
+  <remove-project name="platform/prebuilts/gcc/darwin-x86/arm/arm-linux-androideabi-4.7"/>
+  <remove-project name="platform/prebuilts/gcc/darwin-x86/host/headers"/>
+  <remove-project name="platform/prebuilts/gcc/darwin-x86/host/i686-apple-darwin-4.2.1"/>
+  <remove-project name="platform/prebuilts/gcc/darwin-x86/mips/mipsel-linux-android-4.6"/>
+  <remove-project name="platform/prebuilts/gcc/darwin-x86/mips/mipsel-linux-android-4.7"/>
+  <remove-project name="platform/prebuilts/gcc/darwin-x86/x86/i686-linux-android-4.6"/>
+  <remove-project name="platform/prebuilts/gcc/darwin-x86/x86/i686-linux-android-4.7"/>
+  <remove-project name="platform/prebuilts/python/darwin-x86/2.7.5"/>
+
   <remote name="ghub" fetch="https://github.com/" />
 
   <project path="device/samsung/espresso-common" name="syphyr/android_device_samsung_espresso-common" remote="ghub" />

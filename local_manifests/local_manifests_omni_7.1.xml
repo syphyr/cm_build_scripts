@@ -234,7 +234,6 @@
   <remove-project name="platform/packages/apps/CertInstaller"/>
   <remove-project name="android_packages_apps_Contacts"/>
   <remove-project name="android_packages_apps_ContactsCommon"/>
-  <remove-project name="android_packages_apps_DeskClock"/>
   <remove-project name="android_packages_apps_Dialer"/>
   <remove-project name="android_packages_apps_Email"/>
   <remove-project name="platform/packages/apps/ExactCalculator"/>

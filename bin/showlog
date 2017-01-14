@@ -1,1 +1,1 @@
-git log --pretty="%C(yellow)%h %C(green)(%cr) %C(white)%s %C(blue)(%an)"
+git log --pretty="%C(yellow)%h %C(green)(%cr) %C(red)(%ar) %C(white)%s %C(blue)(%an)"

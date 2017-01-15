@@ -1,0 +1,19 @@
+## Root of ROM directory
+ROM_DIR=/var/www/html/roms
+## LineageOS server directory
+OTA_DIR=~/android/system/lineageos_updater
+## End Edit
+
+cd "$ROM_DIR"
+FILE=$(ls lineage-14.1-*.zip)
+
+if [ ! -e "$FILE" ]; then
+  echo "Build not detected"
+  exit
+fi
+
+cd "$OTA_DIR"
+echo "Removing $FILE from OTA Server"
+FLASK_APP=app.py flask delrom -f $FILE
+
+

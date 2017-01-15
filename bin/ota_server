@@ -1,0 +1,2 @@
+cd ~/android/system/lineageos_updater
+FLASK_APP=app.py flask run

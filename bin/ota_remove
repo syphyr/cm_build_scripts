@@ -12,6 +12,9 @@ if [ ! -e "$FILE" ]; then
   exit
 fi
 
+echo "Deleting $FILE"
+rm $FILE
+
 cd "$OTA_DIR"
 echo "Removing $FILE from OTA Server"
 FLASK_APP=app.py flask delrom -f $FILE

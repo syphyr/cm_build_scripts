@@ -4,6 +4,8 @@
 PROJECT_DIR=~/android/system/cm-14.1
 ## LineageOS server directory
 OTA_DIR=~/android/system/lineageos_updater
+## Root of ROM directory
+ROM_DIR=/var/www/html/roms
 ## Device name
 ANDROID_DEVICE=v500
 ## End Edit
@@ -22,6 +24,8 @@ if [ ! -e "$FILE" ]; then
   echo "Build not detected"
   exit
 fi
+
+cp $FILE $ROM_DIR/
 
 cd "$OTA_DIR"
 echo "Adding $FILE to OTA Server"

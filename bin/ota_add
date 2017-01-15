@@ -1,0 +1,28 @@
+## usage: addrom.py [-h] -f FILENAME -d DEVICE -v VERSION -t DATETIME -r ROMTYPE -m MD5SUM -u URL
+
+## Root of project directory
+PROJECT_DIR=~/android/system/cm-14.1
+## LineageOS server directory
+OTA_DIR=~/android/system/lineageos_updater
+## Device name
+ANDROID_DEVICE=v500
+## End Edit
+
+OUTDIR=$PROJECT_DIR/out/target/product/$ANDROID_DEVICE
+cd "$OUTDIR"
+
+FILE=$(ls lineage-14.1-*.zip)
+MD5=$(cat lineage-14.1-*.md5sum | cut -d " " -f 1)
+DATE=$(echo $FILE | cut -d "-" -f 3)
+DATE=${DATE:0:4}-${DATE:4:2}-${DATE:6:2}
+ROM_TYPE=$(echo $FILE | cut -d "-" -f 4 | tr A-Z a-z)
+
+
+if [ ! -e "$FILE" ]; then
+  echo "Build not detected"
+  exit
+fi
+
+cd "$OTA_DIR"
+echo "Adding $FILE to OTA Server"
+FLASK_APP=app.py flask addrom -f $FILE -d $ANDROID_DEVICE -v 1 -t $DATE -r $ROM_TYPE -m $MD5 -u http://192.168.1.5/roms/$FILE

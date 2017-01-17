@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# Path to root of CM project directory
+CM_PROJECT_DIR=~/android/system/lineageos_updater
+## End Edit
+
+cd "$CM_PROJECT_DIR"
+
+echo ""
+
+echo "Rebasing Lineage OTA repo."
+git checkout master
+git fetch lineage
+git rebase lineage/master
+
+

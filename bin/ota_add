@@ -4,8 +4,10 @@
 PROJECT_DIR=~/android/system/cm-14.1
 ## LineageOS server directory
 OTA_DIR=~/android/system/lineageos_updater
-## Root of ROM directory
-ROM_DIR=/var/www/html/roms
+## Document Root
+DOC_DIR=/var/www/html
+## Root of Rom directory in Document Root
+ROM_DIR=CyanogenModOTA/builds/full
 ## Device name
 ANDROID_DEVICE=v500
 ## End Edit
@@ -27,8 +29,8 @@ DATE=${DATE:0:4}-${DATE:4:2}-${DATE:6:2}
 TIME=$(grep "ro.build.date=" system/build.prop | cut -d " " -f 4)
 ROM_TYPE=$(echo $FILE | cut -d "-" -f 4 | tr A-Z a-z)
 
-cp $FILE $ROM_DIR/
+cp $FILE $DOC_DIR/$ROM_DIR/
 
 cd "$OTA_DIR"
 echo "Adding $FILE to OTA Server"
-FLASK_APP=app.py flask addrom -f $FILE -d $ANDROID_DEVICE -v $ROM_VER -t "$DATE $TIME" -r $ROM_TYPE -m $MD5 -u http://192.168.1.5/roms/$FILE
+FLASK_APP=app.py flask addrom -f $FILE -d $ANDROID_DEVICE -v $ROM_VER -t "$DATE $TIME" -r $ROM_TYPE -m $MD5 -u http://192.168.1.5/$ROM_DIR/$FILE

@@ -1,10 +1,12 @@
-## Root of ROM directory
-ROM_DIR=/var/www/html/roms
+## Document Root
+DOC_DIR=/var/www/html
+## Root of Rom directory in Document Root
+ROM_DIR=CyanogenModOTA/builds/full
 ## LineageOS server directory
 OTA_DIR=~/android/system/lineageos_updater
 ## End Edit
 
-cd "$ROM_DIR"
+cd "$DOC_DIR"/"$ROM_DIR"
 FILE=$(ls lineage-14.1-*.zip)
 
 if [ ! -e "$FILE" ]; then

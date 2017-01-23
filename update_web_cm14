@@ -1,7 +1,11 @@
 #!/bin/bash
 
-## OTA Rest Server builds directory
-BUILDDIR=/var/www/html/CyanogenModOTA/builds
+## LineageOS server directory
+OTA_DIR=~/android/system/lineageos_updater
+## Document Root
+DOC_DIR=/var/www/html
+## Root of Rom directory in Document Root
+ROM_DIR=CyanogenModOTA/builds/full
 ## Root of CM project directory
 PROJECT_DIR=~/android/system/cm-14.1
 ## Changelog location
@@ -39,26 +43,51 @@ fi
 ## Remove extension of file name and set variable
 NOEXT=${FILE%\.*}
 
+MD5=$(cat lineage-14.1-*.md5sum | cut -d " " -f 1)
+ROM_VER=$(echo $FILE | cut -d "-" -f 2)
+DATE=$(echo $FILE | cut -d "-" -f 3)
+DATE=${DATE:0:4}-${DATE:4:2}-${DATE:6:2}
+TIME=$(grep "ro.build.date=" system/build.prop | cut -d " " -f 4)
+ROM_TYPE=$(echo $FILE | cut -d "-" -f 4 | tr A-Z a-z)
+
+cd "$DOC_DIR"/"$ROM_DIR"
+FILE_OLD=$(ls lineage-14.1-*.zip)
+
 echo ""
 echo "Removing previous builds on OTA REST Server."
 echo ""
 
-rm "$BUILDDIR"/full/lineage-14.1-*
+rm lineage-14.1-*
+
+cd "$OTA_DIR"
+echo "Removing $FILE from OTA Server"
+FLASK_APP=app.py flask delrom -f $FILE_OLD
 
 echo "Copying ROM ($FILE) to OTA REST Server."
 echo ""
-cp "$FILE" "$BUILDDIR"/full/
+
+cd "$OUTDIR"
+cp "$FILE" "$DOC_DIR"/"$ROM_DIR"/
 
 if [ -e "$CHANGE_FILE" ]; then
   echo "Copying changelog ($NOEXT.html) to OTA REST Server."
   echo ""
-  cp "$CHANGE_FILE" "$BUILDDIR"/full/"$NOEXT".html
+  cp "$CHANGE_FILE" "$DOC_DIR"/"$ROM_DIR"/"$NOEXT".html
 else
   echo "Changelog not found!"
   echo ""
   exit
 fi
 
+cd "$OTA_DIR"
+echo "Adding $FILE to OTA Server"
+FLASK_APP=app.py flask addrom -f $FILE -d $ANDROID_DEVICE -v $ROM_VER -t "$DATE $TIME" -r $ROM_TYPE -m $MD5 -u http://192.168.1.5/$ROM_DIR/$FILE
+
 echo ""
 echo "Done."
 echo ""
+
+#echo "Starting OTA Server"
+#echo ""
+
+#FLASK_APP=app.py flask run

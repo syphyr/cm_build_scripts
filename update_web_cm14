@@ -61,7 +61,9 @@ rm lineage-14.1-*
 
 cd "$OTA_DIR"
 echo "Removing $FILE_OLD from OTA Server"
+echo ""
 FLASK_APP=app.py flask delrom -f $FILE_OLD
+echo ""
 
 echo "Copying ROM ($FILE) to OTA REST Server."
 echo ""
@@ -81,6 +83,7 @@ fi
 
 cd "$OTA_DIR"
 echo "Adding $FILE to OTA Server"
+echo ""
 FLASK_APP=app.py flask addrom -f $FILE -d $ANDROID_DEVICE -v $ROM_VER -t "$DATE $TIME" -r $ROM_TYPE -m $MD5 -u http://192.168.1.5/$ROM_DIR/$FILE
 
 echo ""

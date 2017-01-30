@@ -28,9 +28,10 @@ DATE=$(echo $FILE | cut -d "-" -f 3)
 DATE=${DATE:0:4}-${DATE:4:2}-${DATE:6:2}
 TIME=$(grep "ro.build.date=" system/build.prop | cut -d " " -f 4)
 ROM_TYPE=$(echo $FILE | cut -d "-" -f 4 | tr A-Z a-z)
+FILESIZE=$(stat -c%s "$FILE")
 
 cp $FILE $DOC_DIR/$ROM_DIR/
 
 cd "$OTA_DIR"
 echo "Adding $FILE to OTA Server"
-FLASK_APP=app.py flask addrom -f $FILE -d $ANDROID_DEVICE -v $ROM_VER -t "$DATE $TIME" -r $ROM_TYPE -m $MD5 -u http://192.168.1.5/$ROM_DIR/$FILE
+FLASK_APP=app.py flask addrom -f $FILE -d $ANDROID_DEVICE -v $ROM_VER -t "$DATE $TIME" -r $ROM_TYPE -m $MD5 -s $FILESIZE -u http://192.168.1.5/$ROM_DIR/$FILE

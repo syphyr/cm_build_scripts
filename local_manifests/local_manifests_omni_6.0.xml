@@ -387,14 +387,12 @@
   <remove-project name="android_packages_apps_MonthCalendarWidget"/>
 
   <remote name="ohub" fetch="https://github.com/" review="gerrit.omnirom.org" />
-  <remote name="cmhub" fetch="https://github.com/" review="review.cyanogenmod.com" />
   <remote name="ghub" fetch="https://github.com/" />
 
   <project path="device/lge/v500" name="syphyr/android_device_lge_v500" remote="ghub" revision="android-6.0" />
 
-<!--
-  <project path="device/qcom/common" name="omnirom/android_device_qcom_common" remote="ohub" revision="android-6.0" />
-  <project path="device/qcom/common" name="CyanogenMod/android_device_qcom_common" remote="cmhub" revision="cm-13.0" />
--->
+  <remove-project name="android_bootable_recovery"/>
+  <project path="bootable/recovery" name="omnirom/android_bootable_recovery" remote="ohub" revision="android-7.1" />
+
 
 </manifest>

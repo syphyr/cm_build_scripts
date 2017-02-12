@@ -392,7 +392,10 @@
   <project path="device/lge/v500" name="syphyr/android_device_lge_v500" remote="ghub" revision="android-6.0" />
 
   <remove-project name="android_bootable_recovery"/>
-  <project path="bootable/recovery" name="omnirom/android_bootable_recovery" remote="ohub" revision="android-7.1" />
+  <project path="bootable/recovery" name="syphyr/android_bootable_recovery" remote="ghub" revision="android-7.1" />
 
+<!--
+  <project path="bootable/recovery" name="omnirom/android_bootable_recovery" remote="ohub" revision="android-7.1" />
+-->
 
 </manifest>

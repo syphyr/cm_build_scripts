@@ -2,6 +2,7 @@
 
 # Path to root of OmniROM project directory
 CM_PROJECT_DIR=~/android/system/android-6.0
+CM_RECOVERY="$CM_PROJECT_DIR"/bootable/recovery
 ## End Edit
 
 cd "$CM_PROJECT_DIR"
@@ -10,3 +11,11 @@ repo sync --no-clone-bundle
 
 echo ""
 
+if [ -d "$CM_RECOVERY" ]; then
+  cd "$CM_RECOVERY"
+  echo "Rebasing recovery repo."
+  git checkout android-7.1
+  git fetch omnirom
+  git rebase omnirom/android-7.1
+  echo ""
+fi

@@ -43,6 +43,8 @@ fi
 ## Remove extension of file name and set variable
 NOEXT=${FILE%\.*}
 
+CHANGELOG="$NOEXT".html
+
 MD5=$(cat lineage-14.1-*.md5sum | cut -d " " -f 1)
 ROM_VER=$(echo $FILE | cut -d "-" -f 2)
 DATE=$(echo $FILE | cut -d "-" -f 3)
@@ -76,9 +78,9 @@ cd "$OUTDIR"
 cp "$FILE" "$DOC_DIR"/"$ROM_DIR"/
 
 if [ -e "$CHANGE_FILE" ]; then
-  echo "Copying changelog ($NOEXT.html) to OTA REST Server."
+  echo "Copying changelog ($CHANGELOG) to OTA REST Server."
   echo ""
-  cp "$CHANGE_FILE" "$DOC_DIR"/"$ROM_DIR"/"$NOEXT".html
+  cp "$CHANGE_FILE" "$DOC_DIR"/"$ROM_DIR"/"$CHANGELOG"
 else
   echo "Changelog not found!"
   echo ""
@@ -88,7 +90,7 @@ fi
 cd "$OTA_DIR"
 echo "Adding $FILE to OTA Server"
 echo ""
-FLASK_APP=app.py flask addrom -f $FILE -d $ANDROID_DEVICE -v $ROM_VER -t "$DATE $TIME" -r $ROM_TYPE -m $MD5 -s $FILESIZE -u http://192.168.1.5/$ROM_DIR/$FILE
+FLASK_APP=app.py flask addrom -f $FILE -d $ANDROID_DEVICE -v $ROM_VER -t "$DATE $TIME" -r $ROM_TYPE -m $MD5 -s $FILESIZE -u http://192.168.1.5/$ROM_DIR/$FILE -c http://192.168.1.5/$ROM_DIR/$CHANGELOG
 
 echo ""
 echo "Done."

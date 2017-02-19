@@ -22,6 +22,11 @@ if [ ! -e "$FILE" ]; then
   exit
 fi
 
+## Remove extension of file name and set variable
+NOEXT=${FILE%\.*}
+
+CHANGELOG=$NOEXT.html
+
 MD5=$(cat lineage-14.1-*.md5sum | cut -d " " -f 1)
 ROM_VER=$(echo $FILE | cut -d "-" -f 2)
 DATE=$(echo $FILE | cut -d "-" -f 3)
@@ -37,4 +42,4 @@ cp $FILE $DOC_DIR/$ROM_DIR/
 
 cd "$OTA_DIR"
 echo "Adding $FILE to OTA Server"
-FLASK_APP=app.py flask addrom -f $FILE -d $ANDROID_DEVICE -v $ROM_VER -t "$DATE $TIME" -r $ROM_TYPE -m $MD5 -s $FILESIZE -u http://192.168.1.5/$ROM_DIR/$FILE
+FLASK_APP=app.py flask addrom -f $FILE -d $ANDROID_DEVICE -v $ROM_VER -t "$DATE $TIME" -r $ROM_TYPE -m $MD5 -s $FILESIZE -u http://192.168.1.5/$ROM_DIR/$FILE -c http://192.168.1.5/$ROM_DIR/$CHANGELOG

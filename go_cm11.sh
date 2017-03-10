@@ -30,10 +30,10 @@ if [ ! -e ./update_web_cm11 ]; then
   exit
 fi
 
-echo ""
-echo "Syncing Repos."
-echo ""
-./repo_sync_cm11
+#echo ""
+#echo "Syncing Repos."
+#echo ""
+#./repo_sync_cm11
 echo ""
 echo "Creating Changelog."
 echo ""

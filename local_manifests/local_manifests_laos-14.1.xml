@@ -19,16 +19,14 @@
   <project path="kernel/lge/v500" name="LineageOS/android_kernel_lge_v500" remote="github" revision="cm-14.1" />
 -->
   <project path="device/lge/v500" name="syphyr/android_device_lge_v500-laos" remote="ghub" revision="cm-14.1" />
+  <project path="device/lge/gpad83-common" name="syphyr/android_device_lge_gpad83-common" remote="ghub" revision="cm-14.1" />
   <project path="kernel/lge/v500" name="syphyr/android_kernel_lge_v500-laos" remote="ghub" revision="cm-14.1" />
 
 <!--
   <project path="vendor/lge" name="TheMuppets/proprietary_vendor_lge" remote="ghub" revision="cm-14.1" />
-  <project path="vendor/qcom/binaries" name="TheMuppets/proprietary_vendor_qcom_binaries" remote="ghub" revision="cm-14.1" />
 -->
   <project path="vendor/lge" name="syphyr/proprietary_vendor_lge-cm" remote="ghub" revision="cm-14.1" />
-<!--
-  <project path="vendor/qcom/binaries" name="syphyr/proprietary_vendor_qcom_binaries" remote="ghub" revision="cm-14.1" />
--->
+
   <project path="device/qcom/common" name="LineageOS/android_device_qcom_common" remote="github" revision="cm-14.1" />
 
 </manifest>

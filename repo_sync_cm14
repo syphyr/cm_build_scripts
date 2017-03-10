@@ -5,7 +5,7 @@ CM_PROJECT_DIR=~/android/system/cm-14.1
 CM_DEVICE=~/android/system/cm-14.1/device/lge/v500
 CM_KERNEL=~/android/system/cm-14.1/kernel/lge/v500
 CM_VENDOR=~/android/system/cm-14.1/vendor/lge
-CM_QCOM=~/android/system/cm-14.1/vendor/qcom/binaries
+CM_COMMON=~/android/system/cm-14.1/device/lge/gpad83-common
 ## End Edit
 
 cd "$CM_PROJECT_DIR"
@@ -51,9 +51,9 @@ if [ -d "$CM_VENDOR" ]; then
   echo ""
 fi
 
-if [ -d "$CM_QCOM" ]; then
-  cd "$CM_QCOM"
-  echo "Rebasing qcom repo."
+if [ -d "$CM_COMMON" ]; then
+  cd "$CM_COMMON"
+  echo "Rebasing common gpad repo."
   git checkout cm-14.1
   git fetch cyanogen
   git rebase cyanogen/cm-14.1

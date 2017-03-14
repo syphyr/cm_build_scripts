@@ -13,7 +13,7 @@ export WITH_SU=true
 export USE_CCACHE=1
 # Path to ccache dir
 export CCACHE_DIR=~/android/system/.ccache
-export ANDROID_JACK_VM_ARGS="-Dfile.encoding=UTF-8 -XX:+TieredCompilation -Xmx4g"
+export ANDROID_JACK_VM_ARGS="-Dfile.encoding=UTF-8 -XX:+TieredCompilation -Xmx10g"
 ## End Edit
 
 cd "$CM_PROJECT_DIR"

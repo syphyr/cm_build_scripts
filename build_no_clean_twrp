@@ -5,7 +5,7 @@ sudo update-alternatives --set javac /usr/lib/jvm/java-7-openjdk-amd64/bin/javac
 
 # Path to root of OmniROM project directory
 CM_PROJECT_DIR=~/android/system/android-6.0
-ANDROID_DEVICE=v500
+ANDROID_DEVICE=gts210vewifi
 # Path to ccache dir
 export USE_CCACHE=1
 export CCACHE_DIR=~/android/system/.ccache

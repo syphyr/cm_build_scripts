@@ -3,7 +3,7 @@
 # Path to root of CM project directory
 CM_PROJECT_DIR=~/android/system/cm-14.1
 # Set device
-ANDROID_DEVICE=v500
+ANDROID_DEVICE=gts210vewifi
 # Enable SU by default
 export WITH_SU=true
 # Enable ccache

@@ -2,10 +2,11 @@
 
 # Path to root of CM project directory
 CM_PROJECT_DIR=~/android/system/cm-14.1
-CM_DEVICE=~/android/system/cm-14.1/device/lge/v500
-CM_KERNEL=~/android/system/cm-14.1/kernel/lge/v500
-CM_VENDOR=~/android/system/cm-14.1/vendor/lge
-CM_COMMON=~/android/system/cm-14.1/device/lge/gpad83-common
+CM_DEVICE=~/android/system/cm-14.1/device/samsung/gts210vewifi
+CM_KERNEL=~/android/system/cm-14.1/kernel/samsung/msm8976
+CM_VENDOR=~/android/system/cm-14.1/vendor/samsung
+CM_COMMON=~/android/system/cm-14.1/device/samsung/msm8976-common
+CM_HARDWARE=~/android/system/cm-14.1/hardware/samsung
 ## End Edit
 
 cd "$CM_PROJECT_DIR"
@@ -51,9 +52,18 @@ if [ -d "$CM_VENDOR" ]; then
   echo ""
 fi
 
+if [ -d "$CM_HARDWARE" ]; then
+  cd "$CM_HARDWARE"
+  echo "Rebasing hardware repo."
+  git checkout cm-14.1
+  git fetch cyanogen
+  git rebase cyanogen/cm-14.1
+  echo ""
+fi
+
 if [ -d "$CM_COMMON" ]; then
   cd "$CM_COMMON"
-  echo "Rebasing common gpad repo."
+  echo "Rebasing common repo."
   git checkout cm-14.1
   git fetch cyanogen
   git rebase cyanogen/cm-14.1

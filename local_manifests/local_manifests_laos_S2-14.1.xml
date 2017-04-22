@@ -20,7 +20,9 @@
   <project path="kernel/samsung/msm8976" name="syphyr/android_kernel_samsung_msm8976" remote="ghub" revision="cm-14.1" />
   <project path="hardware/samsung" name="syphyr/android_hardware_samsung-laos" remote="ghub" revision="cm-14.1" />
   <project path="vendor/samsung" name="syphyr/proprietary_vendor_samsung" remote="ghub" revision="cm-14.1" />
-
+<!--
+  <project path="vendor/extra" name="syphyr/android_vendor_extra" />
+-->
   <project path="device/qcom/common" name="LineageOS/android_device_qcom_common" remote="github" revision="cm-14.1" />
   <project path="hardware/sony/timekeep" name="LineageOS/android_hardware_sony_timekeep" remote="github" revision="cm-14.1" />
 

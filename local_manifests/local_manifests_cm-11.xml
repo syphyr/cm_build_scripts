@@ -46,6 +46,7 @@
   <remove-project name="CyanogenMod/android_external_skia" />
   <remove-project name="CyanogenMod/android_frameworks_native" />
   <remove-project name="CyanogenMod/android_external_sonivox" />
+  <remove-project name="CyanogenMod/android_external_freetype" />
 
   <project path="bionic" name="syphyr/android_bionic" remote="ghub" revision="cm-11.0" />
   <project path="build" name="syphyr/android_build" remote="ghub" revision="cm-11.0" />
@@ -71,6 +72,7 @@
   <project path="external/skia" name="syphyr/android_external_skia" remote="ghub" />
   <project path="frameworks/native" name="syphyr/android_frameworks_native" remote="ghub" />
   <project path="external/sonivox" name="syphyr/android_external_sonivox" remote="ghub" />
+  <project path="external/freetype" name="syphyr/android_external_freetype" remote="ghub" />
 
   <project path="device/samsung/espresso-common" name="syphyr/android_device_samsung_espresso-common" remote="ghub" />
   <project path="device/samsung/omap4-common" name="syphyr/android_device_samsung_omap4-common" remote="ghub" />

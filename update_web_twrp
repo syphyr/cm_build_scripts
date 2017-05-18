@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ## Root of CM project directory
-PROJECT_DIR=~/android/system/android-6.0
+PROJECT_DIR=~/android/system/android-7.1
 ## Changelog location
 CHANGE_FILE=~/android/changelog-twrp.html
 ## Device name

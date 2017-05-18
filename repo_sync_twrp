@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Path to root of OmniROM project directory
-CM_PROJECT_DIR=~/android/system/android-6.0
+CM_PROJECT_DIR=~/android/system/android-7.1
 CM_RECOVERY="$CM_PROJECT_DIR"/bootable/recovery
 CM_DEVICE="$CM_PROJECT_DIR"/device/samsung/gts210vewifi
 ## End Edit
@@ -24,8 +24,8 @@ fi
 if [ -d "$CM_DEVICE" ]; then
   cd "$CM_DEVICE"
   echo "Rebasing device repo."
-  git checkout android-6.0
+  git checkout android-7.1
   git fetch teamwin
-  git rebase teamwin/android-6.0
+  git rebase teamwin/android-7.1
   echo ""
 fi

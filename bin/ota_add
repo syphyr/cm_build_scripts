@@ -9,7 +9,7 @@ DOC_DIR=/var/www/html
 ## Root of Rom directory in Document Root
 ROM_DIR=CyanogenModOTA/builds/full
 ## Device name
-ANDROID_DEVICE=v500
+ANDROID_DEVICE=gts210vewifi
 ## End Edit
 
 OUTDIR=$PROJECT_DIR/out/target/product/$ANDROID_DEVICE
@@ -42,4 +42,4 @@ cp $FILE $DOC_DIR/$ROM_DIR/
 
 cd "$OTA_DIR"
 echo "Adding $FILE to OTA Server"
-FLASK_APP=app.py flask addrom -f $FILE -d $ANDROID_DEVICE -v $ROM_VER -t "$DATE $TIME" -r $ROM_TYPE -m $MD5 -s $FILESIZE -u http://192.168.1.5/$ROM_DIR/$FILE -c http://192.168.1.5/$ROM_DIR/$CHANGELOG
+FLASK_APP=updater.app flask addrom -f $FILE -d $ANDROID_DEVICE -v $ROM_VER -t "$DATE $TIME" -r $ROM_TYPE -m $MD5 -s $FILESIZE -u http://192.168.1.5/$ROM_DIR/$FILE -c http://192.168.1.5/$ROM_DIR/$CHANGELOG

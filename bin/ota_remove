@@ -19,6 +19,6 @@ rm $FILE
 
 cd "$OTA_DIR"
 echo "Removing $FILE from OTA Server"
-FLASK_APP=app.py flask delrom -f $FILE
+FLASK_APP=updater.app flask delrom -f $FILE
 
 

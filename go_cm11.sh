@@ -47,3 +47,5 @@ echo "Updating Web Server."
 echo ""
 ./update_web_cm11
 
+sudo update-alternatives --set java /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
+sudo update-alternatives --set javac /usr/lib/jvm/java-8-openjdk-amd64/bin/javac

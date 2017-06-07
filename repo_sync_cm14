@@ -5,8 +5,11 @@ CM_PROJECT_DIR=~/android/system/cm-14.1
 CM_DEVICE=~/android/system/cm-14.1/device/samsung/gts210vewifi
 CM_KERNEL=~/android/system/cm-14.1/kernel/samsung/msm8976
 CM_VENDOR=~/android/system/cm-14.1/vendor/samsung
+CM_VENDOR_CM=~/android/system/cm-14.1/vendor/cm
 CM_COMMON=~/android/system/cm-14.1/device/samsung/msm8976-common
 CM_HARDWARE=~/android/system/cm-14.1/hardware/samsung
+CM_SETTINGS=~/android/system/cm-14.1/packages/apps/Settings
+CM_FRAME_AV=~/android/system/cm-14.1/frameworks/av
 ## End Edit
 
 cd "$CM_PROJECT_DIR"
@@ -26,35 +29,7 @@ echo ""
 
 if [ -d "$CM_DEVICE" ]; then
   cd "$CM_DEVICE"
-  echo "Rebasing device repo."
-  git checkout cm-14.1
-  git fetch cyanogen
-  git rebase cyanogen/cm-14.1
-  echo ""
-fi
-
-
-if [ -d "$CM_KERNEL" ]; then
-  cd "$CM_KERNEL"
-  echo "Rebasing kernel repo."
-  git checkout cm-14.1
-  git fetch cyanogen
-  git rebase cyanogen/cm-14.1
-  echo ""
-fi
-
-if [ -d "$CM_VENDOR" ]; then
-  cd "$CM_VENDOR"
-  echo "Rebasing vendor repo."
-  git checkout cm-14.1
-  git fetch cyanogen
-  git rebase cyanogen/cm-14.1
-  echo ""
-fi
-
-if [ -d "$CM_HARDWARE" ]; then
-  cd "$CM_HARDWARE"
-  echo "Rebasing hardware repo."
+  echo "Rebasing device_samsung_gts210vewifi repo."
   git checkout cm-14.1
   git fetch cyanogen
   git rebase cyanogen/cm-14.1
@@ -63,7 +38,58 @@ fi
 
 if [ -d "$CM_COMMON" ]; then
   cd "$CM_COMMON"
-  echo "Rebasing common repo."
+  echo "Rebasing device_samsung_msm8976-common repo."
+  git checkout cm-14.1
+  git fetch cyanogen
+  git rebase cyanogen/cm-14.1
+  echo ""
+fi
+
+if [ -d "$CM_FRAME_AV" ]; then
+  cd "$CM_FRAME_AV"
+  echo "Rebasing frameworks_av repo."
+  git checkout cm-14.1
+  git rebase
+  echo ""
+fi
+
+if [ -d "$CM_HARDWARE" ]; then
+  cd "$CM_HARDWARE"
+  echo "Rebasing hardware_samsung repo."
+  git checkout cm-14.1
+  git fetch cyanogen
+  git rebase cyanogen/cm-14.1
+  echo ""
+fi
+
+if [ -d "$CM_KERNEL" ]; then
+  cd "$CM_KERNEL"
+  echo "Rebasing kernel_samsung_msm8976 repo."
+  git checkout cm-14.1
+  git fetch cyanogen
+  git rebase cyanogen/cm-14.1
+  echo ""
+fi
+
+if [ -d "$CM_SETTINGS" ]; then
+  cd "$CM_SETTINGS"
+  echo "Rebasing packages_apps_settings repo."
+  git checkout cm-14.1
+  git rebase
+  echo ""
+fi
+
+if [ -d "$CM_VENDOR_CM" ]; then
+  cd "$CM_VENDOR_CM"
+  echo "Rebasing vendor_cm repo."
+  git checkout cm-14.1
+  git rebase
+  echo ""
+fi
+
+if [ -d "$CM_VENDOR" ]; then
+  cd "$CM_VENDOR"
+  echo "Rebasing vendor_samsung repo."
   git checkout cm-14.1
   git fetch cyanogen
   git rebase cyanogen/cm-14.1

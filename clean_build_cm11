@@ -5,7 +5,7 @@ CM_PROJECT_DIR=~/android/system/cm-11.0
 ANDROID_DEVICE=p3110
 # Path to ccache dir
 export USE_CCACHE=1
-export CCACHE_DIR=~/android/system/.ccache
+export CCACHE_DIR=~/android/system/.ccache-cm11
 ## End Edit
 
 cd "$CM_PROJECT_DIR"

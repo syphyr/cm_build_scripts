@@ -16,3 +16,6 @@ prebuilts/misc/linux-x86/ccache/ccache -z
 source build/envsetup.sh
 brunch "$ANDROID_DEVICE"
 prebuilts/misc/linux-x86/ccache/ccache -s
+
+sudo update-alternatives --set java /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
+sudo update-alternatives --set javac /usr/lib/jvm/java-8-openjdk-amd64/bin/javac

@@ -96,7 +96,7 @@ echo ""
 echo "Done."
 echo ""
 
-#echo "Starting OTA Server"
-#echo ""
+echo "Starting OTA Server"
+echo ""
 
-#FLASK_APP=updater.app flask run
+FLASK_APP=updater.app flask run

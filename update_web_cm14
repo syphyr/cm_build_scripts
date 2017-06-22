@@ -44,6 +44,7 @@ fi
 NOEXT=${FILE%\.*}
 
 CHANGELOG="$NOEXT".html
+MD5FILE="$FILE".md5sum
 
 MD5=$(cat lineage-14.1-*.md5sum | cut -d " " -f 1)
 ROM_VER=$(echo $FILE | cut -d "-" -f 2)
@@ -71,11 +72,12 @@ echo ""
 FLASK_APP=updater.app flask delrom -f $FILE_OLD
 echo ""
 
-echo "Copying ROM ($FILE) to OTA REST Server."
+echo "Copying ROM ($FILE) and MD5SUM ($MD5FILE) to OTA REST Server."
 echo ""
 
 cd "$OUTDIR"
 cp "$FILE" "$DOC_DIR"/"$ROM_DIR"/
+cp "$MD5FILE" "$DOC_DIR"/"$ROM_DIR"/
 
 if [ -e "$CHANGE_FILE" ]; then
   echo "Copying changelog ($CHANGELOG) to OTA REST Server."

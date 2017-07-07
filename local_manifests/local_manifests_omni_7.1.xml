@@ -236,7 +236,6 @@
   <remove-project name="platform/external/objenesis" />
   <remove-project name="platform/external/okhttp" />
   <remove-project name="platform/external/opencv" />
-  <remove-project name="platform/external/opencv3" />
   <remove-project name="platform/external/owasp/sanitizer" />
   <remove-project name="platform/external/parameter-framework" />
   <remove-project name="platform/external/pdfium" />

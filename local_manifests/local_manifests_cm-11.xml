@@ -50,6 +50,8 @@
   <remove-project name="CyanogenMod/android_external_libxml2" />
   <remove-project name="CyanogenMod/android_external_bluetooth_bluedroid" />
   <remove-project name="CyanogenMod/android_packages_apps_Bluetooth" />
+  <remove-project name="CyanogenMod/android_packages_apps_Settings" />
+  <remove-project name="CyanogenMod/android_external_chromium_org_third_party_openssl" />
 
   <project path="bionic" name="syphyr/android_bionic" remote="ghub" revision="cm-11.0" />
   <project path="build" name="syphyr/android_build" remote="ghub" revision="cm-11.0" />
@@ -79,6 +81,8 @@
   <project path="external/libxml2" name="syphyr/android_external_libxml2" remote="ghub" />
   <project path="external/bluetooth/bluedroid" name="syphyr/android_external_bluetooth_bluedroid" remote="ghub" />
   <project path="packages/apps/Bluetooth" name="syphyr/android_packages_apps_Bluetooth" remote="ghub" />
+  <project path="packages/apps/Settings" name="syphyr/android_packages_apps_Settings-cm" remote="ghub" />
+  <project path="external/chromium_org/third_party/openssl" name="syphyr/android_external_chromium_org_third_party_openssl" remote="ghub" />
 
   <project path="device/samsung/espresso-common" name="syphyr/android_device_samsung_espresso-common" remote="ghub" />
   <project path="device/samsung/omap4-common" name="syphyr/android_device_samsung_omap4-common" remote="ghub" />

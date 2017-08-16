@@ -31,10 +31,6 @@ if [ ! -e ./update_web_twrp ]; then
 fi
 
 echo ""
-echo "Syncing Repos."
-echo ""
-./repo_sync_twrp
-echo ""
 echo "Creating Changelog."
 echo ""
 ./make_changelog_twrp

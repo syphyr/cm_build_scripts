@@ -31,10 +31,6 @@ if [ ! -e ./update_web_cm14 ]; then
 fi
 
 echo ""
-echo "Syncing Repos."
-echo ""
-./repo_sync_cm14
-echo ""
 echo "Creating Changelog."
 echo ""
 ./make_changelog_cm14

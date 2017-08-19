@@ -19,7 +19,3 @@ echo "Vendor:"
 cd ~/android/system/cm-14.1/vendor/samsung
 git status
 echo ""
-echo "Updater:"
-cd ~/android/system/cm-14.1/packages/apps/Updater
-git status
-echo ""

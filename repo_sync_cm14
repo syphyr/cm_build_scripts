@@ -10,7 +10,6 @@ CM_COMMON=~/android/system/cm-14.1/device/samsung/msm8976-common
 CM_HARDWARE=~/android/system/cm-14.1/hardware/samsung
 CM_SETTINGS=~/android/system/cm-14.1/packages/apps/Settings
 CM_FRAME_AV=~/android/system/cm-14.1/frameworks/av
-CM_UPDATE=~/android/system/cm-14.1/packages/apps/Updater
 ## End Edit
 
 cd "$CM_PROJECT_DIR"
@@ -77,15 +76,6 @@ if [ -d "$CM_SETTINGS" ]; then
   echo "Rebasing packages_apps_settings repo."
   git checkout cm-14.1
   git rebase
-  echo ""
-fi
-
-if [ -d "$CM_UPDATE" ]; then
-  cd "$CM_UPDATE"
-  echo "Rebasing packages_apps_updater repo."
-  git checkout master
-  git fetch gmrt
-  git rebase gmrt/master
   echo ""
 fi
 

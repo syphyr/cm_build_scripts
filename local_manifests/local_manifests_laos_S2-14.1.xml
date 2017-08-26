@@ -23,7 +23,6 @@
 <!--
   <project path="vendor/extra" name="syphyr/android_vendor_extra" />
 -->
-  <project path="packages/apps/Updater" name="LineageOS/android_packages_apps_Updater" remote="github" revision="cm-14.1" />
 
   <project path="device/qcom/common" name="LineageOS/android_device_qcom_common" remote="github" revision="cm-14.1" />
   <project path="hardware/sony/timekeep" name="LineageOS/android_hardware_sony_timekeep" remote="github" revision="cm-14.1" />

@@ -1,0 +1,4 @@
+#!/bin/bash
+
+cd ~/android/system/lineage-15.0
+repo init -u https://github.com/LineageOS/android.git -b lineage-15.0

@@ -1,0 +1,24 @@
+## Document Root
+DOC_DIR=/var/www/html
+## Root of Rom directory in Document Root
+ROM_DIR=CyanogenModOTA/builds/full
+## LineageOS server directory
+OTA_DIR=~/android/system/lineageos_updater
+## End Edit
+
+cd "$DOC_DIR"/"$ROM_DIR"
+FILE=$(ls lineage-15.0-*.zip)
+
+if [ ! -e "$FILE" ]; then
+  echo "Build not detected"
+  exit
+fi
+
+echo "Deleting $FILE"
+rm $FILE
+
+cd "$OTA_DIR"
+echo "Removing $FILE from OTA Server"
+FLASK_APP=updater.app flask delrom -f $FILE
+
+

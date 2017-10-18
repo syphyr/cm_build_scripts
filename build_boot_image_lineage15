@@ -1,0 +1,24 @@
+#!/bin/bash
+
+sudo update-alternatives --set java /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
+sudo update-alternatives --set javac /usr/lib/jvm/java-8-openjdk-amd64/bin/javac
+
+# Path to root of CM project directory
+CM_PROJECT_DIR=~/android/system/lineage-15.0
+# Set device
+ANDROID_DEVICE=gts210vewifi
+# Enable SU by default
+export WITH_SU=true
+# Enable ccache
+export USE_CCACHE=1
+# Path to ccache dir
+export CCACHE_DIR=~/T5/android/system/.ccache-15
+export ANDROID_JACK_VM_ARGS="-Dfile.encoding=UTF-8 -XX:+TieredCompilation -Xmx4g"
+## End Edit
+
+cd "$CM_PROJECT_DIR"
+prebuilts/misc/linux-x86/ccache/ccache -z
+source build/envsetup.sh
+lunch lineage_"$ANDROID_DEVICE"-userdebug
+mka bootimage
+prebuilts/misc/linux-x86/ccache/ccache -s

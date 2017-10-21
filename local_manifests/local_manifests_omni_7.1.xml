@@ -123,7 +123,6 @@
   <remove-project name="platform/external/dexmaker" />
   <remove-project name="platform/external/dhcpcd-6.8.2" />
   <remove-project name="platform/external/dng_sdk" />
-  <remove-project name="platform/external/dnsmasq" />
   <remove-project name="platform/external/donuts" />
   <remove-project name="platform/external/drm_gralloc" />
   <remove-project name="platform/external/drm_hwcomposer" />
@@ -189,7 +188,6 @@
   <remove-project name="platform/external/libevent" />
   <remove-project name="platform/external/libgdx" />
   <remove-project name="platform/external/libgsm" />
-  <remove-project name="platform/external/libhevc" />
   <remove-project name="platform/external/libjpeg-turbo" />
   <remove-project name="platform/external/libmicrohttpd" />
   <remove-project name="platform/external/libmpeg2" />

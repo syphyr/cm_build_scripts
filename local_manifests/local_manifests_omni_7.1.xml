@@ -190,7 +190,6 @@
   <remove-project name="platform/external/libgsm" />
   <remove-project name="platform/external/libjpeg-turbo" />
   <remove-project name="platform/external/libmicrohttpd" />
-  <remove-project name="platform/external/libmpeg2" />
   <remove-project name="platform/external/libmtp" />
   <remove-project name="platform/external/libnfc-nxp" />
   <remove-project name="platform/external/libogg" />
@@ -264,7 +263,6 @@
   <remove-project name="platform/external/tinyxml2" />
   <remove-project name="platform/external/tlsdate" />
   <remove-project name="platform/external/tpm2" />
-  <remove-project name="platform/external/tremolo" />
   <remove-project name="platform/external/unicode" />
   <remove-project name="platform/external/universal-tween-engine" />
   <remove-project name="platform/external/v8" />
@@ -275,7 +273,6 @@
   <remove-project name="platform/external/vulkan-validation-layers" />
   <remove-project name="platform/external/webp" />
   <remove-project name="platform/external/webrtc" />
-  <remove-project name="platform/external/wpa_supplicant_8" />
   <remove-project name="platform/external/xmlrpcpp" />
   <remove-project name="platform/external/xmlwriter" />
   <remove-project name="platform/external/xmp_toolkit" />

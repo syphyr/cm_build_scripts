@@ -33,14 +33,14 @@ if [ -d "$CM_COMMON" ]; then
   echo ""
 fi
 
-if [ -d "$CM_HARDWARE" ]; then
-  cd "$CM_HARDWARE"
-  echo "Rebasing hardware_samsung repo."
-  git checkout lineage-15.0
-  git fetch lineage
-  git rebase lineage/lineage-15.0
-  echo ""
-fi
+#if [ -d "$CM_HARDWARE" ]; then
+#  cd "$CM_HARDWARE"
+#  echo "Rebasing hardware_samsung repo."
+#  git checkout lineage-15.0
+#  git fetch lineage
+#  git rebase lineage/lineage-15.0
+#  echo ""
+#fi
 
 if [ -d "$CM_KERNEL" ]; then
   cd "$CM_KERNEL"

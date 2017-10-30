@@ -7,10 +7,10 @@ echo "Device:"
 cd ~/android/system/lineage-15.0/device/samsung/gts210vewifi
 git status
 echo ""
-echo "Hardware:"
-cd ~/android/system/lineage-15.0/hardware/samsung
-git status
-echo ""
+#echo "Hardware:"
+#cd ~/android/system/lineage-15.0/hardware/samsung
+#git status
+#echo ""
 echo "Kernel:"
 cd ~/android/system/lineage-15.0/kernel/samsung/msm8976
 git status

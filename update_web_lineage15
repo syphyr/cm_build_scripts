@@ -45,6 +45,7 @@ NOEXT=${FILE%\.*}
 
 CHANGELOG="$NOEXT".html
 MD5FILE="$FILE".md5sum
+PROPFILE="$NOEXT".prop
 
 MD5=$(cat lineage-15.0-*.md5sum | cut -d " " -f 1)
 ROM_VER=$(echo $FILE | cut -d "-" -f 2)
@@ -67,7 +68,7 @@ echo ""
 rm lineage-15.0-*
 
 cd "$OTA_DIR"
-echo "Removing $FILE_OLD from OTA Server"
+echo "Removing $FILE_OLD from OTA Server."
 echo ""
 FLASK_APP=updater.app flask delrom -f $FILE_OLD
 echo ""
@@ -78,6 +79,9 @@ echo ""
 cd "$OUTDIR"
 cp "$FILE" "$DOC_DIR"/"$ROM_DIR"/
 cp "$MD5FILE" "$DOC_DIR"/"$ROM_DIR"/
+echo "Copying build.prop ($PROPFILE) to OTA RESET Server."
+echo ""
+cp system/build.prop "$DOC_DIR"/"$ROM_DIR"/"$PROPFILE"
 
 if [ -e "$CHANGE_FILE" ]; then
   echo "Copying changelog ($CHANGELOG) to OTA REST Server."

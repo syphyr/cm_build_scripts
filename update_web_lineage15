@@ -45,7 +45,7 @@ NOEXT=${FILE%\.*}
 
 CHANGELOG="$NOEXT".html
 MD5FILE="$FILE".md5sum
-PROPFILE="$NOEXT".prop
+PROPFILE="$FILE".prop
 
 MD5=$(cat lineage-15.0-*.md5sum | cut -d " " -f 1)
 ROM_VER=$(echo $FILE | cut -d "-" -f 2)

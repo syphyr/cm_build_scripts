@@ -178,7 +178,6 @@
   <remove-project name="platform/external/junit" />
   <remove-project name="platform/external/kernel-headers" />
   <remove-project name="platform/external/ksoap2" />
-  <remove-project name="platform/external/libavc" />
   <remove-project name="platform/external/libbrillo" />
   <remove-project name="platform/external/libcap-ng" />
   <remove-project name="platform/external/libchrome" />
@@ -389,7 +388,6 @@
   <remove-project name="platform/prebuilts/qemu-kernel" />
   <remove-project name="platform/prebuilts/tools" />
   <remove-project name="platform/sdk" />
-  <remove-project name="platform/system/bt" />
   <remove-project name="platform/system/ca-certificates" />
   <remove-project name="platform/system/connectivity/apmanager" />
   <remove-project name="platform/system/connectivity/dhcp_client" />

@@ -79,7 +79,7 @@ echo ""
 cd "$OUTDIR"
 cp "$FILE" "$DOC_DIR"/"$ROM_DIR"/
 cp "$MD5FILE" "$DOC_DIR"/"$ROM_DIR"/
-echo "Copying build.prop ($PROPFILE) to OTA RESET Server."
+echo "Copying build.prop ($PROPFILE) to OTA REST Server."
 echo ""
 cp system/build.prop "$DOC_DIR"/"$ROM_DIR"/"$PROPFILE"
 
@@ -94,7 +94,7 @@ else
 fi
 
 cd "$OTA_DIR"
-echo "Adding $FILE to OTA Server"
+echo "Adding $FILE to LineageOS OTA Server"
 echo ""
 FLASK_APP=updater.app flask addrom -f $FILE -d $ANDROID_DEVICE -v $ROM_VER -t "$DATE $TIME" -r $ROM_TYPE -m $MD5 -s $FILESIZE -u http://192.168.1.5/$ROM_DIR/$FILE -c http://192.168.1.5/$ROM_DIR/$CHANGELOG
 

@@ -90,7 +90,7 @@ else
 fi
 
 cd "$OTA_DIR"
-echo "Adding $FILE to OTA Server"
+echo "Adding $FILE to LineageOS OTA Server"
 echo ""
 FLASK_APP=updater.app flask addrom -f $FILE -d $ANDROID_DEVICE -v $ROM_VER -t "$DATE $TIME" -r $ROM_TYPE -m $MD5 -s $FILESIZE -u http://192.168.1.5/$ROM_DIR/$FILE -c http://192.168.1.5/$ROM_DIR/$CHANGELOG
 

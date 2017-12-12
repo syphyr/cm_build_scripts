@@ -1,7 +1,7 @@
 ## usage: addrom.py [-h] -f FILENAME -d DEVICE -v VERSION -t DATETIME -r ROMTYPE -m MD5SUM -u URL
 
 ## Root of project directory
-PROJECT_DIR=~/android/system/lineage-15.0
+PROJECT_DIR=~/android/system/lineage-15.1
 ## LineageOS server directory
 OTA_DIR=~/android/system/lineageos_updater
 ## Document Root
@@ -15,7 +15,7 @@ ANDROID_DEVICE=gts210vewifi
 OUTDIR=$PROJECT_DIR/out/target/product/$ANDROID_DEVICE
 cd "$OUTDIR"
 
-FILE=$(ls lineage-15.0-*.zip)
+FILE=$(ls lineage-15.1-*.zip)
 
 if [ ! -e "$FILE" ]; then
   echo "Build not detected"
@@ -27,7 +27,7 @@ NOEXT=${FILE%\.*}
 
 CHANGELOG=$NOEXT.html
 
-MD5=$(cat lineage-15.0-*.md5sum | cut -d " " -f 1)
+MD5=$(cat lineage-15.1-*.md5sum | cut -d " " -f 1)
 ROM_VER=$(echo $FILE | cut -d "-" -f 2)
 DATE=$(echo $FILE | cut -d "-" -f 3)
 DATE=${DATE:0:4}-${DATE:4:2}-${DATE:6:2}

@@ -1,1 +1,1 @@
-git review --no-topic --remote=gerrit lineage-15.0
+git review --no-topic --remote=gerrit lineage-15.1

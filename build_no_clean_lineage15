@@ -4,7 +4,7 @@ sudo update-alternatives --set java /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/ja
 sudo update-alternatives --set javac /usr/lib/jvm/java-8-openjdk-amd64/bin/javac
 
 # Path to root of CM project directory
-CM_PROJECT_DIR=~/android/system/lineage-15.0
+CM_PROJECT_DIR=~/android/system/lineage-15.1
 # Set device
 ANDROID_DEVICE=gts210vewifi
 # Enable SU by default

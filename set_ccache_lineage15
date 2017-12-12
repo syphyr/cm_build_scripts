@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd ~/android/system/lineage-15.0
+cd ~/android/system/lineage-15.1
 export USE_CCACHE=1
 export CCACHE_DIR=~/T5/android/system/.ccache-15
 ## END EDIT ##

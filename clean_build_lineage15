@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Path to root of CM project directory
-CM_PROJECT_DIR=~/android/system/lineage-15.0
+CM_PROJECT_DIR=~/android/system/lineage-15.1
 # Set device
 ANDROID_DEVICE=gts210vewifi
 # Enable SU by default

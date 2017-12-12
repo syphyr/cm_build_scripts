@@ -7,7 +7,7 @@ DOC_DIR=/var/www/html
 ## Root of Rom directory in Document Root
 ROM_DIR=CyanogenModOTA/builds/full
 ## Root of CM project directory
-PROJECT_DIR=~/android/system/lineage-15.0
+PROJECT_DIR=~/android/system/lineage-15.1
 ## Changelog location
 CHANGE_FILE=~/android/changelog-lineage15.html
 ## Device name
@@ -18,7 +18,7 @@ OUTDIR=$PROJECT_DIR/out/target/product/$ANDROID_DEVICE
 
 ## Find file name of ROM and set variable
 cd "$OUTDIR"
-FILE=$(ls lineage-15.0-*.zip)
+FILE=$(ls lineage-15.1-*.zip)
 
 ## Check if ROM exists before proceding
 if [ ! -e "$FILE" ]; then
@@ -47,7 +47,7 @@ CHANGELOG="$NOEXT".html
 MD5FILE="$FILE".md5sum
 PROPFILE="$FILE".prop
 
-MD5=$(cat lineage-15.0-*.md5sum | cut -d " " -f 1)
+MD5=$(cat lineage-15.1-*.md5sum | cut -d " " -f 1)
 ROM_VER=$(echo $FILE | cut -d "-" -f 2)
 DATE=$(echo $FILE | cut -d "-" -f 3)
 DATE=${DATE:0:4}-${DATE:4:2}-${DATE:6:2}
@@ -59,13 +59,13 @@ ROM_TYPE=$(echo $FILE | cut -d "-" -f 4 | tr A-Z a-z)
 FILESIZE=$(stat -c%s "$FILE")
 
 cd "$DOC_DIR"/"$ROM_DIR"
-FILE_OLD=$(ls lineage-15.0-*.zip)
+FILE_OLD=$(ls lineage-15.1-*.zip)
 
 echo ""
 echo "Removing previous builds on OTA REST Server."
 echo ""
 
-rm lineage-15.0-*
+rm lineage-15.1-*
 
 cd "$OTA_DIR"
 echo "Removing $FILE_OLD from OTA Server."

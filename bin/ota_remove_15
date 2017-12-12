@@ -7,7 +7,7 @@ OTA_DIR=~/android/system/lineageos_updater
 ## End Edit
 
 cd "$DOC_DIR"/"$ROM_DIR"
-FILE=$(ls lineage-15.0-*.zip)
+FILE=$(ls lineage-15.1-*.zip)
 
 if [ ! -e "$FILE" ]; then
   echo "Build not detected"

@@ -28,6 +28,7 @@ if [ ! -e "$FILE" ]; then
     echo "Automatic email notification sent for failed build!"
     SUBJECT="Build Failed!"
     send_mail_lineage15 "$SUBJECT"
+    notify-send "$SUBJECT"
   fi
   exit
 fi
@@ -38,6 +39,7 @@ if [ -e `which send_mail_lineage15` ]; then
   echo "Automatic email notification sent for successful build."
   SUBJECT="Build Successful for $FILE"
   send_mail_lineage15 "$SUBJECT"
+  notify-send "$SUBJECT"
 fi
 
 ## Remove extension of file name and set variable

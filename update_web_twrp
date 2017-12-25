@@ -24,6 +24,7 @@ if [ ! -e "$FILE" ]; then
     echo "Automatic email notification sent for failed build!"
     SUBJECT="TWRP Build Failed on $NOW"
     send_mail_twrp "$SUBJECT"
+    notify-send "$SUBJECT"
   fi
   exit
 fi
@@ -34,6 +35,7 @@ if [ -e `which send_mail_twrp` ]; then
   echo "Automatic email notification sent for successful build."
   SUBJECT="Build Successful for TWRP on $NOW"
   send_mail_twrp "$SUBJECT"
+  notify-send "$SUBJECT"
 fi
 
 echo ""

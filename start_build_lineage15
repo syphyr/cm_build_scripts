@@ -11,7 +11,6 @@ export USE_CCACHE=1
 # Path to ccache dir
 export CCACHE_DIR=~/T5/android/system/.ccache-15
 export ANDROID_JACK_VM_ARGS="-Dfile.encoding=UTF-8 -XX:+TieredCompilation -Xmx4g"
-export ALLOW_MISSING_DEPENDENCIES=true
 ## End Edit
 
 cd "$CM_PROJECT_DIR"

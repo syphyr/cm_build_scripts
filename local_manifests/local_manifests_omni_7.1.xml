@@ -411,6 +411,6 @@
   <project path="device/qcom/common" name="TeamWin/android_device_qcom_common" remote="ghub" revision="android-7.1" />
 
   <remove-project name="android_bootable_recovery"/>
-  <project path="bootable/recovery" name="syphyr/android_bootable_recovery" remote="ghub" revision="android-8.0" />
+  <project path="bootable/recovery" name="syphyr/android_bootable_recovery" remote="ghub" revision="android-8.1" />
 
 </manifest>

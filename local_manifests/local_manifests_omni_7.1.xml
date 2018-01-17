@@ -90,7 +90,6 @@
   <remove-project name="platform/developers/samples/android" />
   <remove-project name="platform/docs/source.android.com" />
   <remove-project name="platform/external/ImageMagick" />
-  <remove-project name="platform/external/aac" />
   <remove-project name="platform/external/android-clat" />
   <remove-project name="platform/external/androidplot" />
   <remove-project name="platform/external/ant-glob" />
@@ -200,7 +199,6 @@
   <remove-project name="platform/external/libutf" />
   <remove-project name="platform/external/libvncserver" />
   <remove-project name="platform/external/libvorbis" />
-  <remove-project name="platform/external/libvpx" />
   <remove-project name="platform/external/libvterm" />
   <remove-project name="platform/external/libweave" />
   <remove-project name="platform/external/libyuv" />

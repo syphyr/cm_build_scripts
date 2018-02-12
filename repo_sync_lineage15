@@ -18,18 +18,18 @@ echo ""
 if [ -d "$CM_DEVICE" ]; then
   cd "$CM_DEVICE"
   echo "Rebasing device_samsung_gts210vewifi repo."
-  git checkout lineage-15.1-dev
-  git fetch dev
-  git rebase dev/lineage-15.1
+  git checkout lineage-15.1
+  git fetch lineage
+  git rebase lineage/lineage-15.1
   echo ""
 fi
 
 if [ -d "$CM_COMMON" ]; then
   cd "$CM_COMMON"
   echo "Rebasing device_samsung_msm8976-common repo."
-  git checkout lineage-15.1-dev
-  git fetch dev
-  git rebase dev/lineage-15.1
+  git checkout lineage-15.1
+  git fetch lineage
+  git rebase lineage/lineage-15.1
   echo ""
 fi
 
@@ -45,17 +45,17 @@ fi
 if [ -d "$CM_KERNEL" ]; then
   cd "$CM_KERNEL"
   echo "Rebasing kernel_samsung_msm8976 repo."
-  git checkout lineage-15.1-dev
-  git fetch dev
-  git rebase dev/lineage-15.1
+  git checkout lineage-15.1
+  git fetch lineage
+  git rebase lineage/lineage-15.1
   echo ""
 fi
 
 if [ -d "$CM_VENDOR" ]; then
   cd "$CM_VENDOR"
   echo "Rebasing vendor_samsung repo."
-  git checkout lineage-15.1-dev
-  git fetch dev
-  git rebase dev/lineage-15.1
+  git checkout lineage-15.1
+  git fetch lineage
+  git rebase lineage/lineage-15.1
   echo ""
 fi

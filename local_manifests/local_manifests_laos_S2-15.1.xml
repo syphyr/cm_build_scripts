@@ -23,5 +23,6 @@
   <project path="hardware/samsung" name="LineageOS/android_hardware_samsung" remote="github" />
   <project path="device/qcom/common" name="LineageOS/android_device_qcom_common" remote="github" />
   <project path="hardware/sony/timekeep" name="LineageOS/android_hardware_sony_timekeep" remote="github" />
+  <project path="packages/resources/devicesettings" name="LineageOS/android_packages_resources_devicesettings" remote="github" />
 
 </manifest>

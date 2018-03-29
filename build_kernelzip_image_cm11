@@ -1,0 +1,24 @@
+#!/bin/bash
+
+sudo update-alternatives --set java /usr/lib/jvm/java-6-oracle/jre/bin/java
+sudo update-alternatives --set javac /usr/lib/jvm/java-6-oracle/bin/javac
+
+# Path to root of CM project directory
+CM_PROJECT_DIR=~/android/system/cm-11.0
+# Set device
+ANDROID_DEVICE=p3110
+# Enable ccache
+export USE_CCACHE=1
+# Path to ccache dir
+export CCACHE_DIR=~/android/system/.ccache-cm11
+## End Edit
+
+cd "$CM_PROJECT_DIR"
+prebuilts/misc/linux-x86/ccache/ccache -z
+source build/envsetup.sh
+lunch cm_"$ANDROID_DEVICE"-userdebug
+mka bootzip
+prebuilts/misc/linux-x86/ccache/ccache -s
+
+sudo update-alternatives --set java /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
+sudo update-alternatives --set javac /usr/lib/jvm/java-8-openjdk-amd64/bin/javac

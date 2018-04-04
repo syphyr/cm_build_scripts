@@ -61,6 +61,8 @@
   <remove-project name="CyanogenMod/android" />
   <remove-project name="CyanogenMod/android_external_aac" />
   <remove-project name="CyanogenMod/android_system_media" />
+  <remove-project name="CyanogenMod/android_device_common" />
+  <remove-project name="CyanogenMod/android_packages_apps_Apollo" />
 
   <project path="bionic" name="syphyr/android_bionic" remote="ghub" revision="cm-11.0" />
   <project path="build" name="syphyr/android_build" remote="ghub" revision="cm-11.0" />
@@ -101,6 +103,8 @@
   <project path="android" name="syphyr/android" remote="ghub" />
   <project path="external/aac" name="syphyr/android_external_aac" remote="ghub" />
   <project path="system/media" name="syphyr/android_system_media" remote="ghub" />
+  <project path="device/common" name="syphyr/android_device_common" remote="ghub" />
+  <project path="packages/apps/Apollo" name="syphyr/android_packages_apps_Apollo" remote="ghub" />
 
   <project path="device/samsung/espresso-common" name="syphyr/android_device_samsung_espresso-common" remote="ghub" />
   <project path="device/samsung/omap4-common" name="syphyr/android_device_samsung_omap4-common" remote="ghub" />

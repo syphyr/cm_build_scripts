@@ -67,6 +67,8 @@
   <remove-project name="CyanogenMod/android_hardware_qcom_display-caf" />
   <remove-project name="CyanogenMod/android_packages_apps_LockClock" />
   <remove-project name="CyanogenMod/android_packages_apps_Trebuchet" />
+  <remove-project name="CyanogenMod/android_packages_apps_Stk" />
+  <remove-project name="CyanogenMod/android_packages_apps_SoundRecorder" />
 
   <project path="bionic" name="syphyr/android_bionic" remote="ghub" revision="cm-11.0" />
   <project path="build" name="syphyr/android_build" remote="ghub" revision="cm-11.0" />
@@ -113,6 +115,8 @@
   <project path="hardware/qcom/display-caf" name="syphyr/android_hardware_qcom_display-caf" remote="ghub" />
   <project path="packages/apps/LockClock" name="syphyr/android_packages_apps_LockClock" remote="ghub" />
   <project path="packages/apps/Trebuchet" name="syphyr/android_packages_apps_Trebuchet" remote="ghub" />
+  <project path="packages/apps/Stk" name="syphyr/android_packages_apps_Stk" remote="ghub" />
+  <project path="packages/apps/SoundRecorder" name="syphyr/android_packages_apps_SoundRecorder" remote="ghub" />
 
   <project path="device/samsung/espresso-common" name="syphyr/android_device_samsung_espresso-common" remote="ghub" />
   <project path="device/samsung/omap4-common" name="syphyr/android_device_samsung_omap4-common" remote="ghub" />

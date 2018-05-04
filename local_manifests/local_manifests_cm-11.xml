@@ -65,6 +65,8 @@
   <remove-project name="CyanogenMod/android_packages_apps_Apollo" />
   <remove-project name="CyanogenMod/android_packages_apps_DeskClock" />
   <remove-project name="CyanogenMod/android_hardware_qcom_display-caf" />
+  <remove-project name="CyanogenMod/android_packages_apps_LockClock" />
+  <remove-project name="CyanogenMod/android_packages_apps_Trebuchet" />
 
   <project path="bionic" name="syphyr/android_bionic" remote="ghub" revision="cm-11.0" />
   <project path="build" name="syphyr/android_build" remote="ghub" revision="cm-11.0" />
@@ -109,6 +111,8 @@
   <project path="packages/apps/Apollo" name="syphyr/android_packages_apps_Apollo" remote="ghub" />
   <project path="packages/apps/DeskClock" name="syphyr/android_packages_apps_DeskClock" remote="ghub" />
   <project path="hardware/qcom/display-caf" name="syphyr/android_hardware_qcom_display-caf" remote="ghub" />
+  <project path="packages/apps/LockClock" name="syphyr/android_packages_apps_LockClock" remote="ghub" />
+  <project path="packages/apps/Trebuchet" name="syphyr/android_packages_apps_Trebuchet" remote="ghub" />
 
   <project path="device/samsung/espresso-common" name="syphyr/android_device_samsung_espresso-common" remote="ghub" />
   <project path="device/samsung/omap4-common" name="syphyr/android_device_samsung_omap4-common" remote="ghub" />

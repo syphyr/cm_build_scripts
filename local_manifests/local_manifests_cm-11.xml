@@ -70,6 +70,8 @@
   <remove-project name="CyanogenMod/android_packages_apps_Stk" />
   <remove-project name="CyanogenMod/android_packages_apps_SoundRecorder" />
   <remove-project name="CyanogenMod/android_packages_apps_DSPManager" />
+  <remove-project name="CyanogenMod/android_frameworks_opt_telephony" />
+  <remove-project name="CyanogenMod/android_packages_providers_UserDictionaryProvider" />
 
   <project path="bionic" name="syphyr/android_bionic" remote="ghub" revision="cm-11.0" />
   <project path="build" name="syphyr/android_build" remote="ghub" revision="cm-11.0" />
@@ -119,6 +121,8 @@
   <project path="packages/apps/Stk" name="syphyr/android_packages_apps_Stk" remote="ghub" />
   <project path="packages/apps/SoundRecorder" name="syphyr/android_packages_apps_SoundRecorder" remote="ghub" />
   <project path="packages/apps/DSPManager" name="syphyr/android_packages_apps_DSPManager" remote="ghub" />
+  <project path="frameworks/opt/telephony" name="syphyr/android_frameworks_opt_telephony" remote="ghub" />
+  <project path="packages/providers/UserDictionaryProvider" name="syphyr/android_packages_providers_UserDictionaryProvider" remote="ghub" />
 
   <project path="device/samsung/espresso-common" name="syphyr/android_device_samsung_espresso-common" remote="ghub" />
   <project path="device/samsung/omap4-common" name="syphyr/android_device_samsung_omap4-common" remote="ghub" />

@@ -72,6 +72,7 @@
   <remove-project name="CyanogenMod/android_packages_apps_DSPManager" />
   <remove-project name="CyanogenMod/android_frameworks_opt_telephony" />
   <remove-project name="CyanogenMod/android_packages_providers_UserDictionaryProvider" />
+  <remove-project name="CyanogenMod/android_external_libvorbis" />
 
   <project path="bionic" name="syphyr/android_bionic" remote="ghub" revision="cm-11.0" />
   <project path="build" name="syphyr/android_build" remote="ghub" revision="cm-11.0" />
@@ -123,6 +124,7 @@
   <project path="packages/apps/DSPManager" name="syphyr/android_packages_apps_DSPManager" remote="ghub" />
   <project path="frameworks/opt/telephony" name="syphyr/android_frameworks_opt_telephony" remote="ghub" />
   <project path="packages/providers/UserDictionaryProvider" name="syphyr/android_packages_providers_UserDictionaryProvider" remote="ghub" />
+  <project path="external/libvorbis" name="syphyr/android_external_libvorbis" remote="ghub" />
 
   <project path="device/samsung/espresso-common" name="syphyr/android_device_samsung_espresso-common" remote="ghub" />
   <project path="device/samsung/omap4-common" name="syphyr/android_device_samsung_omap4-common" remote="ghub" />

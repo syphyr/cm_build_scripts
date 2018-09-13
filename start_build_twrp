@@ -5,6 +5,7 @@ CM_PROJECT_DIR=~/android/system/android-7.1
 ANDROID_DEVICE=gts210vewifi
 # Path to ccache dir
 export USE_CCACHE=1
+export CCACHE_COMPRESS=1
 export CCACHE_DIR=~/android/system/.ccache
 export TW_DEVICE_VERSION=1
 ## End Edit

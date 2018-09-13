@@ -9,6 +9,8 @@ CM_PROJECT_DIR=~/android/system/cm-11.0
 ANDROID_DEVICE=p3110
 # Enable ccache
 export USE_CCACHE=1
+# enable ccache compression
+export CCACHE_COMPRESS=1
 # Path to ccache dir
 export CCACHE_DIR=~/android/system/.ccache-cm11
 ## End Edit

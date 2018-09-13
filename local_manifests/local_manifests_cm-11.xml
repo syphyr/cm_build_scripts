@@ -76,6 +76,7 @@
   <remove-project name="CyanogenMod/android_external_libusbx" />
   <remove-project name="CyanogenMod/android_external_e2fsprogs" />
   <remove-project name="CyanogenMod/android_packages_apps_UnifiedEmail" />
+  <remove-project name="CyanogenMod/android_external_neven" />
 
   <project path="bionic" name="syphyr/android_bionic" remote="ghub" revision="cm-11.0" />
   <project path="build" name="syphyr/android_build" remote="ghub" revision="cm-11.0" />
@@ -131,6 +132,7 @@
   <project path="external/libusbx" name="syphyr/android_external_libusbx" remote="ghub" />
   <project path="external/e2fsprogs" name="syphyr/android_external_e2fsprogs" remote="ghub" />
   <project path="packages/apps/UnifiedEmail" name="syphyr/android_packages_apps_UnifiedEmail" remote="ghub" />
+  <project path="external/neven" name="syphyr/android_external_neven" remote="ghub" />
 
   <project path="device/samsung/espresso-common" name="syphyr/android_device_samsung_espresso-common" remote="ghub" />
   <project path="device/samsung/omap4-common" name="syphyr/android_device_samsung_omap4-common" remote="ghub" />

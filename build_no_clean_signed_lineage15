@@ -1,0 +1,28 @@
+#!/bin/bash
+
+# Set Date
+DATE=`date +%Y%m%d`
+# Path to root of CM project directory
+CM_PROJECT_DIR=~/android/system/lineage-15.1
+# Set device
+ANDROID_DEVICE=gts210vewifi
+# Enable SU by default
+export WITH_SU=true
+# Enable ccache
+export USE_CCACHE=1
+# enable ccache compression
+export CCACHE_COMPRESS=1
+# Path to ccache dir
+export CCACHE_DIR=~/T5/android/system/.ccache-15
+export ANDROID_JACK_VM_ARGS="-Dfile.encoding=UTF-8 -XX:+TieredCompilation -Xmx4g"
+## End Edit
+
+cd "$CM_PROJECT_DIR"
+prebuilts/misc/linux-x86/ccache/ccache -z
+source build/envsetup.sh
+rm out/dist/*-target_files-*.zip
+lunch lineage_"$ANDROID_DEVICE"-userdebug
+mka target-files-package dist
+./build/tools/releasetools/sign_target_files_apks -o -d ~/.android-certs out/dist/*-target_files-*.zip out/target/product/"$ANDROID_DEVICE"/signed-target_files.zip
+./build/tools/releasetools/ota_from_target_files -k ~/.android-certs/releasekey --block --backup=true out/target/product/"$ANDROID_DEVICE"/signed-target_files.zip out/target/product/"$ANDROID_DEVICE"/lineage-15.1-"$DATE"-NIGHTLY-"$ANDROID_DEVICE"-signed.zip
+prebuilts/misc/linux-x86/ccache/ccache -s

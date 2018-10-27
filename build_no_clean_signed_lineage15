@@ -20,13 +20,13 @@ prebuilts/misc/linux-x86/ccache/ccache -z
 source build/envsetup.sh
 rm out/dist/*-target_files-*.zip
 lunch lineage_"$ANDROID_DEVICE"-userdebug
-mka target-files-package dist
+mka target-files-package dist otatools
 
 # Set Date
 DATE=$(grep ro.lineage.version out/target/product/"$ANDROID_DEVICE"/system/build.prop | cut -d "-" -f 2)
 
-./build/tools/releasetools/sign_target_files_apks -o -d ~/.android-certs out/dist/*-target_files-*.zip out/target/product/"$ANDROID_DEVICE"/signed-target_files.zip
-./build/tools/releasetools/ota_from_target_files -k ~/.android-certs/releasekey --block --backup=true out/target/product/"$ANDROID_DEVICE"/signed-target_files.zip out/target/product/"$ANDROID_DEVICE"/lineage-15.1-"$DATE"-NIGHTLY-"$ANDROID_DEVICE"-signed.zip
+build/tools/releasetools/sign_target_files_apks -o -d ~/.android-certs out/dist/*-target_files-*.zip out/target/product/"$ANDROID_DEVICE"/signed-target_files.zip
+build/tools/releasetools/ota_from_target_files -k ~/.android-certs/releasekey --block --backup=true out/target/product/"$ANDROID_DEVICE"/signed-target_files.zip out/target/product/"$ANDROID_DEVICE"/lineage-15.1-"$DATE"-NIGHTLY-"$ANDROID_DEVICE"-signed.zip
 
 prebuilts/misc/linux-x86/ccache/ccache -s
 

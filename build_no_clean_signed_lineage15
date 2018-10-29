@@ -15,6 +15,13 @@ export CCACHE_DIR=~/T5/android/system/.ccache-15
 export ANDROID_JACK_VM_ARGS="-Dfile.encoding=UTF-8 -XX:+TieredCompilation -Xmx4g"
 ## End Edit
 
+# Ask for signing keys unlock password
+echo -n "Enter password: "
+read -s password
+echo
+
+export ANDROID_SECURE_STORAGE_CMD="echo '$password'"
+
 cd "$CM_PROJECT_DIR"
 prebuilts/misc/linux-x86/ccache/ccache -z
 source build/envsetup.sh

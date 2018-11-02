@@ -12,6 +12,11 @@ ANDROID_DEVICE=awifi
 
 OUTDIR=$PROJECT_DIR/out/target/product/$ANDROID_DEVICE
 
+if [ ! -e "$OUTDIR" ]; then
+  echo "No build detected. Exiting."
+  exit
+fi
+
 ## Find file name of ROM and set variable
 cd "$OUTDIR"
 FILE=$(ls cm-13.0-*.zip)

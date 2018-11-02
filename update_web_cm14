@@ -16,6 +16,11 @@ ANDROID_DEVICE=gts210vewifi
 
 OUTDIR=$PROJECT_DIR/out/target/product/$ANDROID_DEVICE
 
+if [ ! -e "$OUTDIR" ]; then
+  echo "No build detected. Exiting."
+  exit
+fi
+
 ## Find file name of ROM and set variable
 cd "$OUTDIR"
 FILE=$(ls lineage-14.1-*.zip)

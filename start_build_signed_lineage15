@@ -15,6 +15,11 @@ export CCACHE_DIR=~/T5/android/system/.ccache-15
 export ANDROID_JACK_VM_ARGS="-Dfile.encoding=UTF-8 -XX:+TieredCompilation -Xmx4g"
 ## End Edit
 
+if [ ! -e ~/.android-certs ]; then
+  echo "Android Keys directory (~/.android-certs) does not exist. Exiting."
+  exit
+fi
+
 # Ask for signing keys unlock password
 echo -n "Enter password: "
 read -s password

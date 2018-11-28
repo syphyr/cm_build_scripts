@@ -7,6 +7,8 @@ ANDROID_DEVICE=awifi
 export USE_CCACHE=1
 export CCACHE_COMPRESS=1
 export CCACHE_DIR=~/android/system/.ccache
+# Fix Flex for Ubuntu 18.04
+export LC_ALL=C
 ## End Edit
 
 cd "$CM_PROJECT_DIR"

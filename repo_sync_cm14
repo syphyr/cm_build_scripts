@@ -45,14 +45,6 @@ if [ -d "$CM_COMMON" ]; then
   echo ""
 fi
 
-if [ -d "$CM_FRAME_AV" ]; then
-  cd "$CM_FRAME_AV"
-  echo "Rebasing frameworks_av repo."
-  git checkout cm-14.1
-  git rebase
-  echo ""
-fi
-
 if [ -d "$CM_HARDWARE" ]; then
   cd "$CM_HARDWARE"
   echo "Rebasing hardware_samsung repo."
@@ -68,22 +60,6 @@ if [ -d "$CM_KERNEL" ]; then
   git checkout cm-14.1
   git fetch cyanogen
   git rebase cyanogen/cm-14.1
-  echo ""
-fi
-
-if [ -d "$CM_SETTINGS" ]; then
-  cd "$CM_SETTINGS"
-  echo "Rebasing packages_apps_settings repo."
-  git checkout cm-14.1
-  git rebase
-  echo ""
-fi
-
-if [ -d "$CM_VENDOR_CM" ]; then
-  cd "$CM_VENDOR_CM"
-  echo "Rebasing vendor_cm repo."
-  git checkout cm-14.1
-  git rebase
   echo ""
 fi
 

@@ -1,8 +1,6 @@
 #!/bin/bash
 
-sudo update-alternatives --set java /usr/lib/jvm/java-6-oracle/jre/bin/java
-sudo update-alternatives --set javac /usr/lib/jvm/java-6-oracle/bin/javac
-sudo update-alternatives --set javap /usr/lib/jvm/java-6-oracle/bin/javap
+sudo update-java-alternatives -s java-6-oracle
 
 # Directory that contains CM build scripts
 BUILD_SCRIPT_DIR=~/android
@@ -44,6 +42,4 @@ echo "Updating Web Server."
 echo ""
 ./update_web_cm11
 
-sudo update-alternatives --set java /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
-sudo update-alternatives --set javac /usr/lib/jvm/java-8-openjdk-amd64/bin/javac
-sudo update-alternatives --set javap /usr/lib/jvm/java-8-openjdk-amd64/bin/javap
+sudo update-java-alternatives -s java-1.8.0-openjdk-amd64

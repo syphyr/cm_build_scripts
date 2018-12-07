@@ -1,7 +1,6 @@
 #!/bin/bash
 
-sudo update-alternatives --set java /usr/lib/jvm/java-7-openjdk-amd64/jre/bin/java
-sudo update-alternatives --set javac /usr/lib/jvm/java-7-openjdk-amd64/bin/javac
+sudo update-java-alternatives -s java-1.7.0-openjdk-amd64
 
 # Path to root of CM project directory
 CM_PROJECT_DIR=~/android/system/cm-13.0
@@ -19,3 +18,5 @@ prebuilts/misc/linux-x86/ccache/ccache -z
 source build/envsetup.sh
 brunch "$ANDROID_DEVICE"
 prebuilts/misc/linux-x86/ccache/ccache -s
+
+sudo update-java-alternatives -s java-1.8.0-openjdk-amd64

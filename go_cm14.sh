@@ -1,7 +1,6 @@
 #!/bin/bash
 
-sudo update-alternatives --set java /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
-sudo update-alternatives --set javac /usr/lib/jvm/java-8-openjdk-amd64/bin/javac
+sudo update-java-alternatives -s java-1.8.0-openjdk-amd64
 
 # Directory that contains CM build scripts
 BUILD_SCRIPT_DIR=~/android

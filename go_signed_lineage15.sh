@@ -1,6 +1,8 @@
 #!/bin/bash
 
 sudo update-java-alternatives -s java-1.8.0-openjdk-amd64
+java -version
+javac -version
 
 # Directory that contains CM build scripts
 BUILD_SCRIPT_DIR=~/android

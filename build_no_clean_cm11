@@ -1,6 +1,8 @@
 #!/bin/bash
 
 sudo update-java-alternatives -s java-6-oracle
+java -version
+javac -version
 
 # Path to root of CM project directory
 CM_PROJECT_DIR=~/android/system/cm-11.0
@@ -19,4 +21,8 @@ source build/envsetup.sh
 brunch "$ANDROID_DEVICE"
 prebuilts/misc/linux-x86/ccache/ccache -s
 
+echo "Returning back to default Java configuration"
 sudo update-java-alternatives -s java-1.8.0-openjdk-amd64
+java -version
+javac -version
+echo "Done."

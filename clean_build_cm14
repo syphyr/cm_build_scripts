@@ -2,6 +2,8 @@
 
 # Path to root of CM project directory
 CM_PROJECT_DIR=~/android/system/cm-14.1
+# Path to kernel directory
+KERNEL_DIR=~/android/system/cm-14.1/kernel/samsung/msm8976
 # Set device
 ANDROID_DEVICE=gts210vewifi
 # Enable SU by default
@@ -21,10 +23,6 @@ cd "$CM_PROJECT_DIR"
 source build/envsetup.sh
 make clean
 
-if [ -e kernel/samsung/msm8976/net/wireguard/crypto/zinc/chacha20/chacha20-arm64.S ]; then
-   rm kernel/samsung/msm8976/net/wireguard/crypto/zinc/chacha20/chacha20-arm64.S
-fi
-
-if [ -e kernel/samsung/msm8976/net/wireguard/crypto/zinc/poly1305/poly1305-arm64.S ]; then
-   rm kernel/samsung/msm8976/net/wireguard/crypto/zinc/poly1305/poly1305-arm64.S
-fi
+echo "Cleaning kernel sources."
+cd "$KERNEL_DIR"
+make mrproper

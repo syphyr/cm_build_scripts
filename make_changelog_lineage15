@@ -4,6 +4,8 @@
 CHANGE_FILE=~/android/changelog-lineage15.html
 # Path to root of CM project directory
 CM_PROJECT_DIR=~/android/system/lineage-15.1
+# Path to WireGuard submodule
+WIREGUARD_DIR=kernel/samsung/msm8976/net/wireguard
 ## End Edit
 
 PROJECT_LIST=$CM_PROJECT_DIR/.repo/project.list
@@ -12,7 +14,9 @@ NOW=$(date -u)
 SINCE=$(date -u --date="$NOW - 5 day")
 
 if [ -e "$PROJECT_LIST" ]; then
-  REPOS=$(cat "$PROJECT_LIST" | sort)
+  REPOS=$(cat "$PROJECT_LIST" | tr " " "\n")
+  REPOS+=$(echo -e "\n$WIREGUARD_DIR\n")
+  REPOS=$(echo -e "$REPOS" | sort)
 else
   echo "Project list not found. Run repo_sync command to generate project list. Exiting!"
   exit

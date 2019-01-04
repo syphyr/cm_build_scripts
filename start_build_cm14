@@ -2,6 +2,8 @@
 
 # Path to root of CM project directory
 CM_PROJECT_DIR=~/android/system/cm-14.1
+# Path to kernel directory
+KERNEL_DIR=~/android/system/cm-14.1/kernel/samsung/msm8976
 # Set device
 ANDROID_DEVICE=gts210vewifi
 # Enable SU by default
@@ -20,6 +22,11 @@ export LC_ALL=C
 cd "$CM_PROJECT_DIR"
 prebuilts/misc/linux-x86/ccache/ccache -z
 source build/envsetup.sh
+echo "Cleaning project."
 make clean
+echo "Cleaning kernel sources."
+cd "$KERNEL_DIR"
+make mrproper
+cd ../../..
 brunch "$ANDROID_DEVICE"
 prebuilts/misc/linux-x86/ccache/ccache -s

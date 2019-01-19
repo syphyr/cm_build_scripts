@@ -79,6 +79,7 @@
   <remove-project name="CyanogenMod/android_external_neven" />
   <remove-project name="CyanogenMod/android_packages_providers_DownloadProvider" />
   <remove-project name="CyanogenMod/android_system_vold" />
+  <remove-project name="CyanogenMod/android_packages_apps_Contacts" />
 
   <project path="bionic" name="syphyr/android_bionic" remote="ghub" revision="cm-11.0" />
   <project path="build" name="syphyr/android_build" remote="ghub" revision="cm-11.0" />
@@ -137,6 +138,7 @@
   <project path="external/neven" name="syphyr/android_external_neven" remote="ghub" />
   <project path="packages/providers/DownloadProvider" name="syphyr/android_packages_providers_DownloadProvider" remote="ghub" />
   <project path="system/vold" name="syphyr/android_system_vold" remote="ghub" />
+  <project path="packages/apps/Contacts" name="syphyr/android_packages_apps_Contacts" remote="ghub" />
 
   <project path="device/samsung/espresso-common" name="syphyr/android_device_samsung_espresso-common" remote="ghub" />
   <project path="device/samsung/omap4-common" name="syphyr/android_device_samsung_omap4-common" remote="ghub" />

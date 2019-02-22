@@ -1,0 +1,27 @@
+FILE=~/android/merge/search_commits.txt
+
+if [ "$1" == "" ]; then
+  echo 'No file specified. Usage: search_commits /path/to/file "search text"'
+  exit
+fi
+
+if [ "$2" == "" ]; then
+  echo 'No search text specified. Usage: search_commits /path/to/file "search text"'
+  exit
+fi
+
+if [ ! -e "$1" ]; then
+  echo 'Target file or directory not found. Usage: search_commits /path/to/file "search text"'
+  exit
+fi
+
+git log --oneline "$1" > ~/android/merge/search_commits.txt
+
+REPOS=$(tac $FILE | cut -d " " -f1)
+
+for REPOLINE in $REPOS ; do
+    if [ ! "$REPOLINE" == "" ]; then
+      echo $REPOLINE
+      git show $REPOLINE | grep "$2"
+    fi
+done

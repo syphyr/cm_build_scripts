@@ -15,9 +15,9 @@ echo ""
 if [ -d "$CM_RECOVERY" ]; then
   cd "$CM_RECOVERY"
   echo "Rebasing recovery repo."
-  git checkout android-8.1
+  git checkout android-9.0
   git fetch omnirom
-  git rebase omnirom/android-8.1
+  git rebase omnirom/android-9.0
   echo ""
 fi
 

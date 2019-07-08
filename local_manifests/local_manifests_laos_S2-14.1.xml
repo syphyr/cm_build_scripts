@@ -20,6 +20,7 @@
   <project path="kernel/samsung/msm8976" name="syphyr/android_kernel_samsung_msm8976" remote="ghub" revision="cm-14.1" />
   <project path="hardware/samsung" name="syphyr/android_hardware_samsung-laos" remote="ghub" revision="cm-14.1" />
   <project path="vendor/samsung" name="syphyr/proprietary_vendor_samsung" remote="ghub" revision="cm-14.1" />
+  <project path="external/privacy-friendly-netmonitor" name="syphyr/privacy-friendly-netmonitor-prebuilt" remote="ghub" revision="master" />
 <!--
   <project path="vendor/extra" name="syphyr/android_vendor_extra" />
 -->

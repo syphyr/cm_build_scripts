@@ -1,0 +1,61 @@
+#!/bin/bash
+
+# Path to root of CM project directory
+CM_PROJECT_DIR=~/android/system/lineage-16.0
+CM_DEVICE=$CM_PROJECT_DIR/device/samsung/gts210vewifi
+CM_KERNEL=$CM_PROJECT_DIR/kernel/samsung/msm8976
+CM_VENDOR=$CM_PROJECT_DIR/vendor/samsung
+CM_COMMON=$CM_PROJECT_DIR/device/samsung/msm8976-common
+CM_HARDWARE=$CM_PROJECT_DIR/hardware/samsung
+## End Edit
+
+cd "$CM_PROJECT_DIR"
+
+repo sync --no-clone-bundle
+
+echo ""
+
+if [ -d "$CM_DEVICE" ]; then
+  cd "$CM_DEVICE"
+  echo "Rebasing device_samsung_gts210vewifi repo."
+  git checkout lineage-16.0
+  git fetch lineage
+  git rebase lineage/lineage-16.0
+  echo ""
+fi
+
+if [ -d "$CM_COMMON" ]; then
+  cd "$CM_COMMON"
+  echo "Rebasing device_samsung_msm8976-common repo."
+  git checkout lineage-16.0
+  git fetch lineage
+  git rebase lineage/lineage-16.0
+  echo ""
+fi
+
+#if [ -d "$CM_HARDWARE" ]; then
+#  cd "$CM_HARDWARE"
+#  echo "Rebasing hardware_samsung repo."
+#  git checkout lineage-16.0
+#  git fetch lineage
+#  git rebase lineage/lineage-16.0
+#  echo ""
+#fi
+
+if [ -d "$CM_KERNEL" ]; then
+  cd "$CM_KERNEL"
+  echo "Rebasing kernel_samsung_msm8976 repo."
+  git checkout lineage-16.0
+  git fetch lineage
+  git rebase lineage/lineage-16.0
+  echo ""
+fi
+
+if [ -d "$CM_VENDOR" ]; then
+  cd "$CM_VENDOR"
+  echo "Rebasing vendor_samsung repo."
+  git checkout lineage-16.0
+  git fetch lineage
+  git rebase lineage/lineage-16.0
+  echo ""
+fi

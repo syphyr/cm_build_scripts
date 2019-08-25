@@ -1,0 +1,115 @@
+#!/bin/bash
+
+## LineageOS server directory
+OTA_DIR=~/android/system/lineageos_updater
+## Document Root
+DOC_DIR=/var/www/html
+## Root of Rom directory in Document Root
+ROM_DIR=CyanogenModOTA/builds/full
+## Root of CM project directory
+PROJECT_DIR=~/android/system/lineage-16.0
+## Changelog location
+CHANGE_FILE=~/android/changelog-lineage16.html
+## Device name
+ANDROID_DEVICE=gts210vewifi
+## End Edit
+
+OUTDIR=$PROJECT_DIR/out/target/product/$ANDROID_DEVICE
+
+if [ ! -e "$OUTDIR" ]; then
+  echo "No build detected. Exiting."
+  exit
+fi
+
+## Find file name of ROM and set variable
+cd "$OUTDIR"
+FILE=$(ls lineage-16.0-*.zip)
+
+## Check if ROM exists before proceding
+if [ ! -e "$FILE" ]; then
+  echo "Build Failed!"
+  if [ -e `which send_mail_lineage16` ]; then
+    echo ""
+    echo "Automatic email notification sent for failed build!"
+    SUBJECT="Build Failed!"
+    send_mail_lineage16 "$SUBJECT"
+    notify-send "$SUBJECT"
+  fi
+  exit
+fi
+
+echo "Build Successful!"
+if [ -e `which send_mail_lineage16` ]; then
+  echo ""
+  echo "Automatic email notification sent for successful build."
+  SUBJECT="Build Successful for $FILE"
+  send_mail_lineage16 "$SUBJECT"
+  notify-send "$SUBJECT"
+fi
+
+## Remove extension of file name and set variable
+NOEXT=${FILE%\.*}
+
+CHANGELOG="$NOEXT".html
+MD5FILE="$FILE".md5sum
+PROPFILE="$FILE".prop
+
+MD5=$(cat lineage-16.0-*.md5sum | cut -d " " -f 1)
+ROM_VER=$(echo $FILE | cut -d "-" -f 2)
+DATE=$(echo $FILE | cut -d "-" -f 3)
+DATE=${DATE:0:4}-${DATE:4:2}-${DATE:6:2}
+TIME=$(grep "ro.build.date=" system/build.prop | cut -d " " -f 4)
+if [ ${#TIME} == 1 ]; then
+  TIME=$(grep "ro.build.date=" system/build.prop | cut -d " " -f 5)
+fi
+ROM_TYPE=$(echo $FILE | cut -d "-" -f 4 | tr A-Z a-z)
+FILESIZE=$(stat -c%s "$FILE")
+
+cd "$DOC_DIR"/"$ROM_DIR"
+FILE_OLD=$(ls lineage-16.0-*.zip)
+
+echo ""
+echo "Removing previous builds on OTA REST Server."
+echo ""
+
+rm lineage-16.0-*
+
+cd "$OTA_DIR"
+echo "Removing $FILE_OLD from OTA Server."
+echo ""
+FLASK_APP=updater.app flask delrom -f $FILE_OLD
+echo ""
+
+echo "Copying ROM ($FILE) and MD5SUM ($MD5FILE) to OTA REST Server."
+echo ""
+
+cd "$OUTDIR"
+cp "$FILE" "$DOC_DIR"/"$ROM_DIR"/
+cp "$MD5FILE" "$DOC_DIR"/"$ROM_DIR"/
+echo "Copying build.prop ($PROPFILE) to OTA REST Server."
+echo ""
+cp system/build.prop "$DOC_DIR"/"$ROM_DIR"/"$PROPFILE"
+
+if [ -e "$CHANGE_FILE" ]; then
+  echo "Copying changelog ($CHANGELOG) to OTA REST Server."
+  echo ""
+  cp "$CHANGE_FILE" "$DOC_DIR"/"$ROM_DIR"/"$CHANGELOG"
+else
+  echo "Changelog not found!"
+  echo ""
+  exit
+fi
+
+cd "$OTA_DIR"
+echo "Adding $FILE to LineageOS OTA Server"
+echo ""
+FLASK_APP=updater.app flask addrom -f $FILE -d $ANDROID_DEVICE -v $ROM_VER -t "$DATE $TIME" -r $ROM_TYPE -m $MD5 -s $FILESIZE -u http://192.168.1.5/$ROM_DIR/$FILE -c http://192.168.1.5/$ROM_DIR/$CHANGELOG
+
+echo ""
+echo "Done."
+echo ""
+
+#echo "Starting OTA Server"
+#echo ""
+
+#FLASK_APP=updater.app flask run

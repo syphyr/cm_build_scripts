@@ -1,0 +1,7 @@
+if [ "$1" == "" ]; then
+	echo "Define change-id list to verify +1 and code-review +1"
+	echo 'Example: plusplus "264332,1 264331,1 264330,1 264329,1"'
+	exit
+fi
+
+ssh -p 29418 syphyr@review.lineageos.org "gerrit review -n NONE --code-review +1 --verified +1 $1"

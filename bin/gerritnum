@@ -1,0 +1,6 @@
+if [ "$1" == "" ]; then
+	echo "Define topic to search for on gerrit"
+	exit
+fi
+
+ssh -p 29418 syphyr@review.lineageos.org "gerrit query status:open topic:$1" | grep number

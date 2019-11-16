@@ -1,0 +1,1 @@
+ssh -p 29418 syphyr@review.lineageos.org "gerrit query status:open branch:cm-14.1 limit:50" | grep 'topic\|number\|subject\|username\|lastUpdated' | more

@@ -15,7 +15,7 @@ if [ ! -e "$1" ]; then
   exit
 fi
 
-git log --oneline "$1" > ~/android/merge/search_commits.txt
+git log --oneline "$1" > $FILE
 
 REPOS=$(tac $FILE | cut -d " " -f1)
 

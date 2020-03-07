@@ -12,10 +12,14 @@
   <remove-project name="platform/prebuilts/go/darwin-x86"/>
   <remove-project name="platform/prebuilts/ninja/darwin-x86"/>
   <remove-project name="platform/prebuilts/python/darwin-x86/2.7.5"/>
+  <remove-project name="platform/external/ppp"/>
 
   <remote name="ghub" fetch="https://github.com/" />
+
+  <project path="external/ppp" name="syphyr/ppp" remote="ghub" revision="cm-14.1" />
   
   <project path="device/samsung/gts210vewifi" name="syphyr/android_device_samsung_gts210vewifi" remote="ghub" revision="cm-14.1" />
+  <project path="device/samsung/gts28vewifi" name="syphyr/android_device_samsung_gts28vewifi" remote="ghub" revision="cm-14.1" />
   <project path="device/samsung/msm8976-common" name="syphyr/android_device_samsung_msm8976-common" remote="ghub" revision="cm-14.1" />
   <project path="kernel/samsung/msm8976" name="syphyr/android_kernel_samsung_msm8976" remote="ghub" revision="cm-14.1" />
   <project path="hardware/samsung" name="syphyr/android_hardware_samsung-laos" remote="ghub" revision="cm-14.1" />

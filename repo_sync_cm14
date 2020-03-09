@@ -10,6 +10,29 @@ CM_COMMON=~/android/system/cm-14.1/device/samsung/msm8976-common
 CM_HARDWARE=~/android/system/cm-14.1/hardware/samsung
 CM_SETTINGS=~/android/system/cm-14.1/packages/apps/Settings
 CM_FRAME_AV=~/android/system/cm-14.1/frameworks/av
+
+CM_ANDROID=~/android/system/cm-14.1/android
+CM_QCOM_SE=~/android/system/cm-14.1/device/qcom/sepolicy
+CM_BORING=~/android/system/cm-14.1/external/boringssl
+CM_IPTABLE=~/android/system/cm-14.1/external/iptables
+CM_ZIP=~/android/system/cm-14.1/external/p7zip
+CM_PPP=~/android/system/cm-14.1/external/ppp
+CM_SQL=~/android/system/cm-14.1/external/sqlite
+CM_BASE=~/android/system/cm-14.1/frameworks/base
+CM_NATIVE=~/android/system/cm-14.1/frameworks/native
+CM_WIFI=~/android/system/cm-14.1/frameworks/opt/net/wifi
+CM_AUDIO=~/android/system/cm-14.1/hardware/qcom/audio-caf/msm8952
+CM_DISPLAY=~/android/system/cm-14.1/hardware/qcom/display-caf/msm8952
+CM_MEDIA=~/android/system/cm-14.1/hardware/qcom/media-caf/msm8952
+CM_CLOCK=~/android/system/cm-14.1/packages/apps/DeskClock
+CM_JELLY=~/android/system/cm-14.1/packages/apps/Jelly
+CM_IME=~/android/system/cm-14.1/packages/inputmethods/LatinIME
+CM_BT=~/android/system/cm-14.1/system/bt
+CM_NETD=~/android/system/cm-14.1/system/netd
+CM_SYS_SE=~/android/system/cm-14.1/system/sepolicy
+CM_VOLD=~/android/system/cm-14.1/system/vold
+CM_QCOM=~/android/system/cm-14.1/device/qcom/common
+
 ## End Edit
 
 cd "$CM_PROJECT_DIR"
@@ -69,5 +92,221 @@ if [ -d "$CM_VENDOR" ]; then
   git checkout cm-14.1
   git fetch cyanogen
   git rebase cyanogen/cm-14.1
+  echo ""
+fi
+
+if [ -d "$CM_ANDROID" ]; then
+  cd "$CM_ANDROID"
+  echo "Rebasing android repo."
+  git checkout cm-14.1
+  git fetch lineage
+  git rebase lineage/cm-14.1
+  echo ""
+fi
+
+if [ -d "$CM_QCOM_SE" ]; then
+  cd "$CM_QCOM_SE"
+  echo "Rebasing qcom sepolicy repo."
+  git checkout cm-14.1
+  git fetch lineage
+  git rebase lineage/cm-14.1
+  echo ""
+fi
+
+if [ -d "$CM_BORING" ]; then
+  cd "$CM_BORING"
+  echo "Rebasing boringssl repo."
+  git checkout cm-14.1
+  git fetch lineage
+  git rebase lineage/cm-14.1
+  echo ""
+fi
+
+if [ -d "$CM_IPTABLE" ]; then
+  cd "$CM_IPTABLE"
+  echo "Rebasing iptables repo."
+  git checkout cm-14.1
+  git fetch lineage
+  git rebase lineage/cm-14.1
+  echo ""
+fi
+
+if [ -d "$CM_ZIP" ]; then
+  cd "$CM_ZIP"
+  echo "Rebasing p7zip repo."
+  git checkout lineage-17.1
+  git fetch lineage
+  git rebase lineage/lineage-17.1
+  echo ""
+fi
+
+if [ -d "$CM_PPP" ]; then
+  cd "$CM_PPP"
+  echo "Rebasing ppp repo."
+  git checkout cm-14.1
+  git fetch lineage
+  git rebase lineage/cm-14.1
+  echo ""
+fi
+
+if [ -d "$CM_SQL" ]; then
+  cd "$CM_SQL"
+  echo "Rebasing sqlite repo."
+  git checkout cm-14.1
+  git fetch lineage
+  git rebase lineage/cm-14.1
+  echo ""
+fi
+
+if [ -d "$CM_FRAME_AV" ]; then
+  cd "$CM_FRAME_AV"
+  echo "Rebasing frameworks/av repo."
+  git checkout cm-14.1
+  git fetch lineage
+  git rebase lineage/cm-14.1
+  echo ""
+fi
+
+if [ -d "$CM_BASE" ]; then
+  cd "$CM_BASE"
+  echo "Rebasing frameworks/base repo."
+  git checkout cm-14.1
+  git fetch lineage
+  git rebase lineage/cm-14.1
+  echo ""
+fi
+
+if [ -d "$CM_NATIVE" ]; then
+  cd "$CM_NATIVE"
+  echo "Rebasing frameworks/native repo."
+  git checkout cm-14.1
+  git fetch lineage
+  git rebase lineage/cm-14.1
+  echo ""
+fi
+
+if [ -d "$CM_VENDOR_CM" ]; then
+  cd "$CM_VENDOR_CM"
+  echo "Rebasing vendor/cm repo."
+  git checkout cm-14.1
+  git fetch lineage
+  git rebase lineage/cm-14.1
+  echo ""
+fi
+
+if [ -d "$CM_SETTINGS" ]; then
+  cd "$CM_SETTINGS"
+  echo "Rebasing settings repo."
+  git checkout cm-14.1
+  git fetch lineage
+  git rebase lineage/cm-14.1
+  echo ""
+fi
+
+if [ -d "$CM_WIFI" ]; then
+  cd "$CM_WIFI"
+  echo "Rebasing frameworks/opt/net/wifi repo."
+  git checkout cm-14.1
+  git fetch lineage
+  git rebase lineage/cm-14.1
+  echo ""
+fi
+
+if [ -d "$CM_AUDIO" ]; then
+  cd "$CM_AUDIO"
+  echo "Rebasing audio-caf repo."
+  git checkout cm-14.1-caf-8952
+  git fetch lineage
+  git rebase lineage/cm-14.1-caf-8952
+  echo ""
+fi
+
+if [ -d "$CM_DISPLAY" ]; then
+  cd "$CM_DISPLAY"
+  echo "Rebasing display-caf repo."
+  git checkout cm-14.1-caf-8952
+  git fetch lineage
+  git rebase lineage/cm-14.1-caf-8952
+  echo ""
+fi
+
+if [ -d "$CM_MEDIA" ]; then
+  cd "$CM_MEDIA"
+  echo "Rebasing media-caf repo."
+  git checkout cm-14.1-caf-8952
+  git fetch lineage
+  git rebase lineage/cm-14.1-caf-8952
+  echo ""
+fi
+
+if [ -d "$CM_CLOCK" ]; then
+  cd "$CM_CLOCK"
+  echo "Rebasing DeskClock repo."
+  git checkout cm-14.1
+  git fetch lineage
+  git rebase lineage/cm-14.1
+  echo ""
+fi
+
+if [ -d "$CM_JELLY" ]; then
+  cd "$CM_JELLY"
+  echo "Rebasing Jelly repo."
+  git checkout cm-14.1
+  git fetch lineage
+  git rebase lineage/cm-14.1
+  echo ""
+fi
+
+if [ -d "$CM_IME" ]; then
+  cd "$CM_IME"
+  echo "Rebasing LatinIME repo."
+  git checkout cm-14.1
+  git fetch lineage
+  git rebase lineage/cm-14.1
+  echo ""
+fi
+
+if [ -d "$CM_BT" ]; then
+  cd "$CM_BT"
+  echo "Rebasing system/bt repo."
+  git checkout cm-14.1
+  git fetch lineage
+  git rebase lineage/cm-14.1
+  echo ""
+fi
+
+if [ -d "$CM_NETD" ]; then
+  cd "$CM_NETD"
+  echo "Rebasing netd repo."
+  git checkout cm-14.1
+  git fetch lineage
+  git rebase lineage/cm-14.1
+  echo ""
+fi
+
+if [ -d "$CM_SYS_SE" ]; then
+  cd "$CM_SYS_SE"
+  echo "Rebasing system/sepolicy repo."
+  git checkout cm-14.1
+  git fetch lineage
+  git rebase lineage/cm-14.1
+  echo ""
+fi
+
+if [ -d "$CM_VOLD" ]; then
+  cd "$CM_VOLD"
+  echo "Rebasing vold repo."
+  git checkout cm-14.1
+  git fetch lineage
+  git rebase lineage/cm-14.1
+  echo ""
+fi
+
+if [ -d "$CM_QCOM" ]; then
+  cd "$CM_QCOM"
+  echo "Rebasing qcom/common repo."
+  git checkout cm-14.1
+  git fetch lineage
+  git rebase lineage/cm-14.1
   echo ""
 fi

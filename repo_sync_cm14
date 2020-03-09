@@ -3,6 +3,7 @@
 # Path to root of CM project directory
 CM_PROJECT_DIR=~/android/system/cm-14.1
 CM_DEVICE=~/android/system/cm-14.1/device/samsung/gts210vewifi
+CM_DEV_T713=~/android/system/cm-14.1/device/samsung/gts28vewifi
 CM_KERNEL=~/android/system/cm-14.1/kernel/samsung/msm8976
 CM_VENDOR=~/android/system/cm-14.1/vendor/samsung
 CM_VENDOR_CM=~/android/system/cm-14.1/vendor/cm
@@ -53,6 +54,20 @@ echo ""
 if [ -d "$CM_DEVICE" ]; then
   cd "$CM_DEVICE"
   echo "Rebasing device_samsung_gts210vewifi repo."
+  git show-ref --verify --quiet refs/heads/cm-14.1
+  if [ "$?" == 1 ]; then
+    git checkout -b cm-14.1 ghub/cm-14.1
+  else
+    git checkout cm-14.1
+  fi
+  git fetch cyanogen
+  git rebase cyanogen/cm-14.1
+  echo ""
+fi
+
+if [ -d "$CM_DEV_T713" ]; then
+  cd "$CM_DEV_T713"
+  echo "Rebasing device_samsung_gts28vewifi repo."
   git show-ref --verify --quiet refs/heads/cm-14.1
   if [ "$?" == 1 ]; then
     git checkout -b cm-14.1 ghub/cm-14.1

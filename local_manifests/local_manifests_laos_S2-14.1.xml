@@ -41,27 +41,51 @@
 
   <project path="android" name="syphyr/android-1" remote="ghub" revision="cm-14.1" />
   <project path="device/qcom/sepolicy" name="syphyr/android_device_qcom_sepolicy" remote="ghub" revision="cm-14.1" />
-  <project path="external/boringssl" name="syphyr/android_external_boringssl" remote="ghub" revision="cm-14.1" />
-  <project path="external/iptables" name="syphyr/android_external_iptables" remote="ghub" revision="cm-14.1" />
+  <project path="external/boringssl" name="syphyr/android_external_boringssl" groups="pdk" remote="ghub" revision="cm-14.1" />
+  <project path="external/iptables" name="syphyr/android_external_iptables" groups="pdk" remote="ghub" revision="cm-14.1" />
   <project path="external/p7zip" name="syphyr/android_external_p7zip" remote="ghub" revision="lineage-17.1" />
-  <project path="external/ppp" name="syphyr/android_external_ppp" remote="ghub" revision="cm-14.1" />
-  <project path="external/sqlite" name="syphyr/android_external_sqlite-1" remote="ghub" revision="cm-14.1" />
-  <project path="frameworks/av" name="syphyr/android_frameworks_av-laos" remote="ghub" revision="cm-14.1" />
-  <project path="frameworks/base" name="syphyr/android_frameworks_base-1" remote="ghub" revision="cm-14.1" />
-  <project path="frameworks/native" name="syphyr/android_frameworks_native-1" remote="ghub" revision="cm-14.1" />
-  <project path="frameworks/opt/net/wifi" name="syphyr/android_frameworks_opt_net_wifi" remote="ghub" revision="cm-14.1" />
-  <project path="hardware/qcom/audio-caf/msm8952" name="syphyr/android_hardware_qcom_audio" remote="ghub" revision="cm-14.1-caf-8952" />
-  <project path="hardware/qcom/display-caf/msm8952" name="syphyr/android_hardware_qcom_display" remote="ghub" revision="cm-14.1-caf-8952" />
-  <project path="hardware/qcom/media-caf/msm8952" name="syphyr/android_hardware_qcom_media-1" remote="ghub" revision="cm-14.1-caf-8952" />
-  <project path="packages/apps/DeskClock" name="syphyr/android_packages_apps_DeskClock-1" remote="ghub" revision="cm-14.1" />
+  <project path="external/ppp" name="syphyr/android_external_ppp" groups="pdk" remote="ghub" revision="cm-14.1" />
+  <project path="external/sqlite" name="syphyr/android_external_sqlite-1" groups="pdk" remote="ghub" revision="cm-14.1" />
+  <project path="frameworks/av" name="syphyr/android_frameworks_av-laos" groups="pdk" remote="ghub" revision="cm-14.1" />
+  <project path="frameworks/base" name="syphyr/android_frameworks_base-1" groups="pdk-cw-fs,pdk-fs" remote="ghub" revision="cm-14.1" />
+  <project path="frameworks/native" name="syphyr/android_frameworks_native-1" groups="pdk" remote="ghub" revision="cm-14.1" />
+  <project path="frameworks/opt/net/wifi" name="syphyr/android_frameworks_opt_net_wifi" groups="pdk" remote="ghub" revision="cm-14.1" />
+  <project path="hardware/qcom/audio-caf/msm8952" name="syphyr/android_hardware_qcom_audio" groups="qcom,qcom_audio" remote="ghub" revision="cm-14.1-caf-8952" />
+  <project path="hardware/qcom/display-caf/msm8952" name="syphyr/android_hardware_qcom_display" groups="pdk,qcom,qcom_display" remote="ghub" revision="cm-14.1-caf-8952" />
+  <project path="hardware/qcom/media-caf/msm8952" name="syphyr/android_hardware_qcom_media-1" groups="qcom" remote="ghub" revision="cm-14.1-caf-8952" />
+  <project path="packages/apps/DeskClock" name="syphyr/android_packages_apps_DeskClock-1" groups="pdk-fs" remote="ghub" revision="cm-14.1" />
   <project path="packages/apps/Jelly" name="syphyr/android_packages_apps_Jelly" remote="ghub" revision="cm-14.1" />
-  <project path="packages/apps/Settings" name="syphyr/android_packages_apps_Settings" remote="ghub" revision="cm-14.1" />
-  <project path="packages/inputmethods/LatinIME" name="syphyr/android_packages_inputmethods_LatinIME" remote="ghub" revision="cm-14.1" />
-  <project path="system/bt" name="syphyr/android_system_bt" remote="ghub" revision="cm-14.1" />
-  <project path="system/netd" name="syphyr/android_system_netd-1" remote="ghub" revision="cm-14.1" />
-  <project path="system/sepolicy" name="syphyr/android_system_sepolicy" remote="ghub" revision="cm-14.1" />
-  <project path="system/vold" name="syphyr/android_system_vold-1" remote="ghub" revision="cm-14.1" />
+  <project path="packages/apps/Settings" name="syphyr/android_packages_apps_Settings" groups="pdk-fs" remote="ghub" revision="cm-14.1" />
+  <project path="packages/inputmethods/LatinIME" name="syphyr/android_packages_inputmethods_LatinIME" groups="pdk-fs" remote="ghub" revision="cm-14.1" />
+  <project path="system/bt" name="syphyr/android_system_bt" groups="pdk" remote="ghub" revision="cm-14.1" />
+  <project path="system/netd" name="syphyr/android_system_netd-1" groups="pdk" remote="ghub" revision="cm-14.1" />
+  <project path="system/sepolicy" name="syphyr/android_system_sepolicy" groups="pdk" remote="ghub" revision="cm-14.1" />
+  <project path="system/vold" name="syphyr/android_system_vold-1" groups="pdk" remote="ghub" revision="cm-14.1" />
   <project path="vendor/cm" name="syphyr/android_vendor_cm-1" remote="ghub" revision="cm-14.1" />
+
+  <project path="hardware/qcom/audio-caf/apq8084" name="LineageOS/android_hardware_qcom_audio" groups="qcom,qcom_audio" revision="cm-14.1-caf-8084" />
+  <project path="hardware/qcom/audio-caf/msm8916" name="LineageOS/android_hardware_qcom_audio" groups="qcom,qcom_audio" revision="cm-14.1-caf-8916" />
+  <project path="hardware/qcom/audio-caf/msm8960" name="LineageOS/android_hardware_qcom_audio" groups="qcom,qcom_audio" revision="cm-14.1-caf-8960" />
+  <project path="hardware/qcom/audio-caf/msm8974" name="LineageOS/android_hardware_qcom_audio" groups="qcom,qcom_audio" revision="cm-14.1-caf-8974" />
+  <project path="hardware/qcom/audio-caf/msm8994" name="LineageOS/android_hardware_qcom_audio" groups="qcom,qcom_audio" revision="cm-14.1-caf-8994" />
+  <project path="hardware/qcom/audio-caf/msm8996" name="LineageOS/android_hardware_qcom_audio" groups="qcom,qcom_audio" revision="cm-14.1-caf-8996" />
+  <project path="hardware/qcom/audio-caf/msm8998" name="LineageOS/android_hardware_qcom_audio" groups="qcom,qcom_audio" revision="cm-14.1-caf-8998" />
+
+  <project path="hardware/qcom/display-caf/apq8084" name="LineageOS/android_hardware_qcom_display" groups="pdk,qcom,qcom_display" revision="cm-14.1-caf-8084" />
+  <project path="hardware/qcom/display-caf/msm8916" name="LineageOS/android_hardware_qcom_display" groups="pdk,qcom,qcom_display" revision="cm-14.1-caf-8916" />
+  <project path="hardware/qcom/display-caf/msm8960" name="LineageOS/android_hardware_qcom_display" groups="pdk,qcom,qcom_display" revision="cm-14.1-caf-8960" />
+  <project path="hardware/qcom/display-caf/msm8974" name="LineageOS/android_hardware_qcom_display" groups="pdk,qcom,qcom_display" revision="cm-14.1-caf-8974" />
+  <project path="hardware/qcom/display-caf/msm8994" name="LineageOS/android_hardware_qcom_display" groups="pdk,qcom,qcom_display" revision="cm-14.1-caf-8994" />
+  <project path="hardware/qcom/display-caf/msm8996" name="LineageOS/android_hardware_qcom_display" groups="pdk,qcom,qcom_display" revision="cm-14.1-caf-8996" />
+  <project path="hardware/qcom/display-caf/msm8998" name="LineageOS/android_hardware_qcom_display" groups="pdk,qcom,qcom_display" revision="cm-14.1-caf-8998" />
+
+  <project path="hardware/qcom/media-caf/apq8084" name="LineageOS/android_hardware_qcom_media" groups="qcom" revision="cm-14.1-caf-8084" />
+  <project path="hardware/qcom/media-caf/msm8916" name="LineageOS/android_hardware_qcom_media" groups="qcom" revision="cm-14.1-caf-8916" />
+  <project path="hardware/qcom/media-caf/msm8960" name="LineageOS/android_hardware_qcom_media" groups="qcom" revision="cm-14.1-caf-8960" />
+  <project path="hardware/qcom/media-caf/msm8974" name="LineageOS/android_hardware_qcom_media" groups="qcom" revision="cm-14.1-caf-8974" />
+  <project path="hardware/qcom/media-caf/msm8994" name="LineageOS/android_hardware_qcom_media" groups="qcom" revision="cm-14.1-caf-8994" />
+  <project path="hardware/qcom/media-caf/msm8996" name="LineageOS/android_hardware_qcom_media" groups="qcom" revision="cm-14.1-caf-8996" />
+  <project path="hardware/qcom/media-caf/msm8998" name="LineageOS/android_hardware_qcom_media" groups="qcom" revision="cm-14.1-caf-8998" />
   
   <project path="device/samsung/gts210vewifi" name="syphyr/android_device_samsung_gts210vewifi" remote="ghub" revision="cm-14.1" />
   <project path="device/samsung/gts28vewifi" name="syphyr/android_device_samsung_gts28vewifi" remote="ghub" revision="cm-14.1" />

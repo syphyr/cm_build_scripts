@@ -18,7 +18,7 @@
   <remove-project name="LineageOS/android_external_boringssl"/>
   <remove-project name="LineageOS/android_external_iptables"/>
   <remove-project name="LineageOS/android_external_p7zip"/>
-  <remove-project name="platform/external/ppp"/>
+  <remove-project name="LineageOS/android_external_ppp"/>
   <remove-project name="LineageOS/android_external_sqlite"/>
   <remove-project name="LineageOS/android_frameworks_av"/>
   <remove-project name="LineageOS/android_frameworks_base"/>

@@ -27,6 +27,7 @@
   <remove-project name="LineageOS/android_hardware_qcom_audio"/>
   <remove-project name="LineageOS/android_hardware_qcom_display"/>
   <remove-project name="LineageOS/android_hardware_qcom_media"/>
+  <remove-project name="LineageOS/android_packages_apps_AudioFX"/>
   <remove-project name="LineageOS/android_packages_apps_DeskClock"/>
   <remove-project name="LineageOS/android_packages_apps_Jelly"/>
   <remove-project name="LineageOS/android_packages_apps_Settings"/>
@@ -53,6 +54,7 @@
   <project path="hardware/qcom/audio-caf/msm8952" name="syphyr/android_hardware_qcom_audio" groups="qcom,qcom_audio" remote="ghub" revision="cm-14.1-caf-8952" />
   <project path="hardware/qcom/display-caf/msm8952" name="syphyr/android_hardware_qcom_display" groups="pdk,qcom,qcom_display" remote="ghub" revision="cm-14.1-caf-8952" />
   <project path="hardware/qcom/media-caf/msm8952" name="syphyr/android_hardware_qcom_media-1" groups="qcom" remote="ghub" revision="cm-14.1-caf-8952" />
+  <project path="packages/apps/AudioFX" name="syphyr/android_packages_apps_AudioFX" remote="ghub" revision="cm-14.1" />
   <project path="packages/apps/DeskClock" name="syphyr/android_packages_apps_DeskClock-1" groups="pdk-fs" remote="ghub" revision="cm-14.1" />
   <project path="packages/apps/Jelly" name="syphyr/android_packages_apps_Jelly" remote="ghub" revision="cm-14.1" />
   <project path="packages/apps/Settings" name="syphyr/android_packages_apps_Settings" groups="pdk-fs" remote="ghub" revision="cm-14.1" />

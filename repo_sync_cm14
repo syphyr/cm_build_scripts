@@ -25,6 +25,7 @@ CM_WIFI=~/android/system/cm-14.1/frameworks/opt/net/wifi
 CM_AUDIO=~/android/system/cm-14.1/hardware/qcom/audio-caf/msm8952
 CM_DISPLAY=~/android/system/cm-14.1/hardware/qcom/display-caf/msm8952
 CM_MEDIA=~/android/system/cm-14.1/hardware/qcom/media-caf/msm8952
+CM_FX=~/android/system/cm-14.1/packages/apps/AudioFX
 CM_CLOCK=~/android/system/cm-14.1/packages/apps/DeskClock
 CM_JELLY=~/android/system/cm-14.1/packages/apps/Jelly
 CM_IME=~/android/system/cm-14.1/packages/inputmethods/LatinIME
@@ -356,6 +357,20 @@ if [ -d "$CM_MEDIA" ]; then
   fi
   git fetch lineage
   git rebase lineage/cm-14.1-caf-8952
+  echo ""
+fi
+
+if [ -d "$CM_FX" ]; then
+  cd "$CM_FX"
+  echo "Rebasing AudioFX repo."
+  git show-ref --verify --quiet refs/heads/cm-14.1
+  if [ "$?" == 1 ]; then
+    git checkout -b cm-14.1 ghub/cm-14.1
+  else
+    git checkout cm-14.1
+  fi
+  git fetch lineage
+  git rebase lineage/cm-14.1
   echo ""
 fi
 

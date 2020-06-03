@@ -84,6 +84,7 @@
   <remove-project name="CyanogenMod/android_system_netd" />
   <remove-project name="CyanogenMod/android_packages_apps_Email" />
   <remove-project name="CyanogenMod/android_packages_apps_Nfc" />
+  <remove-project name="platform/external/libexif" />
 
   <project path="bionic" name="syphyr/android_bionic" remote="ghub" revision="cm-11.0" />
   <project path="build" name="syphyr/android_build" remote="ghub" revision="cm-11.0" />
@@ -147,6 +148,7 @@
   <project path="system/netd" name="syphyr/android_system_netd" remote="ghub" />
   <project path="packages/apps/Email" name="syphyr/android_packages_apps_Email" remote="ghub" />
   <project path="packages/apps/Nfc" name="syphyr/android_packages_apps_Nfc" remote="ghub" />
+  <project path="external/libexif" name="syphyr/android_external_libexif" remote="ghub" />
 
   <project path="device/samsung/espresso-common" name="syphyr/android_device_samsung_espresso-common" remote="ghub" />
   <project path="device/samsung/omap4-common" name="syphyr/android_device_samsung_omap4-common" remote="ghub" />

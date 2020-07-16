@@ -37,6 +37,7 @@
   <remove-project name="LineageOS/android_system_sepolicy"/>
   <remove-project name="LineageOS/android_system_vold"/>
   <remove-project name="LineageOS/android_vendor_cm"/>
+  <remove-project name="LineageOS/android_external_libhevc"/>
 
   <remote name="ghub" fetch="https://github.com/" />
 
@@ -64,6 +65,7 @@
   <project path="system/sepolicy" name="syphyr/android_system_sepolicy" groups="pdk" remote="ghub" revision="cm-14.1" />
   <project path="system/vold" name="syphyr/android_system_vold-1" groups="pdk" remote="ghub" revision="cm-14.1" />
   <project path="vendor/cm" name="syphyr/android_vendor_cm-1" remote="ghub" revision="cm-14.1" />
+  <project path="external/libhevc" name="syphyr/android_external_libhevc" remote="ghub" revision="cm-14.1" />
 
   <project path="hardware/qcom/audio-caf/apq8084" name="LineageOS/android_hardware_qcom_audio" groups="qcom,qcom_audio" revision="cm-14.1-caf-8084" />
   <project path="hardware/qcom/audio-caf/msm8916" name="LineageOS/android_hardware_qcom_audio" groups="qcom,qcom_audio" revision="cm-14.1-caf-8916" />

@@ -34,6 +34,7 @@ CM_NETD=~/android/system/cm-14.1/system/netd
 CM_SYS_SE=~/android/system/cm-14.1/system/sepolicy
 CM_VOLD=~/android/system/cm-14.1/system/vold
 CM_QCOM=~/android/system/cm-14.1/device/qcom/common
+CM_HEVC=~/android/system/cm-14.1/external/libhevc
 
 ## End Edit
 
@@ -475,6 +476,20 @@ fi
 if [ -d "$CM_QCOM" ]; then
   cd "$CM_QCOM"
   echo "Rebasing qcom/common repo."
+  git show-ref --verify --quiet refs/heads/cm-14.1
+  if [ "$?" == 1 ]; then
+    git checkout -b cm-14.1 ghub/cm-14.1
+  else
+    git checkout cm-14.1
+  fi
+  git fetch lineage
+  git rebase lineage/cm-14.1
+  echo ""
+fi
+
+if [ -d "$CM_HEVC" ]; then
+  cd "$CM_HEVC"
+  echo "Rebasing external/libhevc repo."
   git show-ref --verify --quiet refs/heads/cm-14.1
   if [ "$?" == 1 ]; then
     git checkout -b cm-14.1 ghub/cm-14.1

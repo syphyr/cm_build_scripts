@@ -1,5 +1,9 @@
 #!/bin/bash
 
+sudo update-java-alternatives -s java-1.7.0-openjdk-amd64
+java -version
+javac -version
+
 # Path to root of CM project directory
 CM_PROJECT_DIR=~/android/system/cm-13.0
 ANDROID_DEVICE=awifi

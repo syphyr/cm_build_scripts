@@ -1,5 +1,9 @@
 #!/bin/bash
 
+sudo update-java-alternatives -s java-1.8.0-openjdk-amd64
+java -version
+javac -version
+
 # Path to root of OmniROM project directory
 CM_PROJECT_DIR=~/android/system/android-7.1
 ANDROID_DEVICE=gts210vewifi

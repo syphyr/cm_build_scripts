@@ -11,7 +11,7 @@ WIREGUARD_DIR=kernel/samsung/msm8976/net/wireguard
 PROJECT_LIST=$CM_PROJECT_DIR/.repo/project.list
 
 NOW=$(date -u)
-SINCE=$(date -u --date="$NOW - 31 day")
+SINCE=$(date -u --date="$NOW - 45 day")
 
 if [ -e "$PROJECT_LIST" ]; then
   REPOS=$(cat "$PROJECT_LIST" | tr " " "\n")
@@ -30,7 +30,7 @@ for REPOPATH in $REPOS ; do
     if [ ! "$REPOPATH" == "" ]; then
       if [ -d "$CM_PROJECT_DIR"/"$REPOPATH" ]; then
         cd "$CM_PROJECT_DIR"/"$REPOPATH"
-        GITOUT=$(git log HEAD --pretty="<li>%h (%cr) %s (%an)</li>" --since="31 days ago")
+        GITOUT=$(git log HEAD --pretty="<li>%h (%cr) %s (%an)</li>" --since="45 days ago")
         if [ ! "$GITOUT" == "" ]; then
           echo "<font size="4"><b>$REPOPATH</b></font>" >> "$CHANGE_FILE"
           echo '<ul style="list-style-type:square">' >> "$CHANGE_FILE"

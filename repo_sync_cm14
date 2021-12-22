@@ -124,19 +124,19 @@ if [ -d "$CM_KERNEL" ]; then
   echo ""
 fi
 
-if [ -d "$CM_VENDOR" ]; then
-  cd "$CM_VENDOR"
-  echo "Rebasing vendor_samsung repo."
-  git show-ref --verify --quiet refs/heads/cm-14.1
-  if [ "$?" == 1 ]; then
-    git checkout -b cm-14.1 ghub/cm-14.1
-  else
-    git checkout cm-14.1
-  fi
-  git fetch cyanogen
-  git rebase cyanogen/cm-14.1
-  echo ""
-fi
+#if [ -d "$CM_VENDOR" ]; then
+#  cd "$CM_VENDOR"
+#  echo "Rebasing vendor_samsung repo."
+#  git show-ref --verify --quiet refs/heads/cm-14.1
+#  if [ "$?" == 1 ]; then
+#    git checkout -b cm-14.1 ghub/cm-14.1
+#  else
+#    git checkout cm-14.1
+#  fi
+#  git fetch cyanogen
+#  git rebase cyanogen/cm-14.1
+#  echo ""
+#fi
 
 if [ -d "$CM_ANDROID" ]; then
   cd "$CM_ANDROID"
@@ -502,16 +502,16 @@ if [ -d "$CM_HEVC" ]; then
   echo ""
 fi
 
-if [ -d "$CM_FFMPEG" ]; then
-  cd "$CM_FFMPEG"
-  echo "Rebasing external/ffmpeg repo."
-  git show-ref --verify --quiet refs/heads/cm-14.1
-  if [ "$?" == 1 ]; then
-    git checkout -b cm-14.1 ghub/cm-14.1
-  else
-    git checkout cm-14.1
-  fi
-  git fetch lineage
-  git rebase lineage/cm-14.1
-  echo ""
-fi
+#if [ -d "$CM_FFMPEG" ]; then
+#  cd "$CM_FFMPEG"
+#  echo "Rebasing external/ffmpeg repo."
+#  git show-ref --verify --quiet refs/heads/cm-14.1
+#  if [ "$?" == 1 ]; then
+#    git checkout -b cm-14.1 ghub/cm-14.1
+#  else
+#    git checkout cm-14.1
+#  fi
+#  git fetch lineage
+#  git rebase lineage/cm-14.1
+#  echo ""
+#fi

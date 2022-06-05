@@ -39,6 +39,7 @@
   <remove-project name="LineageOS/android_vendor_cm"/>
   <remove-project name="LineageOS/android_external_libhevc"/>
   <remove-project name="LineageOS/android_external_ffmpeg"/>
+  <remove-project name="platform/external/dhcpcd-6.8.2"/>
 
   <remote name="ghub" fetch="https://github.com/" />
 
@@ -68,6 +69,7 @@
   <project path="vendor/cm" name="syphyr/android_vendor_cm-1" remote="ghub" revision="cm-14.1" />
   <project path="external/libhevc" name="syphyr/android_external_libhevc" remote="ghub" revision="cm-14.1" />
   <project path="external/ffmpeg" name="syphyr/android_external_ffmpeg" remote="ghub" revision="cm-14.1" />
+  <project path="external/dhcpcd-6.8.2" name="syphyr/android_external_dhcpcd-6.8.2" remote="ghub" revision="cm-14.1" />
 
   <project path="hardware/qcom/audio-caf/apq8084" name="LineageOS/android_hardware_qcom_audio" groups="qcom,qcom_audio" revision="cm-14.1-caf-8084" />
   <project path="hardware/qcom/audio-caf/msm8916" name="LineageOS/android_hardware_qcom_audio" groups="qcom,qcom_audio" revision="cm-14.1-caf-8916" />

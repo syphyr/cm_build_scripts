@@ -1,1 +1,1 @@
-git cherry-pick $1
+git cherry-pick $@

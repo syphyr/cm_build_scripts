@@ -43,6 +43,7 @@
   <remove-project name="LineageOS/android_external_aac"/>
   <remove-project name="LineageOS/android_external_expat"/>
   <remove-project name="LineageOS/android_external_freetype"/>
+  <remove-project name="platform/external/webp"/>
 
   <remote name="ghub" fetch="https://github.com/" />
 
@@ -76,6 +77,7 @@
   <project path="external/aac" name="syphyr/android_external_aac-1" groups="pdk" remote="ghub" revision="lineage-17.1" />
   <project path="external/expat" name="syphyr/android_external_expat" groups="pdk" remote="ghub" revision="cm-14.1" />
   <project path="external/freetype" name="syphyr/android_external_freetype-1" groups="pdk" remote="ghub" revision="lineage-18.1" />
+  <project path="external/webp" name="syphyr/android_external_webp" groups="pdk,qcom_msm8x26" remote="ghub" revision="lineage-18.1" />
 
   <project path="hardware/qcom/audio-caf/apq8084" name="LineageOS/android_hardware_qcom_audio" groups="qcom,qcom_audio" revision="cm-14.1-caf-8084" />
   <project path="hardware/qcom/audio-caf/msm8916" name="LineageOS/android_hardware_qcom_audio" groups="qcom,qcom_audio" revision="cm-14.1-caf-8916" />

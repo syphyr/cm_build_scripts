@@ -47,6 +47,7 @@
   <remove-project name="LineageOS/android_external_flac"/>
   <remove-project name="LineageOS/android_external_libvpx"/>
   <remove-project name="LineageOS/android_external_libxml2"/>
+  <remove-project name="platform/system/ca-certificates"/>
 
   <remote name="ghub" fetch="https://github.com/" />
 
@@ -84,6 +85,7 @@
   <project path="external/flac" name="syphyr/android_external_flac" groups="pdk" remote="ghub" revision="cm-14.1" />
   <project path="external/libvpx" name="syphyr/android_external_libvpx-1" groups="pdk" remote="ghub" revision="cm-14.1" />
   <project path="external/libxml2" name="syphyr/android_external_libxml2-1" groups="pdk,libxml2" remote="ghub" revision="cm-14.1" />
+  <project path="system/ca-certificates" name="syphyr/android_system_ca-certificates" groups="pdk" remote="ghub" revision="android12-release" />
 
   <project path="hardware/qcom/audio-caf/apq8084" name="LineageOS/android_hardware_qcom_audio" groups="qcom,qcom_audio" revision="cm-14.1-caf-8084" />
   <project path="hardware/qcom/audio-caf/msm8916" name="LineageOS/android_hardware_qcom_audio" groups="qcom,qcom_audio" revision="cm-14.1-caf-8916" />

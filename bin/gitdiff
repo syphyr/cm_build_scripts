@@ -1,3 +1,0 @@
-#!/bin/bash
-
-diff -ru --exclude=.git "$1" "$2"

@@ -48,7 +48,7 @@
   <remove-project name="LineageOS/android_external_libvpx"/>
   <remove-project name="LineageOS/android_external_libxml2"/>
   <remove-project name="platform/system/ca-certificates"/>
-  <remove-project name="platform/external/giflib"/>
+  <remove-project name="LineageOS/android_external_giflib"/>
 
   <remote name="ghub" fetch="https://github.com/" />
 

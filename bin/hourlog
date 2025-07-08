@@ -1,1 +1,1 @@
-sudo journalctl -S -1h --no-pager
+journalctl -S -1h --no-pager

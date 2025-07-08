@@ -1,1 +1,1 @@
-sudo journalctl --system -S today
+journalctl --system -S today

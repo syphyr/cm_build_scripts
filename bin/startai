@@ -1,0 +1,153 @@
+#!/bin/bash
+
+cd $HOME/src
+
+# Parse input parameter to toggle cache state
+BUILD_CACHE_FLAG=""
+RUN_PRUNE_GARBAGE=false
+if [ "$1" == "clean" ]; then
+    echo "🧼 'clean' parameter detected. Forcing --no-cache builds..."
+    BUILD_CACHE_FLAG="--no-cache"
+    RUN_PRUNE_GARBAGE=true
+else
+    echo "⚡ Defaulting to CACHED builds..."
+fi
+
+# 1. Check if the network exists; if not, create it cleanly
+if ! docker network inspect ollama-net >/dev/null 2>&1; then
+    echo "Creating network 'ollama-net'..."
+    docker network create ollama-net
+else
+    echo "Network 'ollama-net' already exists, skipping creation."
+fi
+
+# 2. Clean up any stale or stuck container instances gracefully
+echo "Cleaning up any old container instances..."
+docker stop open-webui hollama kokoro-fastapi stable-diffusion-vulkan ollama >/dev/null 2>&1
+docker rm open-webui hollama kokoro-fastapi stable-diffusion-vulkan ollama >/dev/null 2>&1
+
+echo "------------------------------------------------------------"
+echo "Launching Core AI Backends & Compiling Local Images..."
+echo "------------------------------------------------------------"
+
+# 3. SERVICE 2: OLLAMA BACKEND (Mainline Vulkan via Custom Build)
+(cd ollama/ollama && docker build $BUILD_CACHE_FLAG -t ollama:v1 -f Dockerfile .)
+
+docker run -d \
+    --name ollama \
+    --network ollama-net \
+    --restart always \
+    --device /dev/dri/card1:/dev/dri/card1 \
+    --device /dev/dri/renderD128:/dev/dri/renderD128 \
+    --group-add 990 \
+    --group-add 44 \
+    -v /usr/share/vulkan/icd.d:/usr/share/vulkan/icd.d:ro \
+    -v /etc/vulkan/icd.d:/etc/vulkan/icd.d:ro \
+    -v ollama:/root/.ollama \
+    -p 0.0.0.0:11434:11434 \
+    -e OLLAMA_ORIGINS="*" \
+    -e OLLAMA_NUM_PARALLEL=1 \
+    -e OLLAMA_VULKAN=1 \
+    -e OLLAMA_IGPU_ENABLE=true \
+    -e OLLAMA_FLASH_ATTENTION=1 \
+    -e GGML_VK_DISABLE_INTEGER_DOT_PRODUCT=1 \
+    ollama:v1
+
+# 4. SERVICE 3: STABLE DIFFUSION BACKEND (Vulkan via Custom Build)
+(cd stable-diffusion/stable-diffusion.cpp && docker build $BUILD_CACHE_FLAG -f docker/Dockerfile.vulkan -t stable-diffusion-vulkan:local .)
+
+docker run -d \
+    --name stable-diffusion-vulkan \
+    --network ollama-net \
+    --device /dev/dri/card1:/dev/dri/card1 \
+    --device /dev/dri/renderD128:/dev/dri/renderD128 \
+    --group-add 990 \
+    --group-add 44 \
+    -v /usr/share/vulkan/icd.d:/usr/share/vulkan/icd.d:ro \
+    -v /etc/vulkan/icd.d:/etc/vulkan/icd.d:ro \
+    -v /home/delta/src/sd-models:/models \
+    -p 0.0.0.0:7860:1234 \
+    -e GGML_VK_DISABLE_INTEGER_DOT_PRODUCT=1 \
+    -e GGML_VK_YIELD=1 \
+    --restart always \
+    --entrypoint /sd.cpp/bin/sd-server \
+    stable-diffusion-vulkan:local \
+    -m /models/DreamShaper8_LCM.safetensors \
+    -t 6 \
+    --batch-count 1
+
+# 5. SERVICE 4: KOKORO TTS BACKEND (CPU Optimized via Pre-built Registry)
+docker run -d \
+    --name kokoro-fastapi \
+    --network ollama-net \
+    -p 0.0.0.0:8880:8880 \
+    -v kokoro-data:/app/data \
+    -e NUM_THREADS=4 \
+    --restart always \
+    ghcr.io/remsky/kokoro-fastapi-cpu:latest
+
+echo "------------------------------------------------------------"
+echo "Compiling & Deploying Frontends..."
+echo "------------------------------------------------------------"
+
+# 6. SERVICE 5: HOLLAMA UI FRONTEND (Custom Local Compilation Build)
+(cd hollama/hollama && docker build $BUILD_CACHE_FLAG -t hollama:v1 -f Dockerfile .)
+
+docker run -d \
+    --name hollama \
+    --network ollama-net \
+    -p 0.0.0.0:4173:4173 \
+    -e OLLAMA_BASE_URL=http://ollama:11434 \
+    --restart always \
+    hollama:v1
+
+# 7. SERVICE 6: OPEN WEBUI FRONTEND (Custom Local Compilation Build)
+(cd open-webui/open-webui && docker build $BUILD_CACHE_FLAG -t open-webui:v1 -f Dockerfile .)
+
+docker run -d \
+    --name open-webui \
+    --network ollama-net \
+    --add-host "host.docker.internal:host-gateway" \
+    -p 0.0.0.0:3000:8080 \
+    -v open-webui:/app/backend/data \
+    -e OLLAMA_BASE_URL=http://ollama:11434 \
+    -e RAG_EMBEDDING_ENGINE=ollama \
+    -e RAG_OLLAMA_BASE_URL=http://ollama:11434 \
+    -e RAG_EMBEDDING_MODEL=all-minilm:l6-v2 \
+    -e ENABLE_IMAGE_GENERATION=true \
+    -e IMAGE_GENERATION_ENGINE=automatic1111 \
+    -e AUTOMATIC1111_BASE_URL=http://stable-diffusion-vulkan:1234 \
+    -e IMAGE_GENERATION_MODEL="DreamShaper8_LCM.safetensors" \
+    -e AUDIO_TTS_ENGINE=openai \
+    -e AUDIO_TTS_OPENAI_API_BASE_URL=http://kokoro-fastapi:8880/v1 \
+    -e AUDIO_TTS_OPENAI_API_MODEL=kokoro \
+    -e AUDIO_TTS_OPENAI_API_KEY=sk-1234 \
+    -e AUDIO_TTS_VOICE=af_bella \
+    -e ENABLE_RAG_WEB_SEARCH=true \
+    -e RAG_WEB_SEARCH_ENGINE=searxng \
+    -e RAG_WEB_SEARCH_BASE_URL=http://searxng-core:8080/search \
+    -e DEFAULT_MODEL_PARAMS='{"num_ctx": 16384, "num_thread": 6, "num_batch": 512, "num_predict": 16384, "max_tokens": 16384}' \
+    -e STREAM_RESPONSE=true \
+    --restart always \
+    open-webui:v1
+
+# 8. SERVICE 1: SearXNG Compose Stack (Run in an isolated subshell) Note: must be started last for DNS to function
+echo "Bringing up SearXNG Compose Stack..."
+(cd searxng/searxng && docker compose up -d)
+
+# 9. POST-BUILD ENVIRONMENT MANAGEMENT (Automated Pruning System)
+if [ "$RUN_PRUNE_GARBAGE" = true ]; then
+    echo "------------------------------------------------------------"
+    echo "🧹 Clean build flag triggered global image pruning..."
+    echo "------------------------------------------------------------"
+    docker image prune -f
+fi
+
+echo "------------------------------------------------------------"
+echo "All 6 Services Online and Exposed to Local Network!"
+echo "Open WebUI Chat Panel:       http://localhost:3000"
+echo "Hollama Developer Interface:  http://localhost:4173"
+echo "------------------------------------------------------------"
+
+docker ps
+

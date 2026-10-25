@@ -1,0 +1,32 @@
+cd $HOME/src
+
+cd ollama/ollama
+git fetch
+git log --pretty="%C(yellow)%h %C(green)(%cr) %C(red)(%ar) %C(white)%s %C(blue)(%an)" -10 origin/main
+git rebase
+
+cd ../../stable-diffusion/stable-diffusion.cpp
+git fetch
+git log --pretty="%C(yellow)%h %C(green)(%cr) %C(red)(%ar) %C(white)%s %C(blue)(%an)" -10 origin/master
+git rebase
+
+cd ../../searxng/searxng
+git fetch
+git log --pretty="%C(yellow)%h %C(green)(%cr) %C(red)(%ar) %C(white)%s %C(blue)(%an)" -10 origin/master
+git rebase
+
+cd ../../kokoro-fastapi/Kokoro-FastAPI/
+git fetch
+git log --pretty="%C(yellow)%h %C(green)(%cr) %C(red)(%ar) %C(white)%s %C(blue)(%an)" -10 origin/master
+git rebase
+
+cd ../../open-webui/open-webui
+git fetch
+git log --pretty="%C(yellow)%h %C(green)(%cr) %C(red)(%ar) %C(white)%s %C(blue)(%an)" -10 origin/main
+git rebase
+
+cd ../../hollama/hollama
+git fetch
+git log --pretty="%C(yellow)%h %C(green)(%cr) %C(red)(%ar) %C(white)%s %C(blue)(%an)" -10 origin/main
+git rebase
+

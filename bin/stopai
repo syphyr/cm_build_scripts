@@ -1,0 +1,25 @@
+#!/bin/bash
+
+cd $HOME/src
+
+echo "Gracefully stopping core AI applications..."
+
+# 1. Send SIGTERM to the 5 standalone services to flush memory caches
+docker stop open-webui hollama kokoro-fastapi stable-diffusion-vulkan ollama >/dev/null 2>&1
+
+echo "Bringing down SearXNG Compose Stack..."
+
+# 2. Shut down the 6th service (SearXNG) and its companion caching containers
+(cd searxng/searxng && docker compose down)
+
+echo "Removing stopped application container environments..."
+
+# 3. Cleanly wipe the stopped containers so they are ready for the next fresh start-up
+docker rm open-webui hollama kokoro-fastapi stable-diffusion-vulkan ollama >/dev/null 2>&1
+
+echo "------------------------------------------------------------"
+echo "All 6 AI suite layers shut down cleanly."
+echo "Intel Core Ultra hardware resources have been fully reclaimed!"
+echo "------------------------------------------------------------"
+
+docker ps

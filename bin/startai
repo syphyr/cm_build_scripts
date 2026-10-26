@@ -110,6 +110,11 @@ docker run -d \
     --add-host "host.docker.internal:host-gateway" \
     -p 0.0.0.0:3000:8080 \
     -v open-webui:/app/backend/data \
+    -e HTTP_PROXY=http://searxng-tor:8118 \
+    -e HTTPS_PROXY=http://searxng-tor:8118 \
+    -e ALL_PROXY=http://searxng-tor:8118 \
+    -e NO_PROXY=localhost,127.0.0.1,open-webui,searxng-core,searxng-valkey,searxng-tor,ollama,stable-diffusion-vulkan,kokoro-fastapi,hollama \
+    -e WEB_SEARCH_TRUST_ENV=true \
     -e OLLAMA_BASE_URL=http://ollama:11434 \
     -e RAG_EMBEDDING_ENGINE=ollama \
     -e RAG_OLLAMA_BASE_URL=http://ollama:11434 \

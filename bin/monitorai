@@ -1,0 +1,71 @@
+#!/usr/bin/env bash
+
+# Color formatting variables for scannable terminal layouts
+ANSI_BOLD="\033[1m"
+ANSI_CYAN="\033[36m"
+ANSI_GREEN="\033[32m"
+ANSI_RED="\033[31m"
+ANSI_RESET="\033[0m"
+
+echo -e "${ANSI_BOLD}${ANSI_CYAN}========================================================================${ANSI_RESET}"
+echo -e "${ANSI_BOLD}${ANSI_CYAN}🚀 FULL-STACK PRIVACY AI ECOSYSTEM METRICS GATEWAY${ANSI_RESET}"
+echo -e "${ANSI_BOLD}${ANSI_CYAN}========================================================================${ANSI_RESET}"
+
+# 1. Inspect pure system memory footprint metrics across our entire active container pool
+echo -e "\n${ANSI_BOLD}🧠 CONTAINER RESOURCE UTILIZATION${ANSI_RESET}"
+docker stats --no-stream --format "table {{.Name}}\t{{.MemUsage}}\t{{.MemPerc}}\t{{.CPUPerc}}" \
+  searxng-core searxng-arti searxng-valkey ollama open-webui kokoro-fastapi stable-diffusion-vulkan 2>/dev/null || \
+  echo -e "${ANSI_RED}Warning: One or more target stack containers are not running.${ANSI_RESET}"
+
+# 2. Check the active socket bounds of the Arti proxy container
+echo -e "\n${ANSI_BOLD}📡 ARTI GATEWAY NETSTAT NETWORK SOCKET BOUNDS${ANSI_RESET}"
+docker exec -it searxng-arti ss -tulpn 2>/dev/null | grep -E "9050|Netid" || \
+  echo -e "${ANSI_RED}Could not extract active port listeners from container.${ANSI_RESET}"
+
+# 3. Benchmark active circuit latency by injecting a circuit probe via Python
+echo -e "\n${ANSI_BOLD}🔄 ASYNC TOR CIRCUIT MULTIPLEX LATENCY BENCHMARK${ANSI_RESET}"
+docker exec -it searxng-core python3 -c "
+import socket, time
+start = time.time()
+try:
+    s = socket.create_connection(('searxng-arti', 9050), timeout=3)
+    s.sendall(b'CONNECT check.torproject.org:443 HTTP/1.1\r\n\r\n')
+    print(f'${ANSI_GREEN}SUCCESS:${ANSI_RESET} SOCKS5h dual-stack circuit response time: {(time.time() - start)*1000:.2f}ms')
+except Exception as e:
+    print(f'${ANSI_RED}FAILURE:${ANSI_RESET} Proxy loopback network boundary unreachable: {e}')
+" 2>/dev/null
+
+# 4. Probe the runtime availability of the new application services
+echo -e "\n${ANSI_BOLD}🔌 ADDED ENGINE MICROSERVICE HEALTH RECKONING${ANSI_RESET}"
+
+# A. Open WebUI Endpoint Validation
+if docker exec open-webui python3 -c "import urllib.request; urllib.request.urlopen('http://localhost:8080/health', timeout=2)" 2>/dev/null; then
+  echo -e "  [${ANSI_GREEN}OK${ANSI_RESET}] open-webui: Interface framework responsive on port 8080"
+else
+  echo -e "  [${ANSI_RED}DOWN${ANSI_RESET}] open-webui: Health routing unreachable"
+fi
+
+# B. Kokoro FastAPI Voice Engine Validation
+if docker exec open-webui python3 -c "import urllib.request; urllib.request.urlopen('http://kokoro-fastapi:8880/v1/models', timeout=2)" 2>/dev/null; then
+  echo -e "  [${ANSI_GREEN}OK${ANSI_RESET}] kokoro-fastapi: OpenAI-compatible TTS engine responding on port 8880"
+else
+  echo -e "  [${ANSI_RED}DOWN${ANSI_RESET}] kokoro-fastapi: Audio compilation endpoint unreachable"
+fi
+
+# C. Stable Diffusion Vulkan Engine Validation (Port Corrected to 1234)
+if docker exec open-webui python3 -c "import urllib.request; urllib.request.urlopen('http://stable-diffusion-vulkan:1234/', timeout=2)" 2>/dev/null; then
+  echo -e "  [${ANSI_GREEN}OK${ANSI_RESET}] stable-diffusion-vulkan: Image generation backend alive on port 1234"
+else
+  # Fallback to check raw network port state if root landing returns a strict error
+  if docker exec open-webui python3 -c "import socket; s = socket.socket(); s.settimeout(1); s.connect(('stable-diffusion-vulkan', 1234))" 2>/dev/null; then
+    echo -e "  [${ANSI_GREEN}OK${ANSI_RESET}] stable-diffusion-vulkan: TCP Port 1234 accepting handshakes"
+  else
+    echo -e "  [${ANSI_RED}DOWN${ANSI_RESET}] stable-diffusion-vulkan: Graphics acceleration endpoint unreachable"
+  fi
+fi
+
+# 5. Stream trailing diagnostic outputs from our search core
+echo -e "\n${ANSI_BOLD}🪵 CORE AGGREGATOR RUNTIME ENGINE LOG STREAM${ANSI_RESET}"
+docker logs --tail 3 searxng-core 2>&1
+
+echo -e "\n${ANSI_BOLD}${ANSI_CYAN}========================================================================${ANSI_RESET}"

@@ -11,6 +11,7 @@ git log --pretty="%C(yellow)%h %C(green)(%cr) %C(red)(%ar) %C(white)%s %C(blue)(
 git rebase
 
 cd ../../searxng/searxng
+sudo chown -R delta:delta core-config
 git fetch
 git log --pretty="%C(yellow)%h %C(green)(%cr) %C(red)(%ar) %C(white)%s %C(blue)(%an)" -10 origin/master
 git rebase

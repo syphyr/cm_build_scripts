@@ -51,6 +51,7 @@ docker run -d \
     -e OLLAMA_IGPU_ENABLE=true \
     -e OLLAMA_FLASH_ATTENTION=1 \
     -e GGML_VK_DISABLE_INTEGER_DOT_PRODUCT=1 \
+    -e GIN_MODE=release \
     ollama:v1
 
 # 4. SERVICE 3: STABLE DIFFUSION BACKEND (Vulkan via Custom Build)

@@ -70,12 +70,14 @@ docker run -d \
     -p 0.0.0.0:7860:1234 \
     -e GGML_VK_DISABLE_INTEGER_DOT_PRODUCT=1 \
     -e GGML_VK_YIELD=1 \
+    -e GGML_VK_VISIBLE_DEVICES=0 \
     --restart always \
     --entrypoint /sd.cpp/bin/sd-server \
     stable-diffusion-vulkan:local \
     -m /models/DreamShaper8_LCM.safetensors \
     -t 6 \
-    --batch-count 1
+    --batch-count 1 \
+    --backend vulkan0
 
 # 5. SERVICE 4: KOKORO TTS BACKEND (CPU Optimized via Pre-built Registry)
 docker run -d \

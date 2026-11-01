@@ -9,6 +9,7 @@ cd ../../stable-diffusion/stable-diffusion.cpp
 git fetch
 git log --pretty="%C(yellow)%h %C(green)(%cr) %C(red)(%ar) %C(white)%s %C(blue)(%an)" -10 origin/master
 git rebase
+git submodule update --init --recursive
 
 cd ../../searxng/searxng
 sudo chown -R delta:delta core-config

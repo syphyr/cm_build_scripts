@@ -41,6 +41,8 @@ docker run -d \
     --device /dev/dri/renderD128:/dev/dri/renderD128 \
     --group-add 990 \
     --group-add 44 \
+    --cpuset-cpus="0-11" \
+    --ipc=host \
     -v /usr/share/vulkan/icd.d:/usr/share/vulkan/icd.d:ro \
     -v /etc/vulkan/icd.d:/etc/vulkan/icd.d:ro \
     -v ollama:/root/.ollama \
@@ -64,6 +66,7 @@ docker run -d \
     --device /dev/dri/renderD128:/dev/dri/renderD128 \
     --group-add 990 \
     --group-add 44 \
+    --ipc=host \
     -v /usr/share/vulkan/icd.d:/usr/share/vulkan/icd.d:ro \
     -v /etc/vulkan/icd.d:/etc/vulkan/icd.d:ro \
     -v /home/delta/src/sd-models:/models \
@@ -83,9 +86,13 @@ docker run -d \
 docker run -d \
     --name kokoro-fastapi \
     --network ollama-net \
+    --cpuset-cpus="12-13" \
+    --ipc=host \
     -p 0.0.0.0:8880:8880 \
     -v kokoro-data:/app/data \
-    -e NUM_THREADS=4 \
+    -e NUM_THREADS=2 \
+    -e OMP_NUM_THREADS=2 \
+    -e MKL_NUM_THREADS=2 \
     --restart always \
     ghcr.io/remsky/kokoro-fastapi-cpu:latest
 

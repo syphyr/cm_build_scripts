@@ -41,7 +41,6 @@ docker run -d \
     --device /dev/dri/renderD128:/dev/dri/renderD128 \
     --group-add 990 \
     --group-add 44 \
-    --cpuset-cpus="0-11" \
     --ipc=host \
     -v /usr/share/vulkan/icd.d:/usr/share/vulkan/icd.d:ro \
     -v /etc/vulkan/icd.d:/etc/vulkan/icd.d:ro \

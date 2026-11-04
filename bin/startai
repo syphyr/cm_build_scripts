@@ -142,7 +142,7 @@ docker run -d \
     -e ENABLE_RAG_WEB_SEARCH=true \
     -e RAG_WEB_SEARCH_ENGINE=searxng \
     -e RAG_WEB_SEARCH_BASE_URL=http://searxng-core:8080/search \
-    -e DEFAULT_MODEL_PARAMS='{"num_ctx": 16384, "num_thread": 6, "num_batch": 512, "num_predict": 4096, "max_tokens": 4096}' \
+    -e DEFAULT_MODEL_PARAMS='{"num_ctx": 16384, "num_thread": 6, "num_batch": 512, "num_predict": 4096, "max_tokens": 4096, "num_keep": 24}' \
     -e STREAM_RESPONSE=true \
     --restart always \
     open-webui:v1

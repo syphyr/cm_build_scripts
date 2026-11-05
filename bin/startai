@@ -52,7 +52,7 @@ docker run -d \
     -e OLLAMA_IGPU_ENABLE=true \
     -e OLLAMA_FLASH_ATTENTION=1 \
     -e GGML_VK_DISABLE_INTEGER_DOT_PRODUCT=1 \
-    -e OLLAMA_CONTEXT_LENGTH=32768 \
+    -e OLLAMA_CONTEXT_LENGTH=40960 \
     -e OLLAMA_GPU_OVERHEAD=1024 \
     -e GIN_MODE=release \
     ollama:v1
@@ -142,7 +142,7 @@ docker run -d \
     -e ENABLE_RAG_WEB_SEARCH=true \
     -e RAG_WEB_SEARCH_ENGINE=searxng \
     -e RAG_WEB_SEARCH_BASE_URL=http://searxng-core:8080/search \
-    -e DEFAULT_MODEL_PARAMS='{"num_ctx": 32768, "num_thread": 6, "num_batch": 512, "num_predict": 4096, "max_tokens": 4096, "num_keep": 24}' \
+    -e DEFAULT_MODEL_PARAMS='{"num_ctx": 40960, "num_thread": 6, "num_batch": 512, "num_predict": 4096, "max_tokens": 4096, "num_keep": 24}' \
     -e STREAM_RESPONSE=true \
     --restart always \
     open-webui:v1

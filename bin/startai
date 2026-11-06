@@ -31,7 +31,7 @@ echo "Launching Core AI Backends & Compiling Local Images..."
 echo "------------------------------------------------------------"
 
 # 3. SERVICE 2: OLLAMA BACKEND (Mainline Vulkan via Custom Build)
-(cd ollama/ollama && docker build --target publish-go $BUILD_CACHE_FLAG -t ollama:v1 -f Dockerfile .)
+(cd ollama/ollama && docker build $BUILD_CACHE_FLAG -t ollama:v1 -f Dockerfile .)
 
 docker run -d \
     --name ollama \

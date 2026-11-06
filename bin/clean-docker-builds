@@ -1,0 +1,10 @@
+# 1. Stop all containers completely
+docker stop $(docker ps -aq) 2>/dev/null
+
+# 2. Delete only the broken, half-built images and build logs (Leaves volumes safe!)
+docker container prune -f
+docker network prune -f
+docker builder prune -f
+
+# 3. Force the kernel to rebuild the iptables/nftables chains for Docker
+sudo systemctl restart docker

@@ -23,8 +23,8 @@ fi
 
 # 2. Clean up any stale or stuck container instances gracefully
 echo "Cleaning up any old container instances..."
-docker stop open-webui hollama kokoro-fastapi stable-diffusion-vulkan ollama >/dev/null 2>&1
-docker rm open-webui hollama kokoro-fastapi stable-diffusion-vulkan ollama >/dev/null 2>&1
+docker stop open-webui hollama kokoro-fastapi stable-diffusion-vulkan librechat whisper-stt librechat-mongo ollama >/dev/null 2>&1
+docker rm open-webui hollama kokoro-fastapi stable-diffusion-vulkan librechat whisper-stt librechat-mongo ollama >/dev/null 2>&1
 
 echo "------------------------------------------------------------"
 echo "Launching Core AI Backends & Compiling Local Images..."
@@ -124,7 +124,7 @@ docker run -d \
     -e HTTP_PROXY=http://searxng-arti:9050 \
     -e HTTPS_PROXY=http://searxng-arti:9050 \
     -e ALL_PROXY=http://searxng-arti:9050 \
-    -e NO_PROXY=localhost,127.0.0.1,open-webui,searxng-core,searxng-valkey,searxng-tor,searxng-arti,ollama,stable-diffusion-vulkan,kokoro-fastapi,hollama \
+    -e NO_PROXY=localhost,127.0.0.1,open-webui,searxng-core,searxng-valkey,searxng-tor,searxng-arti,ollama,stable-diffusion-vulkan,kokoro-fastapi,librechat,hollama \
     -e WEB_SEARCH_TRUST_ENV=true \
     -e OLLAMA_BASE_URL=http://ollama:11434 \
     -e RAG_EMBEDDING_ENGINE=ollama \
@@ -147,11 +147,57 @@ docker run -d \
     --restart always \
     open-webui:v1
 
-# 8. SERVICE 1: SearXNG Compose Stack (Run in an isolated subshell) Note: must be started last for DNS to function
+#8.  LibreChat Interface
+
+# MongoDB for LibreChat history
+docker run -d \
+    --name librechat-mongo \
+    --network ollama-net \
+    -v librechat-mongo:/data/db \
+    --restart always \
+    mongo:7 mongod --noauth
+
+docker run -d \
+    --name whisper-stt \
+    --network ollama-net \
+    -v whisper-cache:/root/.cache/huggingface \
+    -e WHISPER__MODEL=Systran/faster-whisper-base.en \
+    --restart always \
+    fedirz/faster-whisper-server:latest-cpu
+
+(cd librechat/LibreChat && docker build $BUILD_CACHE_FLAG -t librechat:latest -f Dockerfile .)
+
+# LibreChat Frontend (wired to Ollama, Kokoro, SearXNG, and your Arti Tor proxy)
+docker run -d \
+    --name librechat \
+    --network ollama-net \
+    -p 0.0.0.0:3080:3080 \
+    -v $HOME/src/librechat/LibreChat/librechat.yaml:/app/librechat.yaml:ro \
+    -v librechat-images:/app/client/public/images \
+    -e HOST=0.0.0.0 \
+    -e MONGO_URI=mongodb://librechat-mongo:27017/LibreChat \
+    -e HTTP_PROXY=http://searxng-arti:9050 \
+    -e HTTPS_PROXY=http://searxng-arti:9050 \
+    -e NO_PROXY=localhost,127.0.0.1,librechat,librechat-mongo,whisper-stt,searxng-core,searxng-valkey,searxng-tor,searxng-arti,ollama,stable-diffusion-vulkan,kokoro-fastapi,open-webui,hollama \
+    -e ENDPOINTS=custom,agents \
+    -e ALLOW_REGISTRATION=true \
+    -e SCHEDULES_SINGLE_PROCESS=true \
+    -e CREDS_KEY=c73152f2d6f6504ed725328ccfc7dd0ed1995a404bca4fe1d6358bef1535eb5b \
+    -e CREDS_IV=1535cf4acf211829eef7fda247368afa \
+    -e JWT_SECRET=fbf8c11af12eb16e4b39e921c520bbb879d45205d62b87d2a2ae08513cbba6e9 \
+    -e JWT_REFRESH_SECRET=fbf8c11af12eb16e4b39e921c520bbb879d45205d62b87d2a2ae08513cbba6e9 \
+    -e METRICS_SECRET=$(openssl rand -hex 16) \
+    -e IMAGE_GEN_OAI_API_KEY=sk-1234 \
+    -e IMAGE_GEN_OAI_BASEURL=http://stable-diffusion-vulkan:1234/v1 \
+    -e IMAGE_GEN_OAI_MODEL=DreamShaper8_LCM.safetensors \
+    --restart always \
+    librechat:latest
+
+# 9. SERVICE 1: SearXNG Compose Stack (Run in an isolated subshell) Note: must be started last for DNS to function
 echo "Bringing up SearXNG Compose Stack..."
 (cd searxng/searxng && docker compose up -d)
 
-# 9. POST-BUILD ENVIRONMENT MANAGEMENT (Automated Pruning System)
+# 10. POST-BUILD ENVIRONMENT MANAGEMENT (Automated Pruning System)
 if [ "$RUN_PRUNE_GARBAGE" = true ]; then
     echo "------------------------------------------------------------"
     echo "🧹 Clean build flag triggered global image pruning..."
@@ -161,7 +207,8 @@ fi
 
 echo "------------------------------------------------------------"
 echo "All 6 Services Online and Exposed to Local Network!"
-echo "Open WebUI Chat Panel:       http://localhost:3000"
+echo "Open WebUI Chat Panel:        http://localhost:3000"
+echo "LibreChat Interface:          http://localhost:3080"
 echo "Hollama Developer Interface:  http://localhost:4173"
 echo "------------------------------------------------------------"
 

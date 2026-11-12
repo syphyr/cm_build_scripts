@@ -18,7 +18,7 @@ echo "Removing stopped application container environments..."
 docker rm open-webui librechat whisper-stt librechat-mongo hollama kokoro-fastapi stable-diffusion-vulkan ollama >/dev/null 2>&1
 
 echo "------------------------------------------------------------"
-echo "All 6 AI suite layers shut down cleanly."
+echo "All AI suite layers shut down cleanly."
 echo "Intel Core Ultra hardware resources have been fully reclaimed!"
 echo "------------------------------------------------------------"
 

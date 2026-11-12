@@ -1,17 +1,59 @@
 #!/bin/bash
 
-cd $HOME/src
+cd "$HOME/src" || exit 1
 
-# Parse input parameter to toggle cache state
+# Parse input parameters (supports: clean, 1/open-webui, 2/librechat, 3/hollama, 4/all)
 BUILD_CACHE_FLAG=""
 RUN_PRUNE_GARBAGE=false
-if [ "$1" == "clean" ]; then
+UI_CHOICE=""
+
+for arg in "$@"; do
+    case "$arg" in
+        clean)
+            BUILD_CACHE_FLAG="--no-cache"
+            RUN_PRUNE_GARBAGE=true
+            ;;
+        1|open-webui|openwebui)
+            UI_CHOICE="1"
+            ;;
+        2|librechat)
+            UI_CHOICE="2"
+            ;;
+        3|hollama)
+            UI_CHOICE="3"
+            ;;
+        4|all)
+            UI_CHOICE="4"
+            ;;
+    esac
+done
+
+if [ "$RUN_PRUNE_GARBAGE" = true ]; then
     echo "🧼 'clean' parameter detected. Forcing --no-cache builds..."
-    BUILD_CACHE_FLAG="--no-cache"
-    RUN_PRUNE_GARBAGE=true
 else
     echo "⚡ Defaulting to CACHED builds..."
 fi
+
+# Prompt for Frontend if not passed via CLI argument
+if [ -z "$UI_CHOICE" ]; then
+    echo ""
+    echo "Select Frontend UI to launch:"
+    echo "  1) Open WebUI  (http://localhost:3000)"
+    echo "  2) LibreChat   (http://localhost:3080)"
+    echo "  3) Hollama     (http://localhost:4173)"
+    echo "  4) All Frontends"
+    echo ""
+    read -rp "Enter choice [1-4] (default: 2): " UI_CHOICE
+    UI_CHOICE=${UI_CHOICE:-2}
+fi
+
+case "$UI_CHOICE" in
+    1|2|3|4) ;;
+    *)
+        echo "❌ Invalid selection '$UI_CHOICE'. Exiting."
+        exit 1
+        ;;
+esac
 
 # 1. Check if the network exists; if not, create it cleanly
 if ! docker network inspect ollama-net >/dev/null 2>&1; then
@@ -30,7 +72,7 @@ echo "------------------------------------------------------------"
 echo "Launching Core AI Backends & Compiling Local Images..."
 echo "------------------------------------------------------------"
 
-# 3. SERVICE 2: OLLAMA BACKEND (Mainline Vulkan via Custom Build)
+# 3. OLLAMA BACKEND (Mainline Vulkan via Custom Build)
 (cd ollama/ollama && docker build $BUILD_CACHE_FLAG -t ollama:v1 -f Dockerfile .)
 
 docker run -d \
@@ -57,7 +99,7 @@ docker run -d \
     -e GIN_MODE=release \
     ollama:v1
 
-# 4. SERVICE 3: STABLE DIFFUSION BACKEND (Vulkan via Custom Build)
+# 4. STABLE DIFFUSION BACKEND (Vulkan via Custom Build)
 (cd stable-diffusion/stable-diffusion.cpp && docker build $BUILD_CACHE_FLAG -f docker/Dockerfile.vulkan -t stable-diffusion-vulkan:local .)
 
 docker run -d \
@@ -83,7 +125,7 @@ docker run -d \
     --batch-count 1 \
     --backend vulkan0
 
-# 5. SERVICE 4: KOKORO TTS BACKEND (CPU Optimized via Pre-built Registry)
+# 5. KOKORO TTS BACKEND (CPU Optimized via Pre-built Registry)
 docker run -d \
     --name kokoro-fastapi \
     --network ollama-net \
@@ -97,66 +139,7 @@ docker run -d \
     --restart always \
     ghcr.io/remsky/kokoro-fastapi-cpu:latest
 
-echo "------------------------------------------------------------"
-echo "Compiling & Deploying Frontends..."
-echo "------------------------------------------------------------"
-
-# 6. SERVICE 5: HOLLAMA UI FRONTEND (Custom Local Compilation Build)
-(cd hollama/hollama && docker build $BUILD_CACHE_FLAG -t hollama:v1 -f Dockerfile .)
-
-docker run -d \
-    --name hollama \
-    --network ollama-net \
-    -p 0.0.0.0:4173:4173 \
-    -e OLLAMA_BASE_URL=http://ollama:11434 \
-    --restart always \
-    hollama:v1
-
-# 7. SERVICE 6: OPEN WEBUI FRONTEND (Custom Local Compilation Build)
-(cd open-webui/open-webui && docker build $BUILD_CACHE_FLAG -t open-webui:v1 -f Dockerfile .)
-
-docker run -d \
-    --name open-webui \
-    --network ollama-net \
-    --add-host "host.docker.internal:host-gateway" \
-    -p 0.0.0.0:3000:8080 \
-    -v open-webui:/app/backend/data \
-    -e HTTP_PROXY=http://searxng-arti:9050 \
-    -e HTTPS_PROXY=http://searxng-arti:9050 \
-    -e ALL_PROXY=http://searxng-arti:9050 \
-    -e NO_PROXY=localhost,127.0.0.1,open-webui,searxng-core,searxng-valkey,searxng-tor,searxng-arti,ollama,stable-diffusion-vulkan,kokoro-fastapi,librechat,hollama \
-    -e WEB_SEARCH_TRUST_ENV=true \
-    -e OLLAMA_BASE_URL=http://ollama:11434 \
-    -e RAG_EMBEDDING_ENGINE=ollama \
-    -e RAG_OLLAMA_BASE_URL=http://ollama:11434 \
-    -e RAG_EMBEDDING_MODEL=all-minilm:l6-v2 \
-    -e ENABLE_IMAGE_GENERATION=true \
-    -e IMAGE_GENERATION_ENGINE=automatic1111 \
-    -e AUTOMATIC1111_BASE_URL=http://stable-diffusion-vulkan:1234 \
-    -e IMAGE_GENERATION_MODEL="DreamShaper8_LCM.safetensors" \
-    -e AUDIO_TTS_ENGINE=openai \
-    -e AUDIO_TTS_OPENAI_API_BASE_URL=http://kokoro-fastapi:8880/v1 \
-    -e AUDIO_TTS_OPENAI_API_MODEL=kokoro \
-    -e AUDIO_TTS_OPENAI_API_KEY=sk-1234 \
-    -e AUDIO_TTS_VOICE=af_bella \
-    -e ENABLE_RAG_WEB_SEARCH=true \
-    -e RAG_WEB_SEARCH_ENGINE=searxng \
-    -e RAG_WEB_SEARCH_BASE_URL=http://searxng-core:8080/search \
-    -e DEFAULT_MODEL_PARAMS='{"num_ctx": 40960, "num_thread": 6, "num_batch": 512, "num_predict": 4096, "max_tokens": 4096, "num_keep": 24}' \
-    -e STREAM_RESPONSE=true \
-    --restart always \
-    open-webui:v1
-
-#8.  LibreChat Interface
-
-# MongoDB for LibreChat history
-docker run -d \
-    --name librechat-mongo \
-    --network ollama-net \
-    -v librechat-mongo:/data/db \
-    --restart always \
-    mongo:7 mongod --noauth
-
+# 6. WHISPER STT BACKEND
 docker run -d \
     --name whisper-stt \
     --network ollama-net \
@@ -165,39 +148,118 @@ docker run -d \
     --restart always \
     fedirz/faster-whisper-server:latest-cpu
 
-(cd librechat/LibreChat && docker build $BUILD_CACHE_FLAG -t librechat:latest -f Dockerfile .)
+echo "------------------------------------------------------------"
+echo "Compiling & Deploying Selected Frontend..."
+echo "------------------------------------------------------------"
 
-# LibreChat Frontend (wired to Ollama, Kokoro, SearXNG, and your Arti Tor proxy)
-docker run -d \
-    --name librechat \
-    --network ollama-net \
-    -p 0.0.0.0:3080:3080 \
-    -v $HOME/src/librechat/LibreChat/librechat.yaml:/app/librechat.yaml:ro \
-    -v librechat-images:/app/client/public/images \
-    -e HOST=0.0.0.0 \
-    -e MONGO_URI=mongodb://librechat-mongo:27017/LibreChat \
-    -e HTTP_PROXY=http://searxng-arti:9050 \
-    -e HTTPS_PROXY=http://searxng-arti:9050 \
-    -e NO_PROXY=localhost,127.0.0.1,librechat,librechat-mongo,whisper-stt,searxng-core,searxng-valkey,searxng-tor,searxng-arti,ollama,stable-diffusion-vulkan,kokoro-fastapi,open-webui,hollama \
-    -e ENDPOINTS=custom,agents \
-    -e ALLOW_REGISTRATION=true \
-    -e SCHEDULES_SINGLE_PROCESS=true \
-    -e CREDS_KEY=c73152f2d6f6504ed725328ccfc7dd0ed1995a404bca4fe1d6358bef1535eb5b \
-    -e CREDS_IV=1535cf4acf211829eef7fda247368afa \
-    -e JWT_SECRET=fbf8c11af12eb16e4b39e921c520bbb879d45205d62b87d2a2ae08513cbba6e9 \
-    -e JWT_REFRESH_SECRET=fbf8c11af12eb16e4b39e921c520bbb879d45205d62b87d2a2ae08513cbba6e9 \
-    -e METRICS_SECRET=$(openssl rand -hex 16) \
-    -e IMAGE_GEN_OAI_API_KEY=sk-1234 \
-    -e IMAGE_GEN_OAI_BASEURL=http://stable-diffusion-vulkan:1234/v1 \
-    -e IMAGE_GEN_OAI_MODEL=DreamShaper8_LCM.safetensors \
-    --restart always \
-    librechat:latest
+# Frontend helper functions
+start_open_webui() {
+    echo "🚀 Starting Open WebUI (http://localhost:3000)..."
+    (cd open-webui/open-webui && docker build $BUILD_CACHE_FLAG -t open-webui:v1 -f Dockerfile .)
 
-# 9. SERVICE 1: SearXNG Compose Stack (Run in an isolated subshell) Note: must be started last for DNS to function
+    docker run -d \
+        --name open-webui \
+        --network ollama-net \
+        --add-host "host.docker.internal:host-gateway" \
+        -p 0.0.0.0:3000:8080 \
+        -v open-webui:/app/backend/data \
+        -e HTTP_PROXY=http://searxng-arti:9050 \
+        -e HTTPS_PROXY=http://searxng-arti:9050 \
+        -e ALL_PROXY=http://searxng-arti:9050 \
+        -e NO_PROXY=localhost,127.0.0.1,open-webui,whisper-stt,searxng-core,searxng-valkey,searxng-tor,searxng-arti,ollama,stable-diffusion-vulkan,kokoro-fastapi,librechat,hollama \
+        -e WEB_SEARCH_TRUST_ENV=true \
+        -e OLLAMA_BASE_URL=http://ollama:11434 \
+        -e RAG_EMBEDDING_ENGINE=ollama \
+        -e RAG_OLLAMA_BASE_URL=http://ollama:11434 \
+        -e RAG_EMBEDDING_MODEL=all-minilm:l6-v2 \
+        -e ENABLE_IMAGE_GENERATION=true \
+        -e IMAGE_GENERATION_ENGINE=automatic1111 \
+        -e AUTOMATIC1111_BASE_URL=http://stable-diffusion-vulkan:1234 \
+        -e IMAGE_GENERATION_MODEL="DreamShaper8_LCM.safetensors" \
+        -e AUDIO_TTS_ENGINE=openai \
+        -e AUDIO_TTS_OPENAI_API_BASE_URL=http://kokoro-fastapi:8880/v1 \
+        -e AUDIO_TTS_OPENAI_API_MODEL=kokoro \
+        -e AUDIO_TTS_OPENAI_API_KEY=sk-1234 \
+        -e AUDIO_TTS_VOICE=af_bella \
+        -e AUDIO_STT_ENGINE=openai \
+        -e AUDIO_STT_OPENAI_API_BASE_URL=http://whisper-stt:8000/v1 \
+        -e AUDIO_STT_OPENAI_API_MODEL=Systran/faster-whisper-base.en \
+        -e AUDIO_STT_OPENAI_API_KEY=not-needed \
+        -e ENABLE_RAG_WEB_SEARCH=true \
+        -e RAG_WEB_SEARCH_ENGINE=searxng \
+        -e RAG_WEB_SEARCH_BASE_URL=http://searxng-core:8080/search \
+        -e DEFAULT_MODEL_PARAMS='{"num_ctx": 40960, "num_thread": 6, "num_batch": 512, "num_predict": 4096, "max_tokens": 4096, "num_keep": 24}' \
+        -e STREAM_RESPONSE=true \
+        --restart always \
+        open-webui:v1
+}
+
+start_librechat() {
+    echo "🚀 Starting LibreChat + MongoDB (http://localhost:3080)..."
+    docker run -d \
+        --name librechat-mongo \
+        --network ollama-net \
+        -v librechat-mongo:/data/db \
+        --restart always \
+        mongo:7 mongod --noauth
+
+    (cd librechat/LibreChat && docker build $BUILD_CACHE_FLAG -t librechat:latest -f Dockerfile .)
+
+    docker run -d \
+        --name librechat \
+        --network ollama-net \
+        -p 0.0.0.0:3080:3080 \
+        -v "$HOME/src/librechat/LibreChat/librechat.yaml:/app/librechat.yaml:ro" \
+        -v librechat-images:/app/client/public/images \
+        -e HOST=0.0.0.0 \
+        -e MONGO_URI=mongodb://librechat-mongo:27017/LibreChat \
+        -e HTTP_PROXY=http://searxng-arti:9050 \
+        -e HTTPS_PROXY=http://searxng-arti:9050 \
+        -e NO_PROXY=localhost,127.0.0.1,librechat,librechat-mongo,whisper-stt,searxng-core,searxng-valkey,searxng-tor,searxng-arti,ollama,stable-diffusion-vulkan,kokoro-fastapi,open-webui,hollama \
+        -e ENDPOINTS=custom,agents \
+        -e ALLOW_REGISTRATION=true \
+        -e SCHEDULES_SINGLE_PROCESS=true \
+        -e CREDS_KEY=c73152f2d6f6504ed725328ccfc7dd0ed1995a404bca4fe1d6358bef1535eb5b \
+        -e CREDS_IV=1535cf4acf211829eef7fda247368afa \
+        -e JWT_SECRET=fbf8c11af12eb16e4b39e921c520bbb879d45205d62b87d2a2ae08513cbba6e9 \
+        -e JWT_REFRESH_SECRET=fbf8c11af12eb16e4b39e921c520bbb879d45205d62b87d2a2ae08513cbba6e9 \
+        -e METRICS_SECRET="$(openssl rand -hex 16)" \
+        -e IMAGE_GEN_OAI_API_KEY=sk-1234 \
+        -e IMAGE_GEN_OAI_BASEURL=http://stable-diffusion-vulkan:1234/v1 \
+        -e IMAGE_GEN_OAI_MODEL=DreamShaper8_LCM.safetensors \
+        --restart always \
+        librechat:latest
+}
+
+start_hollama() {
+    echo "🚀 Starting Hollama (http://localhost:4173)..."
+    (cd hollama/hollama && docker build $BUILD_CACHE_FLAG -t hollama:v1 -f Dockerfile .)
+
+    docker run -d \
+        --name hollama \
+        --network ollama-net \
+        -p 0.0.0.0:4173:4173 \
+        -e OLLAMA_BASE_URL=http://ollama:11434 \
+        --restart always \
+        hollama:v1
+}
+
+case "$UI_CHOICE" in
+    1) start_open_webui ;;
+    2) start_librechat ;;
+    3) start_hollama ;;
+    4)
+        start_open_webui
+        start_librechat
+        start_hollama
+        ;;
+esac
+
+# 7. SearXNG Compose Stack (must be started last for DNS to function)
 echo "Bringing up SearXNG Compose Stack..."
 (cd searxng/searxng && docker compose up -d)
 
-# 10. POST-BUILD ENVIRONMENT MANAGEMENT (Automated Pruning System)
+# 8. POST-BUILD ENVIRONMENT MANAGEMENT (Automated Pruning System)
 if [ "$RUN_PRUNE_GARBAGE" = true ]; then
     echo "------------------------------------------------------------"
     echo "🧹 Clean build flag triggered global image pruning..."
@@ -206,11 +268,7 @@ if [ "$RUN_PRUNE_GARBAGE" = true ]; then
 fi
 
 echo "------------------------------------------------------------"
-echo "All 6 Services Online and Exposed to Local Network!"
-echo "Open WebUI Chat Panel:        http://localhost:3000"
-echo "LibreChat Interface:          http://localhost:3080"
-echo "Hollama Developer Interface:  http://localhost:4173"
+echo "✅ AI Stack Ready!"
 echo "------------------------------------------------------------"
 
 docker ps
-

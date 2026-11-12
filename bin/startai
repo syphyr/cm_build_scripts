@@ -210,6 +210,7 @@ start_librechat() {
         --network ollama-net \
         -p 0.0.0.0:3080:3080 \
         -v "$HOME/src/librechat/LibreChat/librechat.yaml:/app/librechat.yaml:ro" \
+        -v "$HOME/src/librechat/LibreChat/sd-mcp.js:/app/sd-mcp.js:ro" \
         -v librechat-images:/app/client/public/images \
         -e HOST=0.0.0.0 \
         -e MONGO_URI=mongodb://librechat-mongo:27017/LibreChat \

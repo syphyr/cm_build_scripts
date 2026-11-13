@@ -139,6 +139,15 @@ docker run -d \
     --restart always \
     ghcr.io/remsky/kokoro-fastapi-cpu:latest
 
+# 6. WHISPER STT BACKEND
+docker run -d \
+    --name whisper-stt \
+    --network ollama-net \
+    -v whisper-cache:/root/.cache/huggingface \
+    -e WHISPER__MODEL=Systran/faster-whisper-base.en \
+    --restart always \
+    fedirz/faster-whisper-server:latest-cpu
+
 echo "------------------------------------------------------------"
 echo "Compiling & Deploying Selected Frontend..."
 echo "------------------------------------------------------------"
@@ -172,6 +181,10 @@ start_open_webui() {
         -e AUDIO_TTS_OPENAI_API_MODEL=kokoro \
         -e AUDIO_TTS_OPENAI_API_KEY=sk-1234 \
         -e AUDIO_TTS_VOICE=af_bella \
+        -e AUDIO_STT_ENGINE=openai \
+        -e AUDIO_STT_OPENAI_API_BASE_URL=http://whisper-stt:8000/v1 \
+        -e AUDIO_STT_OPENAI_API_MODEL=Systran/faster-whisper-base.en \
+        -e AUDIO_STT_OPENAI_API_KEY=sk-1234 \
         -e ENABLE_RAG_WEB_SEARCH=true \
         -e RAG_WEB_SEARCH_ENGINE=searxng \
         -e RAG_WEB_SEARCH_BASE_URL=http://searxng-core:8080/search \
@@ -182,15 +195,7 @@ start_open_webui() {
 }
 
 start_librechat() {
-    echo "🚀 Starting LibreChat + MongoDB + Whisper-stt (http://localhost:3080)..."
-    docker run -d \
-        --name whisper-stt \
-        --network ollama-net \
-        -v whisper-cache:/root/.cache/huggingface \
-        -e WHISPER__MODEL=Systran/faster-whisper-base.en \
-        --restart always \
-        fedirz/faster-whisper-server:latest-cpu
-
+    echo "🚀 Starting LibreChat + MongoDB (http://localhost:3080)..."
     docker run -d \
         --name librechat-mongo \
         --network ollama-net \

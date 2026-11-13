@@ -96,6 +96,8 @@ docker run -d \
     -e GGML_VK_DISABLE_INTEGER_DOT_PRODUCT=1 \
     -e OLLAMA_CONTEXT_LENGTH=40960 \
     -e OLLAMA_GPU_OVERHEAD=1024 \
+    -e OLLAMA_MAX_LOADED_MODELS=2 \
+    -e OLLAMA_KEEP_ALIVE=30m \
     -e GIN_MODE=release \
     ollama:v1
 

@@ -143,10 +143,10 @@ docker run -d \
 docker run -d \
     --name whisper-stt \
     --network ollama-net \
-    -v whisper-cache:/root/.cache/huggingface \
-    -e WHISPER__MODEL=Systran/faster-whisper-base.en \
+    -v whisper-cache:/home/ubuntu/.cache/huggingface \
+    -e PRELOAD_MODELS='["Systran/faster-whisper-base.en"]' \
     --restart always \
-    fedirz/faster-whisper-server:latest-cpu
+    ghcr.io/speaches-ai/speaches:latest-cpu
 
 echo "------------------------------------------------------------"
 echo "Compiling & Deploying Selected Frontend..."

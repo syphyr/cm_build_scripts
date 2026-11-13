@@ -189,6 +189,7 @@ start_open_webui() {
         -e RAG_WEB_SEARCH_ENGINE=searxng \
         -e RAG_WEB_SEARCH_BASE_URL=http://searxng-core:8080/search \
         -e DEFAULT_MODEL_PARAMS='{"num_ctx": 40960, "num_thread": 6, "num_batch": 512, "num_keep": 24}' \
+        -e AIOHTTP_CLIENT_TIMEOUT=600 \
         -e STREAM_RESPONSE=true \
         --restart always \
         open-webui:v1

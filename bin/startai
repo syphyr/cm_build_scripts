@@ -43,8 +43,8 @@ if [ -z "$UI_CHOICE" ]; then
     echo "  3) Hollama     (http://localhost:4173)"
     echo "  4) All Frontends"
     echo ""
-    read -rp "Enter choice [1-4] (default: 2): " UI_CHOICE
-    UI_CHOICE=${UI_CHOICE:-2}
+    read -rp "Enter choice [1-4] (default: 1): " UI_CHOICE
+    UI_CHOICE=${UI_CHOICE:-1}
 fi
 
 case "$UI_CHOICE" in

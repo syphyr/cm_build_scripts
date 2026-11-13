@@ -32,3 +32,8 @@ git fetch
 git log --pretty="%C(yellow)%h %C(green)(%cr) %C(red)(%ar) %C(white)%s %C(blue)(%an)" -10 origin/main
 git rebase
 
+cd ../../librechat/LibreChat
+git fetch
+git log --pretty="%C(yellow)%h %C(green)(%cr) %C(red)(%ar) %C(white)%s %C(blue)(%an)" -10 origin/main
+git rebase
+

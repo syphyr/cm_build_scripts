@@ -8,3 +8,10 @@ docker builder prune -f
 
 # 3. Force the kernel to rebuild the iptables/nftables chains for Docker
 sudo systemctl restart docker
+
+#Note: ONLY run this command when ALL AI front ends are running (startai 4).
+#docker container prune -f \
+#  && docker volume prune -a -f \
+#  && docker image prune -f \
+#  && docker builder prune -f \
+#  && docker system df

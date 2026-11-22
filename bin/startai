@@ -208,12 +208,13 @@ start_librechat() {
     docker run -d \
         --name librechat-pgvector \
         --network ollama-net \
+        --memory="512m" \
         -e POSTGRES_DB=mydatabase \
         -e POSTGRES_USER=myuser \
         -e POSTGRES_PASSWORD=mypassword \
         -v librechat-pgdata:/var/lib/postgresql/data \
         --restart always \
-        pgvector/pgvector:pg16
+        pgvector/pgvector:pg16 postgres -c shared_buffers=128MB
 
     docker run -d \
         --name librechat-rag \

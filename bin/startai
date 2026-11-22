@@ -230,6 +230,7 @@ start_librechat() {
         -e IMAGE_GEN_OAI_API_KEY=sk-1234 \
         -e IMAGE_GEN_OAI_BASEURL=http://stable-diffusion-vulkan:1234/v1 \
         -e IMAGE_GEN_OAI_MODEL=DreamShaper8_LCM.safetensors \
+        -e SD_WEBUI_URL=http://stable-diffusion-vulkan:1234 \
         --restart always \
         librechat:latest
 }

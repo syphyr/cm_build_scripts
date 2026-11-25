@@ -227,6 +227,7 @@ start_librechat() {
         -e EMBEDDINGS_PROVIDER=ollama \
         -e EMBEDDINGS_MODEL=all-minilm:l6-v2 \
         -e OLLAMA_BASE_URL=http://ollama:11434 \
+        -e JWT_SECRET=fbf8c11af12eb16e4b39e921c520bbb879d45205d62b87d2a2ae08513cbba6e9 \
         -e CHUNK_SIZE=1500 \
         -e CHUNK_OVERLAP=100 \
         -e RAG_PORT=8000 \

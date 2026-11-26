@@ -124,7 +124,8 @@ docker run -d \
     -m /models/DreamShaper8_LCM.safetensors \
     -t 6 \
     --batch-count 1 \
-    --backend vulkan0
+    --backend vulkan0 \
+    --cors-origins http://stable-diffusion-vulkan:1234
 
 # 5. KOKORO TTS BACKEND (CPU Optimized via Pre-built Registry)
 docker run -d \
